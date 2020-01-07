@@ -33,7 +33,10 @@ const AddHire = (props) => {
     const [fileTypePdf, setFileTypePdf] = useState(false);
     const [attachfileName, setattachfileName] = useState('')
     const [dateValue, setDate] = useState(new Date())
-    const [showLocation, setShowLocation] = useState(false)
+    const [selected,setSelected] = useState('')
+    const [showLocation, setShowLocation] = useState(false);
+    const [showManager, setShowManager] = useState(false);
+    const [showPackage, setShowPackage] = useState('');
     
 
     const onAddClick = () => {
@@ -41,6 +44,7 @@ const AddHire = (props) => {
     }
 
     const onCancelClick = () => {
+        setShowLocation(false)
         setFirstName('');
         setLastName('');
         setRole('');
@@ -64,28 +68,47 @@ const AddHire = (props) => {
     }
 
     const handleLocation = () => {
-        console.log('bvksfb')
         setShowLocation(!showLocation)
     }
 
-    const setOption = (value) => [
-        
-    ]
+    const setOption = (value) => {
+        setLocation(value);
+    }
+
+    const handleManager = () => {
+        setShowManager(!showManager)
+    }
+
+    const setManagerOption = (value) => {
+        setManager(value)
+    }
+
+    const handlePackages = () => {
+        setShowPackage(!showPackage)
+    }
+
+    const setPackageOption = (value) => {
+        setPackages(value)
+    }
+
    
     useEffect(
         () => {
-            if(fileName !== '') {
+            if (fileName !== '') {
                 let file = fileName.split("\\")
                 setattachfileName(file[2]);
             } else {
                 setattachfileName('')
             }
-            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || date ===''|| fileTypePdf === false) {  
+            console.log("pack",packages);
+            console.log("loc",location)
+            console.log("man",manager)
+            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || date === '' || fileTypePdf === false) {
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
             }
-        }, [firstName, lastName, role, email, phNum, location, manager, salary, packages,fileName,fileTypePdf]
+        }, [firstName, lastName, role, email, phNum, location, manager, salary, packages, fileName, fileTypePdf]
     )
 
     useEffect (
@@ -189,8 +212,8 @@ const AddHire = (props) => {
                                     <img src={dropDownArrow} className="arrowDrop-img" />
                                 </div>
                                 <div className={showLocation ? 'optionList showLocation' : 'optionList'}>
-                                    <div className="optionValue" onClick={()=> setOption('Bangalore')}>Bangalore</div>
-                                    <div className="optionValue" onClick={()=> setOption('Seattle')}>Seattle</div>
+                                    <div className={`optionValue ${location === "Bangalore"?'select__option':''}`} onClick={()=> setOption('Bangalore')}>Bangalore</div>
+                                    <div className={`optionValue ${location === "Seattle"?'select__option':''}`} onClick={()=> setOption('Seattle')}>Seattle</div>
                                 </div>
                             </div>
                             <div className="input-field">
@@ -219,23 +242,31 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                                <select className="input-default select-data  form__input" onChange={(e) => setManager(e.target.value)} value={manager} name="manager">
-                                    <option value="" selected disabled>Reporting Manager</option>
-                                    <option value="Bangalore">Vidhi</option>
-                                    <option value="Seatle">Ankit</option>
-                                </select>
+                            <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager} onChange={(e) => setManager(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="manager" className="form__label">Reporting Manager</label>
+                                <div className="arrowContainer" onClick={() => handleManager()}>
+                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                </div>
+                                <div className={showManager ? 'optionList showLocation' : 'optionList'}>
+                                    <div className={`optionValue ${manager === "Vidhi"?'select__option':''}`} onClick={()=> setManagerOption('Vidhi')}>Vidhi</div>
+                                    <div className={`optionValue ${manager === "Ankit"?'select__option':''}`} onClick={()=> setManagerOption('Ankit')}>Ankit</div>
+                                </div>
                             </div>
                             <div className="input-field select-box">
-                                <select className="input-default select-data" onChange={(e) => setPackages(e.target.value)} value={packages} name="packages">
-                                    <option value="" selected disabled>Benefit Package</option>
-                                    <option value="Bangalore">Star-Sliver</option>
-                                </select>
+                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages} onChange={(e) => setPackages(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="package" className="form__label">Benefit Package</label>
+                                <div className="arrowContainer" onClick={() => handlePackages()}>
+                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                </div>
+                                <div className={showPackage ? 'optionList showLocation' : 'optionList'}>
+                                    <div className={`optionValue ${packages === "Star-Sliver"?'select__option':''}`} onClick={()=> setPackageOption('Star-Sliver')}>Star-Sliver</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className="offer-submit">
                         <div className="large-button attach">
-                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>setFileName(e.target.value)} value={fileName}/>
+                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} className="attach-img" />
                                 <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div></div>

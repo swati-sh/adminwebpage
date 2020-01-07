@@ -108,6 +108,10 @@ input:-webkit-autofill:active  {
     font-family: TLight;
     font-size: 12px;
 }
+.optionValue:hover{
+    background-color: #989898;
+    color: #fff;
+}
 
 .dateImgContainer{
     position: absolute;
@@ -148,7 +152,7 @@ input:-webkit-autofill:active  {
 }
 .content{
     width: 80%;
-    height: 600px;
+    max-height: 675px;
     display: flex;
     box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
 }
@@ -199,6 +203,10 @@ input:-webkit-autofill:active  {
     text-align: initial;
     padding-left: 22%;
     font-size: 40px;
+}
+.select__option{
+    background-color: #0058fb !important;
+    color: #fff;
 }
 .text {
     font-family: urbane;
@@ -283,7 +291,7 @@ input:-webkit-autofill:active  {
     opacity: 0.3;
 }
 .form-container {
-    max-height: 460px;
+    max-height: 563px;
     overflow: auto;
     margin-top: 20px;
 }
@@ -327,23 +335,7 @@ input:-webkit-autofill:active  {
     font-size: 10px;
     font-family: TLight;
 }
-.select-box{
-    overflow: hidden;
-    position: relative;
-}
-.select-box::after {
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 7px solid #0058fb;
-    position: absolute;
-    top: 30%;
-    right: 3px;
-    content: "";
-    z-index: 98;
- 
-}
+
 select.select-data {
 	color: #989898;
 }
@@ -363,6 +355,7 @@ select option[disabled]:first-child {
     color: #0058fb;
     font-weight: bold;
     position: relative;
+    z-index: 0;
 }
 .disableOffer {
     background-color: #989898;
