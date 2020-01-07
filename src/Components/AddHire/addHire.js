@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
+import axios from 'axios';
 import './addHire.css'
 import formField from '../formFields'
 import validator from 'validator';
@@ -24,7 +25,20 @@ const AddHire = (props) => {
     const [packages, setPackages] = useState('');
     const [fileName, setFileName] = useState('');
     const [attachfileName, setattachfileName] = useState('')
-
+    
+    useEffect(
+        () => {
+            let config = {
+                headers:  {
+                    
+                }
+            }
+         axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
+         .then(res =>{
+             console.log("res",res);
+         })
+        },[]
+    )
 
     const onAddClick = () => {
         setNoHireData(false)
