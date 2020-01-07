@@ -90,6 +90,7 @@ const AddHire = (props) => {
 
     const setOption = (value) => {
         setLocation(value);
+        setShowLocation(!showLocation)
     }
 
     const handleManager = () => {
@@ -98,6 +99,7 @@ const AddHire = (props) => {
 
     const setManagerOption = (value) => {
         setManager(value)
+        setShowManager(!showManager)
     }
 
     const handlePackages = () => {
@@ -106,6 +108,7 @@ const AddHire = (props) => {
 
     const setPackageOption = (value) => {
         setPackages(value)
+        setShowPackage(!showPackage)
     }
 
    
@@ -144,13 +147,11 @@ const AddHire = (props) => {
          .then(res => {
              let joinee = res.data.joinee
              if(joinee){
-                console.log(res)
              } else {
                 setNoHireData(true)
              }   
          })
          .catch(err => {
-             console.log(err)
          })
         },[]
     )
@@ -196,11 +197,11 @@ const AddHire = (props) => {
         }
         axios.post('http://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
         .then(res => {
-            setLoader(false)
-            console.log("post",res)
+            setLoader(false);
+            setDisabledSubmit(true);
+            onCancelClick()
         })
         .catch(err =>{
-            console.log('err', err)
         })
     }
 

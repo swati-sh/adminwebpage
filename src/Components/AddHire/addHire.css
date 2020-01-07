@@ -103,7 +103,6 @@ input:-webkit-autofill:active  {
     box-sizing: border-box;
     width: 100%;
     transition: all 0.3s;
-    height: 3.5em;
     border: 1px solid #ccc;
     padding: 0.5em;
     display: none;
@@ -116,10 +115,12 @@ input:-webkit-autofill:active  {
 .optionValue{
     font-family: TLight;
     font-size: 12px;
+    padding: 0.3em;
 }
 .optionValue:hover{
     background-color: #989898;
     color: #fff;
+    cursor: pointer;
 }
 
 .dateImgContainer{
@@ -130,6 +131,9 @@ input:-webkit-autofill:active  {
     right: 0;
     pointer-events: none;
     top: 0.9em;
+}
+.dateImgContainer:hover{
+    cursor: pointer;
 }
 .arrowContainer{
     position: absolute;
