@@ -385,6 +385,10 @@ select option[disabled]:first-child {
 .enableOffer {
     background-color: #0058fb;
 }
+.blueBorder{
+    border: 1px solid #0058fb;
+    background: #fff;
+}
 
 .attach-text {
     display: flex;
@@ -392,10 +396,22 @@ select option[disabled]:first-child {
     font-family: TBold;
     font-size: 14px;
 }
+.fileUpload{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    text-transform: uppercase;
+}
 .overlay-layer{
     z-index: 0;
-    width: 7em;
+    width: 100%;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1em;
+}
+.fullWidth{
+    width: 100%;
 }
 .upload_btn{
     opacity: 0;
@@ -420,7 +436,7 @@ select option[disabled]:first-child {
     height: 1em;
 }
 .arrow-img {
-    margin-left: 20px;
+    margin-left: 0.5em;
     width: 100%;
     height: 100%;
 }
