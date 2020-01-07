@@ -11,6 +11,7 @@ import dropDownArrow from '../../assets/noun_Arrow_2284415.svg';
 import attach from '../../assets/noun_attached document_615523.svg';
 import dateIcon from '../../assets/noun_Calendar_821509.svg';
 import DatePicker from "react-datepicker";
+import loader from '../../assets/Spinner-1s-200px.gif';
  
 import "react-datepicker/dist/react-datepicker.css"
 import { tsMappedType } from '@babel/types';
@@ -49,6 +50,7 @@ const AddHire = (props) => {
     const [attachfileName, setattachfileName] = useState('')
     const [dateValue, setDate] = useState(new Date())
     const [showLocation, setShowLocation] = useState(false)
+    const [loaderShow, setLoader] = useState(false)
     
 
     const onAddClick = () => {
@@ -149,6 +151,7 @@ const AddHire = (props) => {
     }
 
     const onSubmitClick = () => {
+        setLoader(true)
         let dateData = dateValue.toISOString()
         dateData = dateData.split('T');
         dateData = dateData[0].split('-')
@@ -173,6 +176,7 @@ const AddHire = (props) => {
         }
         axios.post('http://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
         .then(res => {
+            setLoader(false)
             console.log("post",res)
         })
         .catch(err =>{
@@ -259,11 +263,23 @@ const AddHire = (props) => {
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} className="attach-img" />
-                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div></div>
-                        <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} onClick={() => onSubmitClick()}><button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>SEND OFFER PACKET</button>
-                        <div className="imgContainer">
-                            <img src={arrow} className="arrow-img" /></div>
+                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
                         </div>
+                        { loaderShow ? 
+                            <div className="loaderParent">
+                                <div className="loaderContainer">
+                                    <img src={loader} className="loader-img" />
+                                </div>
+                            </div> : 
+                            <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} onClick={() => onSubmitClick()}>
+                                <button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>
+                                    SEND OFFER PACKET
+                                </button>
+                                <div className="imgContainer">
+                                    <img src={arrow} className="arrow-img" />
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
