@@ -4,7 +4,6 @@ import formField from '../formFields'
 import validator from 'validator';
 import plusSvg from './Images/plus.svg'
 import piktorLogo from '../../assets/Page-1_1_.svg';
-import gotab from '../../assets/GOTAB.svg';
 import cancelIcon from '../../assets/cancel.svg';
 import arrow from '../../assets/noun_Arrow_2094739.svg';
 import attach from '../../assets/noun_attached document_615523.svg';
@@ -106,8 +105,7 @@ const AddHire = (props) => {
                             <div className="input-field select-box">
                                 <select className="input-default select-data" onChange={(e) => setPackages(e.target.value)} value={packages} name="packages">
                                     <option value="" selected disabled>Benefit Package</option>
-                                    <option value="Bangalore">Bangalore</option>
-                                    <option value="Seatle">Seatle</option>
+                                    <option value="Bangalore">Star-Sliver</option>
                                 </select>
                             </div>
                         </div>
