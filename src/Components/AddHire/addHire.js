@@ -57,13 +57,12 @@ const AddHire = (props) => {
     }
 
     const onCancelClick = () => {
-        setShowLocation(false)
         setFirstName('');
         setLastName('');
         setRole('');
         setPhNum('');
         setSalary('');
-        setDate('');
+        setDate(new Date());
         setEmail('');
         setManager('');
         setLocation('');
