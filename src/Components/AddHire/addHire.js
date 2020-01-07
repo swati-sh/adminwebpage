@@ -30,7 +30,7 @@ const AddHire = (props) => {
         () => {
             let config = {
                 headers:  {
-                    
+
                 }
             }
          axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
@@ -92,25 +92,47 @@ const AddHire = (props) => {
                 <form>
                     <div className="all-inputField">
                         <div className="col">
-                            <div className="input-field"><input className="input-default" placeholder="First Name" type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} /></div>
-                            <div className="input-field"><input className="input-default" placeholder="Personal Email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
-                            <div className="input-field"><input className="input-default" placeholder="Role" type="text" name="role" value={role} onChange={(e) => setRole(e.target.value)} /></div>
+                            <div className="input-field">
+                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                <label for="firstName" className="form__label">First Name</label>
+                            </div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                <label for="email" className="form__label">Personal Email</label>
+                            </div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} onChange={(e) => setRole(e.target.value)} />
+                                <label for="role" className="form__label">Role</label>
+                            </div>
                             <div className="input-field select-box">
-                                <select className="input-default select-data" onChange={(e) => setLocation(e.target.value)} value={location} name="location">
+                                <select className="input-default select-data form__input" id="location" onChange={(e) => setLocation(e.target.value)} value={location} name="location">
                                     <option value="" selected disabled>Location</option>
                                     <option value="Bangalore">Bangalore</option>
                                     <option value="Seatle">Seatle</option>
                                 </select>
+                                <label for="location" className="form__label">Location</label>
                             </div>
-                            <div className="input-field"><input className="input-default" value={salary} placeholder="salary" type="text" name="salary" onChange={(e) => setSalary(e.target.value)} /></div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="text" name="salary" onChange={(e) => setSalary(e.target.value)} />
+                                <label for="Salary" className="form__label">Salary</label>
+                            </div>
                         </div>
                         <div className="col">
-                            <div className="input-field"><input className="input-default" placeholder="Last Name" type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} /></div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                <label for="lastName" className="form__label">Last Name</label>
+                            </div>
 
-                            <div className="input-field"><input className="input-default" placeholder="Contact Person" type="text" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} /></div>
-                            <div className="input-field"><input className="input-default" placeholder="Joining Date" type="text" name="date" value={date} onChange={(e) => setdate(e.target.value)} /></div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="text" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} />
+                                <label for="phNum" className="form__label">Contact Phone</label>
+                                </div>
+                            <div className="input-field">
+                                <input className="input-default  form__input" id="date" placeholder="Joining Date" type="text" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
+                                <label for="date" className="form__label">Date</label>
+                                </div>
                             <div className="input-field select-box">
-                                <select className="input-default select-data" onChange={(e) => setManager(e.target.value)} value={manager} name="manager">
+                                <select className="input-default select-data  form__input" onChange={(e) => setManager(e.target.value)} value={manager} name="manager">
                                     <option value="" selected disabled>Reporting Manager</option>
                                     <option value="Bangalore">Vidhi</option>
                                     <option value="Seatle">Ankit</option>

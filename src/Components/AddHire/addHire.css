@@ -1,13 +1,11 @@
 .input-default {
     border: 0;
     outline: 0;
-    background: transparent;
     font-family: Titillium Web;
-    font-weight: 300;
     width: 259px;
     border-bottom: 1px solid #989898;
-    margin-bottom: 1em;
-    padding-bottom: 1em;
+    margin: 1em 0;
+    padding-bottom: 0.5em;
 }
 .hireWrapper{
     margin: auto;
@@ -71,23 +69,6 @@
     width: 2em;
     margin-left: 20px;
     cursor: pointer;
-}
-
-.noHireContainer{
-    position: absolute;
-    top: 45%;
-    left: 45%;
-    width: 10em;
-    box-shadow: 3px 0px 26px 10px #888888;
-    opacity: 0;
-}
-
-.noHireContainer.activeForm {
-    opacity: 1;
-}
-
-.noHireContent{
-    padding: 2em;
 }
 
 .container{
@@ -243,8 +224,22 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-.input-field {
 
+.input-field {
+    position: relative;
+}
+.form__input:placeholder-shown + .form__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+
+}
+.form__label {
+    transition: all .3s;
+    position: absolute;
+    left: 0;
+    margin-bottom: 20px;
+    top: -21%;
 }
 .select-box{
     overflow: hidden;
