@@ -1,0 +1,23 @@
+.loginButn{
+    border: 2px solid black;
+    width: 3em;
+    padding: 0.5em 1em;
+    background-color: darkgray;
+
+}
+
+.loginWrapper{
+    margin: 10em auto;
+    width: 20em;
+    padding: 5em;
+    box-shadow: 3px 0px 26px 10px #888888
+}
+
+.emailWrapper{
+    padding-bottom: 1em;
+    padding-top: 1em;
+}
+
+h2{
+    padding-bottom: 2em;
+}

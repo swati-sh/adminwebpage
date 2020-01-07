@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="696.844" height="456.625" viewBox="0 0 696.844 456.625">
+    <defs>
+        <style>
+            .cls-1,.cls-4{fill:#02abfe}.cls-2,.cls-5{fill:#0058fb}.cls-2,.cls-3,.cls-4{fill-rule:evenodd}.cls-3,.cls-6{fill:#0100a6}
+        </style>
+    </defs>
+    <g id="Group-1" transform="matrix(0 -1 1 0 0 456.625)">
+        <g id="Group_1" data-name="Group 1" transform="translate(3.003 350.103)">
+            <path id="Rectangle_2" d="M0 0h115.775v116.111H0z" class="cls-1" data-name="Rectangle 2"/>
+        </g>
+        <g id="Group_2" data-name="Group 2" transform="translate(3.003)">
+            <path id="Path_2" d="M0 0c0 64.127 51.833 116.111 115.775 116.111V0z" class="cls-2" data-name="Path 2"/>
+        </g>
+        <g id="Group_3" data-name="Group 3" transform="rotate(180 214.893 58.519)">
+            <path id="Path_3" d="M0 116.111C0 51.984 51.885 0 115.826 0v116.111z" class="cls-3" data-name="Path 3"/>
+        </g>
+        <g id="Group_12" data-name="Group 12" transform="translate(3.003)">
+            <path id="Path_11" d="M0 0c0 64.127 51.833 116.111 115.775 116.111S231.55 64.127 231.55 0z" class="cls-3" data-name="Path 11"/>
+        </g>
+        <g id="Group_13" data-name="Group 13" transform="rotate(180 228.312 348.422)">
+            <path id="Path_12" d="M0 0c0 53.894 43.562 97.582 97.3 97.582A97.44 97.44 0 0 0 194.6 0z" class="cls-3" data-name="Path 12"/>
+        </g>
+        <g id="Group_14" data-name="Group 14" transform="translate(3.003 464.546)">
+            <path id="Path_13" d="M0 232.273c127.883 0 231.6-103.968 231.6-232.273H0v232.273z" class="cls-3" data-name="Path 13"/>
+        </g>
+        <g id="Group_15" data-name="Group 15" transform="translate(3.054 464.546)">
+            <path id="Path_14" d="M0 0v111.925c62.55 0 113.508-49.762 115.723-111.925z" class="cls-4" data-name="Path 14"/>
+        </g>
+        <g id="Group_16" data-name="Group 16" transform="rotate(-87.145 181.496 172.67)">
+            <ellipse id="Ellipse_1" cx="57.916" cy="58.084" class="cls-5" data-name="Ellipse 1" rx="57.916" ry="58.084"/>
+        </g>
+        <g id="Group_19" data-name="Group 19" transform="translate(119.185 232.376)">
+            <path id="Rectangle_4" d="M0 0h116.305v232.981H0z" class="cls-6" data-name="Rectangle 4"/>
+        </g>
+    </g>
+</svg>

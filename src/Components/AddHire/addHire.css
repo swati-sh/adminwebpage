@@ -1,0 +1,322 @@
+.input-default {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-family: Titillium Web;
+    font-weight: 300;
+    width: 259px;
+    border-bottom: 1px solid #989898;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+.hireWrapper{
+    margin: auto;
+    width: 40em; 
+    position: relative;
+    box-shadow: 3px 0px 26px 10px #888888;
+    margin-top: 1em;
+    opacity: 0;
+}
+
+.hireWrapper.activeForm {
+    opacity: 1;
+}
+
+
+
+.onboardWrapper{
+    text-align: center;
+    font-size:30px;
+    font-style: bold;
+    color: black;
+    padding:40px 0px 30px 0px;
+}
+
+.titleWrapper{
+    text-align: center;
+    font-size:30px;
+    font-style: bold;
+    color: #4b6f90;;
+    padding:0px 0px 40px 0px;
+}
+
+.formWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 2em;
+}
+
+.loginButton{
+    margin: auto;
+    border: 2px solid black;
+    width: 10em;
+    padding: 0.5em 1em;
+    background-color: darkgray;
+
+}
+
+.buttonWrapper{
+    margin: auto;
+}
+
+.boxContainer{
+    position: absolute;
+    top: 2em;
+    left: 4em;
+}
+
+
+.imageWrapper{
+    width: 2em;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.noHireContainer{
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 10em;
+    box-shadow: 3px 0px 26px 10px #888888;
+    opacity: 0;
+}
+
+.noHireContainer.activeForm {
+    opacity: 1;
+}
+
+.noHireContent{
+    padding: 2em;
+}
+
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content{
+    width: 80%;
+    height: 600px;
+    display: flex;
+    box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
+}
+.content__left{
+    background-color: #0058fb;
+    width: 40%;
+    position: relative;
+}
+.main-content {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.content__left--logo{
+   margin-bottom: 15px;
+}
+.piktor-gotab {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10% 23%;
+}
+.piktor-logo{
+    width: 88px;
+}
+.content__left--gotab{
+    font-size: 43px;
+    color: #fff;
+    font-family:  ChainsawGeometric;
+}
+.gotab-logo{
+    height: 73px;
+    width: 260px;
+}
+.content__left--desc {
+    background-image: url('../../assets/Group-1.svg');
+    height: 350px;
+    background-size: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    background-position: bottom;
+}
+.content__left--desc-text{
+    color: #fff;
+    font-weight: bold;
+    text-align: initial;
+    padding-left: 22%;
+    font-size: 40px;
+}
+.text {
+    font-family: urbane;
+    font-size: 30px;
+}
+
+.content__right {
+    width: 60%;
+}
+.content__right--block {
+    height: 100%;
+}
+.padding {
+    padding: 2em 4em;
+}
+.noHire {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.noHire--text {
+    font-family: urbane;
+    font-size: 20px;
+}
+.button-container {
+    cursor: pointer;
+}
+.onboard-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.disableBtn {
+    cursor: not-allowed;
+}
+
+.enableBtn {
+    cursor: pointer;
+}
+.propBtn {
+    color: #fff;
+    font-weight: bold;
+    font-family: Titillium Web;
+    font-size: 12px;
+}
+.onboard {
+    color: #0100a6;
+    font-family: Titillium Web;
+    font-size: 25px;
+    font-weight: bold;
+}
+.btn-cancel {
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Titillium Web;
+    text-transform: uppercase;
+    opacity: 0.3;
+    margin-bottom: 2px;
+}
+.btn-cancel:hover{
+    opacity: 1;
+}
+.button-container:hover{
+    text-decoration: underline;
+}
+.cancel{
+    height: 12px;
+    width: 15px;
+}
+.create-text {
+    font-weight: bold;
+    font-family: Titillium Web;
+    font-size: 14px;
+    opacity: 0.3;
+}
+.form-container {
+    max-height: 460px;
+    overflow: auto;
+    margin-top: 20px;
+}
+.all-inputField {
+    display: flex;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.input-field {
+
+}
+.select-box{
+    overflow: hidden;
+    position: relative;
+}
+.select-box::after {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid #0058fb;
+    position: absolute;
+    top: 30%;
+    right: 3px;
+    content: "";
+    z-index: 98;
+ 
+}
+select.select-data {
+	color: #989898;
+}
+select option[disabled]:first-child {
+	display: none;
+}
+.large-button {
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.attach {
+    background-color: #f7f7f7;
+    border: solid 1px #e4e4e4;
+    color: #0058fb;
+    font-weight: bold;
+    position: relative;
+}
+.disableOffer {
+    background-color: #989898;
+}
+.enableOffer {
+    background-color: #0058fb;
+}
+
+.attach-text {
+    display: flex;
+    margin-bottom: 7px;
+    align-items: center;
+}
+.overlay-layer{
+    z-index: 0;
+    width: 10em;
+    display: flex;
+}
+.upload_btn{
+    opacity: 0;
+    z-index:10;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.offer-submit {
+    margin-top: 20px;
+}
+.attach-img {
+    width: 14px;
+    height: 56px;
+    margin-right: 6px;
+}
+
+.arrow-img {
+    margin-left: 20px;
+}
