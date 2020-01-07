@@ -44,11 +44,10 @@ const AddHire = (props) => {
     const [fileName, setFileName] = useState('');
     const [base64,setBase64] = useState('');
     const [fileTypePdf, setFileTypePdf] = useState(false);
-    const [attachfileName, setattachfileName] = useState('')
-    const [dateValue, setDate] = useState(new Date())
-    const [showLocation, setShowLocation] = useState(false)
-    const [loaderShow, setLoader] = useState(false)
-    const [selected,setSelected] = useState('')
+    const [attachfileName, setattachfileName] = useState('');
+    const [dateValue, setDate] = useState(new Date());
+    const [showLocation, setShowLocation] = useState(false);
+    const [loaderShow, setLoader] = useState(false);
     const [showManager, setShowManager] = useState(false);
     const [showPackage, setShowPackage] = useState('');
     
@@ -72,7 +71,6 @@ const AddHire = (props) => {
         setFileName('');
     }
     
-
     const removeAttachedFile = () => {
         setFileName('')
     }
@@ -201,6 +199,16 @@ const AddHire = (props) => {
         .catch(err =>{
         })
     }
+    const  validate = (evt) => {
+        let theEvent = evt || window.evt;
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+        var regex = /[0-9]|\./;
+        if( !regex.test(key) ) {
+          theEvent.returnValue = false;
+          if(theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
 
     const formList = () => {
         return <div className="padding">
@@ -214,19 +222,23 @@ const AddHire = (props) => {
                     <div className="all-inputField">
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} 
+                                onChange={(e) => setFirstName(e.target.value)} autoComplete="off" />
                                 <label htmlFor="firstName" className="form__label">First Name</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} 
+                                onChange={(e) => setEmail(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="email" className="form__label">Personal Email</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} onChange={(e) => setRole(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} 
+                                onChange={(e) => setRole(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="role" className="form__label">Role</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location} 
+                                onChange={(e) => setLocation(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="location" className="form__label">Location</label>
                                 <div className="arrowContainer" onClick={() => handleLocation()}>
                                     <img src={dropDownArrow} alt="" className="arrowDrop-img" />
@@ -237,18 +249,20 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01" onChange={(e) => setSalary(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01" 
+                                onChange={(e) => setSalary(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off"/>
                                 <label htmlFor="Salary" className="form__label">Salary</label>
                             </div>
                         </div>
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} 
+                                onChange={(e) => setLastName(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="lastName" className="form__label">Last Name</label>
                             </div>
-
                             <div className="input-field">
-                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input num_class" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum} 
+                                onChange={(e) =>  setPhNum(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off"/>
                                 <label htmlFor="phNum" className="form__label">Contact Phone</label>
                                 </div>
                             <div className="input-field">
@@ -262,7 +276,8 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                            <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager} onChange={(e) => setManager(e.target.value)} autoComplete="off"/>
+                            <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager} 
+                            onChange={(e) => setManager(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="manager" className="form__label">Reporting Manager</label>
                                 <div className="arrowContainer" onClick={() => handleManager()}>
                                     <img src={dropDownArrow} alt="" className="arrowDrop-img" />
@@ -273,7 +288,8 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages} onChange={(e) => setPackages(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages} 
+                                onChange={(e) => setPackages(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="package" className="form__label">Benefit Package</label>
                                 <div className="arrowContainer" onClick={() => handlePackages()}>
                                     <img src={dropDownArrow} alt="" className="arrowDrop-img" />
@@ -289,7 +305,8 @@ const AddHire = (props) => {
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} alt="" className="attach-img" />
-                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
+                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} alt="" 
+                                onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
                         </div>
                         { loaderShow ? 
                             <div className="loaderParent">
@@ -297,7 +314,8 @@ const AddHire = (props) => {
                                     <img src={loader} alt="" className="loader-img" />
                                 </div>
                             </div> : 
-                            <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} onClick={() => onSubmitClick()}>
+                            <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} 
+                            onClick={() => onSubmitClick()}>
                                 <button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>
                                     SEND OFFER PACKET
                                 </button>
