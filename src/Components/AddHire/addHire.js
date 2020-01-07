@@ -235,7 +235,7 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="text" name="salary" onChange={(e) => setSalary(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01" onChange={(e) => setSalary(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="Salary" className="form__label">Salary</label>
                             </div>
                         </div>
@@ -246,7 +246,7 @@ const AddHire = (props) => {
                             </div>
 
                             <div className="input-field">
-                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="text" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="phNum" className="form__label">Contact Phone</label>
                                 </div>
                             <div className="input-field">
