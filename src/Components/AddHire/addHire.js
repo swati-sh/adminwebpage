@@ -301,12 +301,11 @@ const AddHire = (props) => {
                         </div>
                     </div>
                     <div className="offer-submit">
-                        <div className="large-button attach">
+                        <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} alt="" className="attach-img" />
-                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} alt="" 
-                                onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
+                                <div className={fileName !== '' ? "attach-text fullWidth" : "attach-text"}>{fileName !== ''?<div className="fileUpload"><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
                         </div>
                         { loaderShow ? 
                             <div className="loaderParent">
