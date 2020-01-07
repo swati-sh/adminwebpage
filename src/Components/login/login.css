@@ -1,14 +1,66 @@
-.loginButn{
-    border: 2px solid black;
-    width: 3em;
-    padding: 0.5em 1em;
-    background-color: darkgray;
+.loginParent{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    height: 100%;
+}
 
+.btnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginButn{
+    width: 4em;
+    text-align: center;
+    padding: 0.5em 1em;
+    font-family: TLight;
+    font-size: 14px;
+    border-radius: 5em;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.loginParent .form__label{
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.loginParent .input-default{
+    color: #fff;
+    letter-spacing: 0.5px;
+    width: 100%;
+}
+
+.loginParent ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: TLight;
+    opacity: 1; /* Firefox */
+    text-transform: initial;
+    color: #fff;
+}
+
+.loginParent :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    font-family: TLight;
+    text-transform: initial;
+    color: #fff;
+}
+
+.loginParent ::-ms-input-placeholder { /* Microsoft Edge */
+    font-family: TLight;
+    text-transform: initial;
+    color: #fff;
+}
+
+.loginPage{
+    background: #0058fb;
 }
 
 .loginWrapper{
-    margin: 10em auto;
+    background: #0058fb;
     width: 20em;
+    border-radius: 0.3 em;
     padding: 5em;
     box-shadow: 3px 0px 26px 10px #888888
 }

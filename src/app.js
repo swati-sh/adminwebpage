@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css'
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Login from './Components/login/index'
 import AddHire from './Components/AddHire/addHire'
 

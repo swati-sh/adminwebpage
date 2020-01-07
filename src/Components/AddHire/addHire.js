@@ -1,8 +1,6 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import './addHire.css'
-import formField from '../formFields'
-import validator from 'validator';
 import plusSvg from './Images/plus.svg'
 import piktorLogo from '../../assets/Page-1_1_.svg';
 import cancelIcon from '../../assets/cancel.svg';
@@ -14,7 +12,6 @@ import DatePicker from "react-datepicker";
 import loader from '../../assets/Spinner-1s-200px.gif';
  
 import "react-datepicker/dist/react-datepicker.css"
-import { tsMappedType } from '@babel/types';
 
 const monthCalender = {
     '01': 'January',
@@ -195,7 +192,7 @@ const AddHire = (props) => {
             attachmentName: attachfileName,
             attachment: base64
         }
-        axios.post('http://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
+        axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
         .then(res => {
             setLoader(false);
             setDisabledSubmit(true);
@@ -209,7 +206,7 @@ const AddHire = (props) => {
         return <div className="padding">
             <div className="onboard-btn">
                 <div className="onboard">ONBOARDING</div>
-                <div className="button-container" onClick={() => onCancelClick()}><button className="btn btn-cancel">Cancel</button><img className="cancel" src={cancelIcon} /></div>
+                <div className="button-container" onClick={() => onCancelClick()}><button className="btn btn-cancel">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
             </div>
             <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">
@@ -232,7 +229,7 @@ const AddHire = (props) => {
                                 <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="location" className="form__label">Location</label>
                                 <div className="arrowContainer" onClick={() => handleLocation()}>
-                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
                                 </div>
                                 <div className={showLocation ? 'optionList showLocation' : 'optionList'}>
                                     <div className={`optionValue ${location === "Bangalore"?'select__option':''}`} onClick={()=> setOption('Bangalore')}>Bangalore</div>
@@ -261,14 +258,14 @@ const AddHire = (props) => {
                                 />
                                 <label htmlFor="date" className="form__label">Date</label>
                                 <div className="dateImgContainer">
-                                    <img src={dateIcon} className="date-img" />
+                                    <img src={dateIcon} alt="" className="date-img" />
                                 </div>
                             </div>
                             <div className="input-field select-box">
                             <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager} onChange={(e) => setManager(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="manager" className="form__label">Reporting Manager</label>
                                 <div className="arrowContainer" onClick={() => handleManager()}>
-                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
                                 </div>
                                 <div className={showManager ? 'optionList showLocation' : 'optionList'}>
                                     <div className={`optionValue ${manager === "Vidhi"?'select__option':''}`} onClick={()=> setManagerOption('Vidhi')}>Vidhi</div>
@@ -279,7 +276,7 @@ const AddHire = (props) => {
                                 <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages} onChange={(e) => setPackages(e.target.value)} autoComplete="off"/>
                                 <label htmlFor="package" className="form__label">Benefit Package</label>
                                 <div className="arrowContainer" onClick={() => handlePackages()}>
-                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
                                 </div>
                                 <div className={showPackage ? 'optionList showLocation' : 'optionList'}>
                                     <div className={`optionValue ${packages === "Star-Sliver"?'select__option':''}`} onClick={()=> setPackageOption('Star-Sliver')}>Star-Sliver</div>
@@ -291,13 +288,13 @@ const AddHire = (props) => {
                         <div className="large-button attach">
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
-                                <img src={attach} className="attach-img" />
-                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
+                                <img src={attach} alt="" className="attach-img" />
+                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
                         </div>
                         { loaderShow ? 
                             <div className="loaderParent">
                                 <div className="loaderContainer">
-                                    <img src={loader} className="loader-img" />
+                                    <img src={loader} alt="" className="loader-img" />
                                 </div>
                             </div> : 
                             <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} onClick={() => onSubmitClick()}>
@@ -305,7 +302,7 @@ const AddHire = (props) => {
                                     SEND OFFER PACKET
                                 </button>
                                 <div className="imgContainer">
-                                    <img src={arrow} className="arrow-img" />
+                                    <img src={arrow} alt="" className="arrow-img" />
                                 </div>
                             </div>
                         }
@@ -322,7 +319,7 @@ const AddHire = (props) => {
                     <div className="content__left">
                         <div className="main-content">
                             <div className="piktor-gotab">
-                                <div className="content__left--logo"><img src={piktorLogo} className="piktor-logo" /></div>
+                                <div className="content__left--logo"><img src={piktorLogo} alt="" className="piktor-logo" /></div>
                                 <div className="content__left--gotab">Gotab</div>
                             </div>
                             <div className="content__left--desc">
@@ -341,7 +338,7 @@ const AddHire = (props) => {
                                     <div className="noHire">
                                         <div className="noHire--text">
                                             No New Hires
-                                 </div><img className="imageWrapper" src={plusSvg} onClick={() => onAddClick()} />
+                                 </div><img className="imageWrapper" alt="" src={plusSvg} onClick={() => onAddClick()} />
                                     </div> :
                                     formList()
                             }
