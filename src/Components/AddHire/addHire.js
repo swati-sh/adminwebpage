@@ -13,6 +13,22 @@ import dateIcon from '../../assets/noun_Calendar_821509.svg';
 import DatePicker from "react-datepicker";
  
 import "react-datepicker/dist/react-datepicker.css"
+import { tsMappedType } from '@babel/types';
+
+const monthCalender = {
+    '01': 'January',
+    '02': 'February',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+   };
 
 const AddHire = (props) => {
 
@@ -21,7 +37,6 @@ const AddHire = (props) => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [phNum, setPhNum] = useState('');
-    const [date, setdate] = useState('');
     const [role, setRole] = useState('');
     const [salary, setSalary] = useState('');
     const [disabledSubmit, setDisabledSubmit] = useState(true);
@@ -46,7 +61,7 @@ const AddHire = (props) => {
         setRole('');
         setPhNum('');
         setSalary('');
-        setdate('');
+        setDate('');
         setEmail('');
         setManager('');
         setLocation('');
@@ -80,7 +95,7 @@ const AddHire = (props) => {
             } else {
                 setattachfileName('')
             }
-            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || date ===''|| fileTypePdf === false) {  
+            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || dateValue ===''|| fileTypePdf === false) {  
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
@@ -112,6 +127,9 @@ const AddHire = (props) => {
                 setNoHireData(true)
              }   
          })
+         .catch(err => {
+             console.log(err)
+         })
         },[]
     )
 
@@ -131,6 +149,10 @@ const AddHire = (props) => {
     }
 
     const onSubmitClick = () => {
+        let dateData = dateValue.toISOString()
+        dateData = dateData.split('T');
+        dateData = dateData[0].split('-')
+        dateData = dateData[2] + ' ' + monthCalender[dateData[1]] + ' ' + dateData[0]
         let body = {
             documents: [],
             personalEmail: email,
@@ -140,7 +162,7 @@ const AddHire = (props) => {
             phoneNumber: phNum,
             benefitPackage: packages,
             location: location,
-            joiningDate: date,
+            joiningDate: dateData,
             reportingManager: manager,
             annualSalary: salary,
             officialEmail: "",
@@ -149,15 +171,14 @@ const AddHire = (props) => {
             attachmentName: attachfileName,
             attachment: base64
         }
-        console.log("body", body)
-        debugger
-        axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',{data:body})
+        axios.post('http://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
         .then(res => {
-            debugger
             console.log("post",res)
-        }
-    )
-}
+        })
+        .catch(err =>{
+            console.log('err', err)
+        })
+    }
 
     const formList = () => {
         return <div className="padding">
@@ -167,7 +188,7 @@ const AddHire = (props) => {
             </div>
             <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">
-                <form>
+                <div>
                     <div className="all-inputField">
                         <div className="col">
                             <div className="input-field">
@@ -235,16 +256,16 @@ const AddHire = (props) => {
                     </div>
                     <div className="offer-submit">
                         <div className="large-button attach">
-                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>setFileName(e.target.value)} value={fileName}/>
+                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} className="attach-img" />
                                 <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div></div>
-                        <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"}onClick={() => onSubmitClick()}><button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>SEND OFFER PACKET</button>
+                        <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} onClick={() => onSubmitClick()}><button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>SEND OFFER PACKET</button>
                         <div className="imgContainer">
                             <img src={arrow} className="arrow-img" /></div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
         </div>
