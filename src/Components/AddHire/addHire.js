@@ -2,13 +2,17 @@ import React, { Component, useState, useEffect } from 'react'
 import axios from 'axios';
 import './addHire.css'
 import formField from '../formFields'
-const axios = require('axios');
 import validator from 'validator';
 import plusSvg from './Images/plus.svg'
 import piktorLogo from '../../assets/Page-1_1_.svg';
 import cancelIcon from '../../assets/cancel.svg';
 import arrow from '../../assets/noun_Arrow_2094739.svg';
+import dropDownArrow from '../../assets/noun_Arrow_2284415.svg';
 import attach from '../../assets/noun_attached document_615523.svg';
+import dateIcon from '../../assets/noun_Calendar_821509.svg';
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css"
 
 const AddHire = (props) => {
 
@@ -26,6 +30,8 @@ const AddHire = (props) => {
     const [packages, setPackages] = useState('');
     const [fileName, setFileName] = useState('');
     const [attachfileName, setattachfileName] = useState('')
+    const [dateValue, setDate] = useState(new Date())
+    const [showLocation, setShowLocation] = useState(false)
     
     useEffect(
         () => {
@@ -64,6 +70,18 @@ const AddHire = (props) => {
         setFileName('')
     }
 
+    const handleChange = (date) => {
+        setDate(date)
+    }
+
+    const handleLocation = () => {
+        console.log('bvksfb')
+        setShowLocation(!showLocation)
+    }
+
+    const setOption = (value) => [
+        
+    ]
    
     useEffect(
         () => {
@@ -73,21 +91,12 @@ const AddHire = (props) => {
             } else {
                 setattachfileName('')
             }
-            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '') {
+            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || date === '') {
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
             }
         }, [firstName, lastName, role, email, phNum, location, manager, salary, packages,fileName]
-    )
-
-    useEffect(
-        () => {
-         axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
-         .then(res =>{
-             console.log("res",res);
-         })
-        },[]
     )
 
     
@@ -104,44 +113,53 @@ const AddHire = (props) => {
                     <div className="all-inputField">
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                                <label for="firstName" className="form__label">First Name</label>
+                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="firstName" className="form__label">First Name</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                                <label for="email" className="form__label">Personal Email</label>
+                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="email" className="form__label">Personal Email</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} onChange={(e) => setRole(e.target.value)} />
-                                <label for="role" className="form__label">Role</label>
-                            </div>
-                            <div className="input-field select-box">
-                                <select className="input-default select-data form__input" id="location" onChange={(e) => setLocation(e.target.value)} value={location} name="location">
-                                    <option value="" selected disabled>Location</option>
-                                    <option value="Bangalore">Bangalore</option>
-                                    <option value="Seatle">Seatle</option>
-                                </select>
-                                <label for="location" className="form__label">Location</label>
+                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} onChange={(e) => setRole(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="role" className="form__label">Role</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="text" name="salary" onChange={(e) => setSalary(e.target.value)} />
-                                <label for="Salary" className="form__label">Salary</label>
+                                <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="location" className="form__label">Location</label>
+                                <div className="arrowContainer" onClick={() => handleLocation()}>
+                                    <img src={dropDownArrow} className="arrowDrop-img" />
+                                </div>
+                                <div className={showLocation ? 'optionList showLocation' : 'optionList'}>
+                                    <div className="optionValue" onClick={()=> setOption('Bangalore')}>Bangalore</div>
+                                    <div className="optionValue" onClick={()=> setOption('Seattle')}>Seattle</div>
+                                </div>
+                            </div>
+                            <div className="input-field">
+                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="text" name="salary" onChange={(e) => setSalary(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="Salary" className="form__label">Salary</label>
                             </div>
                         </div>
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                                <label for="lastName" className="form__label">Last Name</label>
+                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="lastName" className="form__label">Last Name</label>
                             </div>
 
                             <div className="input-field">
-                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="text" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} />
-                                <label for="phNum" className="form__label">Contact Phone</label>
+                                <input className="input-default form__input" id="phNum" placeholder="Contact Person" type="text" name="phNum" value={phNum} onChange={(e) => setPhNum(e.target.value)} autoComplete="off"/>
+                                <label htmlFor="phNum" className="form__label">Contact Phone</label>
                                 </div>
                             <div className="input-field">
-                                <input className="input-default  form__input" id="date" placeholder="Joining Date" type="text" name="date" value={date} onChange={(e) => setdate(e.target.value)} />
-                                <label for="date" className="form__label">Date</label>
+                                <DatePicker
+                                    selected={dateValue}
+                                    onChange={handleChange}
+                                />
+                                <label htmlFor="date" className="form__label">Date</label>
+                                <div className="dateImgContainer">
+                                    <img src={dateIcon} className="date-img" />
                                 </div>
+                            </div>
                             <div className="input-field select-box">
                                 <select className="input-default select-data  form__input" onChange={(e) => setManager(e.target.value)} value={manager} name="manager">
                                     <option value="" selected disabled>Reporting Manager</option>
@@ -158,8 +176,15 @@ const AddHire = (props) => {
                         </div>
                     </div>
                     <div className="offer-submit">
-    <div className="large-button attach"><input type="file" className="upload_btn" id="fileInput" onChange={(e)=>setFileName(e.target.value)} value={fileName}/><div className="overlay-layer"><img src={attach} className="attach-img" /><div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div></div>
-                        <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"}><button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>SEND OFFER PACKET</button><img src={arrow} className="arrow-img" /></div>
+                        <div className="large-button attach">
+                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>setFileName(e.target.value)} value={fileName}/>
+                            <div className="overlay-layer">
+                                <img src={attach} className="attach-img" />
+                                <div className="attach-text">{fileName !== ''?<div><div>{attachfileName}</div><div><img src={cancelIcon} onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div></div>
+                        <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"}><button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>SEND OFFER PACKET</button>
+                        <div className="imgContainer">
+                            <img src={arrow} className="arrow-img" /></div>
+                        </div>
                     </div>
                 </form>
             </div>
