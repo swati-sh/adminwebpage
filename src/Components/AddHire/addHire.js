@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react'
 import './addHire.css'
 import formField from '../formFields'
+const axios = require('axios');
 import validator from 'validator';
 import plusSvg from './Images/plus.svg'
 import piktorLogo from '../../assets/Page-1_1_.svg';
@@ -65,6 +66,16 @@ const AddHire = (props) => {
             }
         }, [firstName, lastName, role, email, phNum, location, manager, salary, packages,fileName]
     )
+
+    useEffect(
+        () => {
+         axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
+         .then(res =>{
+             console.log("res",res);
+         })
+        },[]
+    )
+
     
 
     const formList = () => {
