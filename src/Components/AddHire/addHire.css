@@ -119,25 +119,6 @@ input:-webkit-autofill:active  {
     cursor: pointer;
 }
 
-.container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.content{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
-}
-.content__left{
-    background-color: #0058fb;
-    width: 33%;
-    position: relative;
-}
-
 .gotab-logo{
     height: 73px;
     width: 260px;
@@ -148,26 +129,6 @@ input:-webkit-autofill:active  {
     color: #fff;
 }
 
-.content__right {
-    width: 67%;
-}
-.content__right--block {
-    display: flex;
-    flex-direction: column;
-    padding: 5% 6%;
-    height: calc(100% - 4em)
-}
-
-.noHire {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.noHire--text {
-    font-family: urbane;
-    font-size: 20px;
-}
 .button-container {
     cursor: pointer;
 }
