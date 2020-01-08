@@ -47,6 +47,7 @@ const AddHire = (props) => {
     const [loaderShow, setLoader] = useState(false);
     const [showManager, setShowManager] = useState(false);
     const [showPackage, setShowPackage] = useState('');
+    const [validEmail, setValidEmail] = useState(false)
     
 
     const onCancelClick = () => {
@@ -108,14 +109,16 @@ const AddHire = (props) => {
             } else {
                 setattachfileName('')
             }
-            if (firstName === '' || lastName === '' || email === '' || salary === '' || role === '' || phNum === '' || location === '' || packages === '' || manager === '' || dateValue ===''|| fileTypePdf === false) {  
+            if (firstName === '' || lastName === '' || email === '' || 
+                salary === '' || role === '' || phNum === '' || location === '' || 
+                packages === '' || manager === '' || dateValue ===''|| fileTypePdf === false || validEmail === false) {  
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
             }
         }, [firstName, lastName, role, email, phNum, location, manager, salary, packages, fileName, fileTypePdf]
     )
-
+    
     useEffect (
         () => {
             if(attachfileName){
@@ -127,6 +130,15 @@ const AddHire = (props) => {
                 }
             }
         },[attachfileName]
+    )
+
+    useEffect (
+        () => {
+            if(email){
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                     setValidEmail(re.test(email));
+            }
+        },[email]
     )
 
     useEffect (
