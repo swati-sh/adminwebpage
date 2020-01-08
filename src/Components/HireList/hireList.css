@@ -1,0 +1,89 @@
+.list {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px 0;
+    width: 50%;
+}
+.list__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    font-family: TBold;
+}
+.list__content--name {
+    text-transform: uppercase;
+}
+.list__content--btn:hover {
+    text-decoration: underline;
+}
+
+.addHire-logOut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.success__container {
+    height: 100%;
+}
+
+.success__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100%);
+}
+
+.success__content--img {
+    margin-bottom: 25px;
+}
+
+.success-img {
+    width: 55px;
+}
+
+.success__content--desc {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.desc-first {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-family: TBold;
+    font-size: 20px;
+    color: #0100a6;
+}
+
+.desc-second {
+    text-transform: uppercase;
+    font-family: TBold;
+    opacity: 0.3;
+    font-size: 12px;
+}
+
+.success__content--btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.success-btn {
+    width: 400px;
+    border: 1px solid #0058fb;
+    padding: 13px;
+    opacity: 1;
+    font-family: TBold;
+    margin-bottom: 15px;
+}
+
+.another-offer-btn {
+    color: #0058fb;
+}
+
+.done-btn {
+    color: #fff;
+    background-color: #0058fb;
+}

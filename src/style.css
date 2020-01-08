@@ -9,6 +9,7 @@ html,body {
 #root {
     height: 100vh;
 }
+
 h3{
     justify-content: center;
     display: flex;
@@ -50,6 +51,27 @@ select {
     display: flex;
     justify-content: center;
     padding: 2em;
+}
+
+.logout__div {
+    position: absolute;
+    top: 5%;
+    right: 2%;
+}
+
+.logout__btn {
+    padding: 5px;
+    border: 0;
+    outline: none;
+    background-color: #0058fb;
+    color: #fff;
+    font-family: TBold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 95px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
 }
 
 

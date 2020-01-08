@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import './addHire.css'
-import plusSvg from './Images/plus.svg'
-import piktorLogo from '../../assets/Page-1_1_.svg';
 import cancelIcon from '../../assets/cancel.svg';
 import arrow from '../../assets/noun_Arrow_2094739.svg';
 import dropDownArrow from '../../assets/noun_Arrow_2284415.svg';
@@ -10,7 +8,6 @@ import attach from '../../assets/noun_attached document_615523.svg';
 import dateIcon from '../../assets/noun_Calendar_821509.svg';
 import DatePicker from "react-datepicker";
 import loader from '../../assets/Spinner-1s-200px.gif';
- 
 import "react-datepicker/dist/react-datepicker.css"
 
 const monthCalender = {
@@ -30,7 +27,7 @@ const monthCalender = {
 
 const AddHire = (props) => {
 
-    const [noHireData, setNoHireData] = useState(true);
+    const {editField,onChildClick,onSubmitForm} = props;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -52,10 +49,6 @@ const AddHire = (props) => {
     const [showPackage, setShowPackage] = useState('');
     
 
-    const onAddClick = () => {
-        setNoHireData(false)
-    }
-
     const onCancelClick = () => {
         setFirstName('');
         setLastName('');
@@ -68,6 +61,7 @@ const AddHire = (props) => {
         setLocation('');
         setPackages('');
         setFileName('');
+        onChildClick(true); //
     }
     
     const removeAttachedFile = () => {
@@ -135,19 +129,23 @@ const AddHire = (props) => {
         },[attachfileName]
     )
 
-    useEffect(
+    useEffect (
         () => {
-         axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
-         .then(res => {
-             let joinee = res.data.joinee
-             if(joinee){
-             } else {
-                setNoHireData(true)
-             }   
-         })
-         .catch(err => {
-         })
-        },[]
+            if(editField){
+                setFirstName(editField.firstName)
+                setLastName(editField.lastName)
+                setPhNum(editField.phoneNumber)
+                setEmail(editField.personalEmail)
+                setRole(editField.designation)
+                setManager(editField.reportingManager)
+                setPackages(editField.benefitPackage)
+                setLocation(editField.location)
+                setSalary(editField.annualSalary)
+                if(editField.passCode){
+                    setDisabledSubmit(true);
+                }
+            }
+        },[editField]
     )
 
     const handleFile = (event) => {
@@ -166,7 +164,6 @@ const AddHire = (props) => {
     }
 
     const onSubmitClick = () => {
-        setLoader(true)
         let dateData = dateValue.toISOString()
         dateData = dateData.split('T');
         dateData = dateData[0].split('-')
@@ -189,14 +186,18 @@ const AddHire = (props) => {
             attachmentName: attachfileName,
             attachment: base64
         }
-        axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
-        .then(res => {
-            setLoader(false);
-            setDisabledSubmit(true);
-            onCancelClick()
-        })
-        .catch(err =>{
-        })
+        onSubmitForm(true)
+        // if(disabledSubmit !== true) {
+        //     setLoader(true)
+        //     axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
+        //     .then(res => {
+        //         setLoader(false);
+        //         setDisabledSubmit(true);
+        //         onCancelClick()
+        //     })
+        //     .catch(err =>{
+        //     })
+        // }
     }
     const  validate = (evt) => {
         let theEvent = evt || window.evt;
@@ -213,7 +214,7 @@ const AddHire = (props) => {
         return <div className="padding">
             <div className="onboard-btn">
                 <div className="onboard">ONBOARDING</div>
-                <div className="button-container" onClick={() => onCancelClick()}><button className="btn btn-cancel">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
+                <div className="button-container" onClick={() => onCancelClick()}><button className="btn">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
             </div>
             <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">
@@ -300,12 +301,12 @@ const AddHire = (props) => {
                         </div>
                     </div>
                     <div className="offer-submit">
-                        <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
+                       {!props.editHire ? <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
                             <div className="overlay-layer">
                                 <img src={attach} alt="" className="attach-img" />
                                 <div className={fileName !== '' ? "attach-text fullWidth" : "attach-text"}>{fileName !== ''?<div className="fileUpload"><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
-                        </div>
+                        </div>:<div className="already-offer">Offer already sent!</div>}
                         { loaderShow ? 
                             <div className="loaderParent">
                                 <div className="loaderContainer">
@@ -330,37 +331,8 @@ const AddHire = (props) => {
     }
     return (
         <React.Fragment>
-            <div className="container">
-                <div className="content">
-                    <div className="content__left">
-                        <div className="main-content">
-                            <div className="piktor-gotab">
-                                <div className="content__left--logo"><img src={piktorLogo} alt="" className="piktor-logo" /></div>
-                                <div className="content__left--gotab">Gotab</div>
-                            </div>
-                            <div className="content__left--desc">
-                                <div className="content__left--desc-text">
-                                    <div className="text">Unified </div>
-                                    <div className="text">Employee</div>
-                                    <div className="text">Management</div>
-                                    <div className="text">Platform</div>
-                                </div></div>
-                        </div>
-                    </div>
-                    <div className="content__right">
-                        <div className="content__right--block">
-                            {
-                                noHireData ?
-                                    <div className="noHire">
-                                        <div className="noHire--text">
-                                            No New Hires
-                                 </div><img className="imageWrapper" alt="" src={plusSvg} onClick={() => onAddClick()} />
-                                    </div> :
-                                    formList()
-                            }
-                        </div>
-                    </div>
-                </div>
+            <div>
+                    {formList()}
             </div>
         </React.Fragment>
     )

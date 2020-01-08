@@ -10,7 +10,7 @@ const Login = (props) => {
         () => {
             let item = localStorage.getItem('token')
             if(item){
-                props.history.push('/addUser')
+                props.history.push('/hireList')
             }
         },[]
     )
@@ -19,7 +19,7 @@ const Login = (props) => {
         if(userName === 'admin' && password === 'admin') {
             localStorage.setItem('token', userName+password);
             setPassword("")
-            props.history.push('/addUser')
+            props.history.push('/hireList')
         }
     }
 
@@ -35,7 +35,7 @@ const Login = (props) => {
                     <label htmlFor="firstName" className="form__label">User Name</label>
                 </div>
                 <div className="input-field">
-                    <input className="input-default form__input loginPage" id="Password" placeholder="Password" type="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="off"/>
+                    <input className="input-default form__input loginPage" id="Password" placeholder="Password" type="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="off" onKeyDown={(event) => validation(event)}/>
                     <label htmlFor="password" className="form__label">Password</label>
                 </div>
                 <div className="btnContainer">
