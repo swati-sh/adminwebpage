@@ -186,18 +186,18 @@ const AddHire = (props) => {
             attachmentName: attachfileName,
             attachment: base64
         }
-        onSubmitForm(true)
-        // if(disabledSubmit !== true) {
-        //     setLoader(true)
-        //     axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
-        //     .then(res => {
-        //         setLoader(false);
-        //         setDisabledSubmit(true);
-        //         onCancelClick()
-        //     })
-        //     .catch(err =>{
-        //     })
-        // }
+        if(disabledSubmit !== true) {
+            setLoader(true)
+            axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
+            .then(res => {
+                onSubmitForm(true)
+                setLoader(false);
+                setDisabledSubmit(true);
+                onCancelClick()
+            })
+            .catch(err =>{
+            })
+        }
     }
     const  validate = (evt) => {
         let theEvent = evt || window.evt;
@@ -214,7 +214,7 @@ const AddHire = (props) => {
         return <div className="padding">
             <div className="onboard-btn">
                 <div className="onboard">ONBOARDING</div>
-                <div className="button-container" onClick={() => onCancelClick()}><button className="btn">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
+                <div className="button-container" onClick={() => onCancelClick()}><button className="btn cancel-btn">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
             </div>
             <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">

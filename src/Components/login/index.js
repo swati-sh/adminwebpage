@@ -39,7 +39,7 @@ const Login = (props) => {
                     <label htmlFor="password" className="form__label">Password</label>
                 </div>
                 <div className="btnContainer">
-                    <div className="loginButn" onClick={validation}>ENTER</div>
+                    <div className="loginButn" onClick={validation}>SUBMIT</div>
                 </div>
             </div>
         </article>
