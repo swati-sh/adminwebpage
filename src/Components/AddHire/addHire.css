@@ -151,9 +151,7 @@ input:-webkit-autofill:active  {
 .cancel-btn {
     opacity: 0.3;
 }
-.cancel-btn:hover {
-    text-decoration: underline;
-}
+
 .disableBtn {
     cursor: not-allowed;
 }
