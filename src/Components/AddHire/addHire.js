@@ -163,7 +163,7 @@ const AddHire = (props) => {
         setArrayList(newData)
     }
 
-    const lookUp = (e) => {
+    const setLookUp = (e) => {
         let value = e.target.value;
         let name = e.target.name;
         if(name === "location") {
@@ -300,7 +300,7 @@ const AddHire = (props) => {
                             <div className="input-field">
                                 <div>
                                 <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location}
-                                    onChange={(e) => lookUp(e)} autoComplete="off"/>
+                                    onChange={(e) => setLookUp(e)} autoComplete="off"/>
                                 <label htmlFor="location" className="form__label">Location</label>
                                 </div>
                                 {(arryList.length>0 && showLocation)?
@@ -317,11 +317,12 @@ const AddHire = (props) => {
                             </div>
                             {
                                 props.editHire ? <div className="input-field">
-                                    <input className="input-default form__input" id="officialEmail" placeholder="Official Email" type="email" name="email" value={officialEmail}
-                                        onChange={(e) => setOfficialEmail(e.target.value)} autoComplete="off" />
-                                    <label htmlFor="officialEmail" className="form__label">Official Email</label>
+                                    <input className="input-default form__input" id="officialPassword" placeholder="Password" type="password" name="officialPassword" value={officialPassword}
+                                        onChange={(e) => setOfficialPassword(e.target.value)} autoComplete="off" />
+                                    <label htmlFor="officialPassword" className="form__label">Password</label>
                                 </div> : ''
                             }
+                           
                         </div>
                         <div className="col">
                             <div className="input-field">
@@ -348,7 +349,7 @@ const AddHire = (props) => {
                             <div className="input-field select-box">
                                 <div>
                                 <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager}
-                                    onChange={(e) => lookUp(e)} autoComplete="off"/>
+                                    onChange={(e) => setLookUp(e)} autoComplete="off"/>
                                 <label htmlFor="manager" className="form__label">Reporting Manager</label>
                                 </div>
                                 {(arryList.length>0 && showManager)?
@@ -360,9 +361,9 @@ const AddHire = (props) => {
                             </div>
                             {
                                 props.editHire ? <div className="input-field">
-                                    <input className="input-default form__input" id="officialPassword" placeholder="Password" type="password" name="officialPassword" value={officialPassword}
-                                        onChange={(e) => setOfficialPassword(e.target.value)} autoComplete="off" />
-                                    <label htmlFor="officialPassword" className="form__label">Password</label>
+                                    <input className="input-default form__input" id="officialEmail" placeholder="Official Email" type="email" name="email" value={officialEmail}
+                                        onChange={(e) => setOfficialEmail(e.target.value)} autoComplete="off" />
+                                    <label htmlFor="officialEmail" className="form__label">Official Email</label>
                                 </div> : ''
                             }
                         </div>
