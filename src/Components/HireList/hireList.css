@@ -1,9 +1,14 @@
 .list {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin: 20px 0;
-    width: 50%;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
 }
+
+.list-heading {
+    padding: 10px;
+    text-transform: uppercase;
+    font-family: TBold;
+}
+
 .list__content {
     display: flex;
     justify-content: space-between;
@@ -11,6 +16,7 @@
     padding: 10px 10px;
     font-family: TBold;
 }
+
 .list__content--name {
     text-transform: uppercase;
 }
@@ -55,11 +61,31 @@
     justify-content: center;
     align-items: center;
 }
+
+.addHire-text {
+    margin-left: 12px;
+}
+
+.main-loader {
+    height: 80%;
+}
+
+.loading-row {
+    width: 6em;
+    height: 6em;
+}
 .noHire--text {
     font-family: urbane;
     font-size: 20px;
 }
 
+.right-sec__container {
+    height: 100%;
+}
+
+.empty-list {
+    height: 90%;
+}
 
 .addHire-logOut {
     display: flex;

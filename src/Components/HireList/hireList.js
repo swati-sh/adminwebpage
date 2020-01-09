@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './hireList.css';
 import LeftDisplay from '../LeftDisplay/leftDisplay';
-import plusSvg from '../../assets/plus.svg'
+import plusSvg from '../../assets/plus.svg';
 import AddHire from '../AddHire/addHire';
-import success from '../../assets/noun_success_2019805.svg'
+import success from '../../assets/noun_success_2019805.svg';
+import loader from '../../assets/Spinner-1s-200px.gif';
 
 const HireList = (props) => {
 
     const [noHireData, setNoHireData] = useState(false);
     const [dataList, setDataList] = useState([]);
-    const [editHire, setEditHire] = useState(false)
+    const [editHire, setEditHire] = useState(false);
     const [editField, setEditField] = useState('');
-    const [formToEnter, setFormToEnter] = useState(false)
-    const [backToList, setBackToList] = useState(true)
-    const [submitClicked,setSubmitClicked] = useState(false)
+    const [formToEnter, setFormToEnter] = useState(false);
+    const [backToList, setBackToList] = useState(true);
+    const [submitClicked,setSubmitClicked] = useState(false);
+    const [loaderShow, setLoaderShow] = useState(false);
 
     useEffect(
         () => {
@@ -23,21 +25,26 @@ const HireList = (props) => {
     )
 
     const getAllJoinee = async() => {
+        setLoaderShow(true)
         const newData = [];
         let res = await axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
-        let joinee = res.data.joinee
-        if (joinee) {
-            res.data.data.map((item) => {
-                newData.push(item);
-            })
-            setDataList(newData)
-            setNoHireData(false)
-        } else {
-            setNoHireData(true)
+        if(res.status === 200){
+            let joinee = res.data.joinee
+            if (joinee) {
+                res.data.data.map((item) => {
+                    newData.push(item);
+                })
+                setDataList(newData)
+                setNoHireData(false)
+            } else {
+                setNoHireData(true)
+            }
+            setLoaderShow(false)
         }
     }
 
     const onDeleteJoinee = async(item) => {
+        setLoaderShow(true)
         let res = await axios.delete('https://piktordigitalid.herokuapp.com/api/onboarding/deleteJoinee?email='+item.personalEmail)
         if(res.status === 200){
             getAllJoinee()
@@ -46,6 +53,7 @@ const HireList = (props) => {
 
    
    const onFormEntryCancelClick = (val) => {
+        getAllJoinee()
         setFormToEnter(false)
         if(dataList.length>0){
             setNoHireData(false)
@@ -56,6 +64,7 @@ const HireList = (props) => {
 
     const onEditCancelClick = (val) => {
         setEditHire(false)
+        getAllJoinee()
     }
 
     const onSubmitClicked = (val) => {
@@ -100,6 +109,7 @@ const HireList = (props) => {
     const showHireList = () => {
         return (
             <div className="padding">
+                <div className="list-heading">List of new joinee</div>
                 {
                     dataList.map((item, key) => {
                         return (
@@ -122,7 +132,7 @@ const HireList = (props) => {
         return (
             <div className="success__content">
                 <div className="success__content--img">
-                    <img src={success} className="success-img"/>
+                    <img src={success} className="success-img" alt="success"/>
                 </div>
                 <div className="success__content--desc">
                     <div className="desc-first">SENT SUCCESSFULLY!</div>
@@ -144,18 +154,25 @@ const HireList = (props) => {
                         <LeftDisplay />
                     </div>
                     <div className="content__right">
-                        <div className="content__right--block">
+                   <div className="content__right--block">
                             <div className="addHire-logOut">
-                                <div>
-                                 {(noHireData === false && editHire === false && formToEnter === false && submitClicked === false) && <div className="noHire"><div className="noHire--text">
-                                    Add Hire</div><img className="imageWrapper" alt="" src={plusSvg} onClick={() => onAddHireClick()} /></div> }
+                                <div> 
+                                 {(noHireData === false && editHire === false && formToEnter === false && submitClicked === false && loaderShow === false) && <div className="noHire addHire-text"><div className="noHire--text">
+                                    Add Hire</div><img className="imageWrapper" alt="imageWrapper" src={plusSvg} onClick={() => onAddHireClick()} /></div> }
                                 </div>
                                 <div>
                                     <button className="logout__btn" onClick={() => onOutClick()}>logOut</button>
                                 </div>
                             </div>
-                            {(noHireData && submitClicked === false) ? <div className="noHire"><div className="noHire--text">
-                                       No New Hires</div><img className="imageWrapper" alt="" src={plusSvg} onClick={() => onEmptyListAddClick()} /></div> 
+                            { loaderShow ? 
+                            <div className="loaderParent main-loader">
+                                <div className="loading-row">
+                                    <img src={loader} alt="loader" className="loader-img" />
+                                </div>
+                            </div> : 
+                            <div className="right-sec__container">
+                            {(noHireData && submitClicked === false) ?<div className="noHire empty-list"><div className="noHire--text">
+                                       No New Hires</div><img className="imageWrapper" alt="plusSvg" src={plusSvg} onClick={() => onEmptyListAddClick()} /></div>
                                        :<div>{
                                     (editHire === false && formToEnter === false && submitClicked === false)?showHireList():''}</div>
                             }
@@ -169,6 +186,7 @@ const HireList = (props) => {
                             {
                                 submitClicked?<div className="success__container">{successResponse()}</div>:''
                             }
+                            </div>}
                         </div>
                     </div>
                 </div>

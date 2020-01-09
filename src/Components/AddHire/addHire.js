@@ -23,11 +23,11 @@ const monthCalender = {
     '10': 'October',
     '11': 'November',
     '12': 'December'
-   };
+};
 
 const AddHire = (props) => {
 
-    const {editField,onChildClick,onSubmitForm} = props;
+    const { editField, onChildClick, onSubmitForm } = props;
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -39,7 +39,7 @@ const AddHire = (props) => {
     const [manager, setManager] = useState('');
     const [packages, setPackages] = useState('');
     const [fileName, setFileName] = useState('');
-    const [base64,setBase64] = useState('');
+    const [base64, setBase64] = useState('');
     const [fileTypePdf, setFileTypePdf] = useState(false);
     const [attachfileName, setattachfileName] = useState('');
     const [dateValue, setDate] = useState(new Date());
@@ -47,8 +47,10 @@ const AddHire = (props) => {
     const [loaderShow, setLoader] = useState(false);
     const [showManager, setShowManager] = useState(false);
     const [showPackage, setShowPackage] = useState('');
-    const [validEmail, setValidEmail] = useState(false)
-    
+    const [officialEmail, setOfficialEmail] = useState('');
+    const [officialPassword, setOfficialPassword] = useState('');
+    const [disabledVerify, setDisabledVerify] = useState(true);
+
 
     const onCancelClick = () => {
         setFirstName('');
@@ -62,9 +64,9 @@ const AddHire = (props) => {
         setLocation('');
         setPackages('');
         setFileName('');
-        onChildClick(true); //
+        onChildClick(true); 
     }
-    
+
     const removeAttachedFile = () => {
         setFileName('')
     }
@@ -100,7 +102,7 @@ const AddHire = (props) => {
         setShowPackage(!showPackage)
     }
 
-   
+
     useEffect(
         () => {
             if (fileName !== '') {
@@ -109,41 +111,52 @@ const AddHire = (props) => {
             } else {
                 setattachfileName('')
             }
-            if (firstName === '' || lastName === '' || email === '' || 
-                salary === '' || role === '' || phNum === '' || location === '' || 
-                packages === '' || manager === '' || dateValue ===''|| fileTypePdf === false || validEmail === false) {  
+            let valid = validateEmail(email)
+            if (firstName === '' || lastName === '' || email === '' ||
+                salary === '' || role === '' || phNum === '' || location === '' ||
+                packages === '' || manager === '' || dateValue === '' || fileTypePdf === false || valid === false) {
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
             }
         }, [firstName, lastName, role, email, phNum, location, manager, salary, packages, fileName, fileTypePdf]
     )
-    
-    useEffect (
+
+    useEffect(
         () => {
-            if(attachfileName){
+            let value = validateEmail(officialEmail)
+            if (officialEmail === '' || officialPassword === '' || value === false) {
+                setDisabledVerify(true);
+            } else {
+                setDisabledVerify(false);
+            }
+
+        }, [officialEmail, officialPassword]
+    )
+
+    useEffect(
+        () => {
+            if (attachfileName) {
                 let value = attachfileName.split(".");
-                if(value[value.length-1] !== "pdf"){
+                if (value[value.length - 1] !== "pdf") {
                     setFileTypePdf(false);
                 } else {
                     setFileTypePdf(true)
                 }
             }
-        },[attachfileName]
+        }, [attachfileName]
     )
 
-    useEffect (
-        () => {
-            if(email){
-                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                     setValidEmail(re.test(email));
-            }
-        },[email]
-    )
+    const validateEmail = (email) => {
+        if (email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+    }
 
-    useEffect (
+    useEffect(
         () => {
-            if(editField){
+            if (editField) {
                 setFirstName(editField.firstName)
                 setLastName(editField.lastName)
                 setPhNum(editField.phoneNumber)
@@ -153,28 +166,30 @@ const AddHire = (props) => {
                 setPackages(editField.benefitPackage)
                 setLocation(editField.location)
                 setSalary(editField.annualSalary)
-                if(editField.passCode){
+                if (editField.passCode) {
                     setDisabledSubmit(true);
                 }
             }
-        },[editField]
+        }, [editField]
     )
 
     const handleFile = (event) => {
         setFileName(event.target.value)
-        if(event.target.value !== ''){
+        if (event.target.value !== '') {
             let selectedFile = event.target.files;
             let file = null;
             let fileToLoad = selectedFile[0];
             let fileReader = new FileReader();
-            fileReader.onload = function(fileLoadedEvent) {
+            fileReader.onload = function (fileLoadedEvent) {
                 file = fileLoadedEvent.target.result;
                 setBase64(file);
             }
             fileReader.readAsDataURL(fileToLoad);
         }
     }
-
+    const onVerifyClick = () => {
+        console.log("verify")
+    }
     const onSubmitClick = () => {
         let dateData = dateValue.toISOString()
         dateData = dateData.split('T');
@@ -198,27 +213,27 @@ const AddHire = (props) => {
             attachmentName: attachfileName,
             attachment: base64
         }
-        if(disabledSubmit !== true) {
+        if (disabledSubmit !== true) {
             setLoader(true)
-            axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee',body)
-            .then(res => {
-                onSubmitForm(true)
-                setLoader(false);
-                setDisabledSubmit(true);
-                onCancelClick()
-            })
-            .catch(err =>{
-            })
+            axios.post('https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee', body)
+                .then(res => {
+                    onSubmitForm(true)
+                    setLoader(false);
+                    setDisabledSubmit(true);
+                    onCancelClick()
+                })
+                .catch(err => {
+                })
         }
     }
-    const  validate = (evt) => {
+    const validate = (evt) => {
         let theEvent = evt || window.evt;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode(key);
         var regex = /[0-9]|\./;
-        if( !regex.test(key) ) {
-          theEvent.returnValue = false;
-          if(theEvent.preventDefault) theEvent.preventDefault();
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
         }
     }
 
@@ -226,7 +241,7 @@ const AddHire = (props) => {
         return <div className="padding">
             <div className="onboard-btn">
                 <div className="onboard">ONBOARDING</div>
-                <div className="button-container" onClick={() => onCancelClick()}><button className="btn cancel-btn">Cancel</button><img className="cancel" alt="" src={cancelIcon} /></div>
+                <div className="button-container" onClick={() => onCancelClick()}><button className="btn cancel-btn">Cancel</button><img className="cancel" alt="cancel" src={cancelIcon} /></div>
             </div>
             <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">
@@ -234,49 +249,58 @@ const AddHire = (props) => {
                     <div className="all-inputField">
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName} 
-                                onChange={(e) => setFirstName(e.target.value)} autoComplete="off" />
+                                <input className="input-default form__input" placeholder="First Name" type="text" name="firstName" id="firstName" value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)} autoComplete="off" />
                                 <label htmlFor="firstName" className="form__label">First Name</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email} 
-                                onChange={(e) => setEmail(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="email" placeholder="Personal Email" type="email" name="email" value={email}
+                                    onChange={(e) => setEmail(e.target.value)} autoComplete="off" />
                                 <label htmlFor="email" className="form__label">Personal Email</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role} 
-                                onChange={(e) => setRole(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="role" placeholder="Role" type="text" name="role" value={role}
+                                    onChange={(e) => setRole(e.target.value)} autoComplete="off" />
                                 <label htmlFor="role" className="form__label">Role</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location} 
-                                onChange={(e) => setLocation(e.target.value)} autoComplete="off"/>
+                                <div onClick={() => handleLocation()}>
+                                <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location}
+                                    onChange={(e) => setLocation(e.target.value)} autoComplete="off" readOnly/>
                                 <label htmlFor="location" className="form__label">Location</label>
-                                <div className="arrowContainer" onClick={() => handleLocation()}>
-                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
+                                <div className="arrowContainer">
+                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
+                                </div>
                                 </div>
                                 <div className={showLocation ? 'optionList showLocation' : 'optionList'}>
-                                    <div className={`optionValue ${location === "Bangalore"?'select__option':''}`} onClick={()=> setOption('Bangalore')}>Bangalore</div>
-                                    <div className={`optionValue ${location === "Seattle"?'select__option':''}`} onClick={()=> setOption('Seattle')}>Seattle</div>
+                                    <div className={`optionValue ${location === "Bangalore" ? 'select__option' : ''}`} onClick={() => setOption('Bangalore')}>Bangalore</div>
+                                    <div className={`optionValue ${location === "Seattle" ? 'select__option' : ''}`} onClick={() => setOption('Seattle')}>Seattle</div>
                                 </div>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01" 
-                                onChange={(e) => setSalary(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off"/>
+                                <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01"
+                                    onChange={(e) => setSalary(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off" />
                                 <label htmlFor="Salary" className="form__label">Salary</label>
                             </div>
+                            {
+                                props.editHire ? <div className="input-field">
+                                    <input className="input-default form__input" id="officialEmail" placeholder="Official Email" type="email" name="email" value={officialEmail}
+                                        onChange={(e) => setOfficialEmail(e.target.value)} autoComplete="off" />
+                                    <label htmlFor="officialEmail" className="form__label">Official Email</label>
+                                </div> : ''
+                            }
                         </div>
                         <div className="col">
                             <div className="input-field">
-                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName} 
-                                onChange={(e) => setLastName(e.target.value)} autoComplete="off"/>
+                                <input className="input-default form__input" id="lastName" placeholder="Last Name" type="text" name="lastName" value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)} autoComplete="off" />
                                 <label htmlFor="lastName" className="form__label">Last Name</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input num_class" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum} 
-                                onChange={(e) =>  setPhNum(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off"/>
+                                <input className="input-default form__input num_class" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum}
+                                    onChange={(e) => setPhNum(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off" />
                                 <label htmlFor="phNum" className="form__label">Contact Phone</label>
-                                </div>
+                            </div>
                             <div className="input-field">
                                 <DatePicker
                                     selected={dateValue}
@@ -284,55 +308,77 @@ const AddHire = (props) => {
                                 />
                                 <label htmlFor="date" className="form__label">Date</label>
                                 <div className="dateImgContainer">
-                                    <img src={dateIcon} alt="" className="date-img" />
+                                    <img src={dateIcon} alt="date" className="date-img" />
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                            <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager} 
-                            onChange={(e) => setManager(e.target.value)} autoComplete="off"/>
+                                <div onClick={() => handleManager()}>
+                                <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager}
+                                    onChange={(e) => setManager(e.target.value)} autoComplete="off" readOnly/>
                                 <label htmlFor="manager" className="form__label">Reporting Manager</label>
-                                <div className="arrowContainer" onClick={() => handleManager()}>
-                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
+                                <div className="arrowContainer">
+                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
                                 </div>
-                                <div className={showManager ? 'optionList showLocation' : 'optionList'}>
-                                    <div className={`optionValue ${manager === "Vidhi"?'select__option':''}`} onClick={()=> setManagerOption('Vidhi')}>Vidhi</div>
-                                    <div className={`optionValue ${manager === "Ankit"?'select__option':''}`} onClick={()=> setManagerOption('Ankit')}>Ankit</div>
+                                </div>
+                                <div className={`optionList ${showManager ? 'showLocation' : ''}`}>
+                                    <div className={`optionValue ${manager === "Vidhi" ? 'select__option' : ''}`} onClick={() => setManagerOption('Vidhi')}>Vidhi</div>
+                                    <div className={`optionValue ${manager === "Ankit" ? 'select__option' : ''}`} onClick={() => setManagerOption('Ankit')}>Ankit</div>
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages} 
-                                onChange={(e) => setPackages(e.target.value)} autoComplete="off"/>
+                                <div onClick={() => handlePackages()}>
+                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages}
+                                    onChange={(e) => setPackages(e.target.value)} autoComplete="off" readOnly/>
                                 <label htmlFor="package" className="form__label">Benefit Package</label>
-                                <div className="arrowContainer" onClick={() => handlePackages()}>
-                                    <img src={dropDownArrow} alt="" className="arrowDrop-img" />
+                                <div className="arrowContainer">
+                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
+                                </div>
                                 </div>
                                 <div className={showPackage ? 'optionList showLocation' : 'optionList'}>
-                                    <div className={`optionValue ${packages === "Star-Sliver"?'select__option':''}`} onClick={()=> setPackageOption('Star-Sliver')}>Star-Sliver</div>
+                                    <div className={`optionValue ${packages === "Star-Sliver" ? 'select__option' : ''}`} onClick={() => setPackageOption('Star-Sliver')}>Star-Sliver</div>
                                 </div>
                             </div>
+                            {
+                                props.editHire ? <div className="input-field">
+                                    <input className="input-default form__input" id="officialPassword" placeholder="Password" type="password" name="officialPassword" value={officialPassword}
+                                        onChange={(e) => setOfficialPassword(e.target.value)} autoComplete="off" />
+                                    <label htmlFor="officialPassword" className="form__label">Password</label>
+                                </div> : ''
+                            }
                         </div>
                     </div>
                     <div className="offer-submit">
-                       {!props.editHire ? <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
-                            <input type="file" className="upload_btn" id="fileInput" onChange={(e)=>handleFile(e)} value={fileName}/>
+                        {!props.editHire ? <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
+                            <input type="file" className="upload_btn" id="fileInput" onChange={(e) => handleFile(e)} value={fileName} />
                             <div className="overlay-layer">
-                                <img src={attach} alt="" className="attach-img" />
-                                <div className={fileName !== '' ? "attach-text fullWidth" : "attach-text"}>{fileName !== ''?<div className="fileUpload"><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div>:"Attach offer"}</div></div>
-                        </div>:<div className="already-offer">Offer already sent!</div>}
-                        { loaderShow ? 
+                                <img src={attach} alt="attach" className="attach-img" />
+                                <div className={`attach-text ${fileName !== 'attach' ? "fullWidth" : ""}`}>{fileName !== '' ? <div className="fileUpload"><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div> : "Attach offer"}</div></div>
+                        </div> :''}
+                        {loaderShow ?
                             <div className="loaderParent">
                                 <div className="loaderContainer">
-                                    <img src={loader} alt="" className="loader-img" />
+                                    <img src={loader} alt="loader" className="loader-img" />
                                 </div>
-                            </div> : 
-                            <div className={disabledSubmit?"large-button disableOffer":"large-button enableOffer"} 
-                            onClick={() => onSubmitClick()}>
-                                <button className={disabledSubmit ? 'btn disableBtn propBtn' : 'btn enableBtn propBtn'} disabled={disabledSubmit}>
-                                    SEND OFFER PACKET
-                                </button>
-                                <div className="imgContainer">
-                                    <img src={arrow} alt="" className="arrow-img" />
-                                </div>
+                            </div> : <div>
+                                {
+                                    !props.editHire ? <div className={`large-button ${disabledSubmit ? "disableOffer" : "enableOffer"}`}
+                                        onClick={() => onSubmitClick()}>
+                                        <button className={`btn propBtn ${disabledSubmit ? 'disableBtn' : 'enableBtn'}`} disabled={disabledSubmit}>
+                                            SEND OFFER PACKET
+                                        </button>
+                                        <div className="imgContainer">
+                                            <img src={arrow} alt="arrow" className="arrow-img" />
+                                        </div>
+                                    </div> : <div className={`large-button ${disabledVerify ? "disableOffer" : "enableOffer"}`}
+                                        onClick={() => onVerifyClick()}>
+                                            <button className={`btn propBtn ${disabledVerify ? 'disableBtn' : 'enableBtn'}`} disabled={disabledVerify}>
+                                                VERIFY
+                                             </button>
+                                            <div className="imgContainer">
+                                                <img src={arrow} alt="arrow" className="arrow-img" />
+                                            </div>
+                                        </div>
+                                }
                             </div>
                         }
                     </div>
@@ -344,11 +390,10 @@ const AddHire = (props) => {
     return (
         <React.Fragment>
             <div>
-                    {formList()}
+                {formList()}
             </div>
         </React.Fragment>
     )
-
 }
 
 export default AddHire;
