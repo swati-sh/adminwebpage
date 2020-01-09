@@ -42,7 +42,7 @@ input:-webkit-autofill:active  {
 }
 .optionList{
     position: absolute;
-    bottom: -2em;
+    bottom: -30%;
     background: #fff;
     box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
     z-index: 1;

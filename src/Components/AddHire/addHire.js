@@ -25,6 +25,12 @@ const monthCalender = {
     '12': 'December'
 };
 
+const managerArray = {
+    manager: ["Vidhi Maheshwari", "Ankit Shekhawat"],
+    location: ["Bangalore", "Seatle"]
+}
+        
+
 const AddHire = (props) => {
 
     const { editField, onChildClick, onSubmitForm } = props;
@@ -49,6 +55,7 @@ const AddHire = (props) => {
     const [officialEmail, setOfficialEmail] = useState('');
     const [officialPassword, setOfficialPassword] = useState('');
     const [disabledVerify, setDisabledVerify] = useState(true);
+    const [arryList, setArrayList] = useState([])
 
 
     const onCancelClick = () => {
@@ -74,22 +81,16 @@ const AddHire = (props) => {
         setDate(date)
     }
 
-    const handleLocation = () => {
-        setShowLocation(!showLocation)
-    }
-
     const setOption = (value) => {
         setLocation(value);
-        setShowLocation(!showLocation)
-    }
-
-    const handleManager = () => {
-        setShowManager(!showManager)
+        setArrayList([])
+        setShowLocation(false)
     }
 
     const setManagerOption = (value) => {
         setManager(value)
-        setShowManager(!showManager)
+        setShowManager(false)
+        setArrayList([])
     }
 
 
@@ -146,6 +147,44 @@ const AddHire = (props) => {
         if (email) {
             var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
+        }
+    }
+
+    const filterArray = (e,item) => {
+        let newData = []
+        let value = e.toLowerCase();
+        managerArray[item].filter(
+            item => {
+                if (item.toLowerCase().startsWith(value)) {
+                    newData.push(item)
+                }
+            }
+        )
+        setArrayList(newData)
+    }
+
+    const lookUp = (e) => {
+        let value = e.target.value;
+        let name = e.target.name;
+        if(name === "location") {
+            if(value !== '') {
+                filterArray(value,name);
+                setShowLocation(true)
+                setLocation(value)
+            } else {
+                setLocation('');
+                setShowLocation(false)
+            }
+        } else if(name === "manager") {
+            if(value !== '') {
+                filterArray(value,name);
+                setShowManager(true)
+                setManager(value)
+            } else {
+                setManager('');
+                setShowManager(false)
+            }
+
         }
     }
 
@@ -259,18 +298,17 @@ const AddHire = (props) => {
                                 <label htmlFor="role" className="form__label">Role</label>
                             </div>
                             <div className="input-field">
-                                <div onClick={() => handleLocation()}>
+                                <div>
                                 <input className="input-default form__input" id="location" placeholder="Location" type="text" name="location" value={location}
-                                    onChange={(e) => setLocation(e.target.value)} autoComplete="off" readOnly/>
+                                    onChange={(e) => lookUp(e)} autoComplete="off"/>
                                 <label htmlFor="location" className="form__label">Location</label>
-                                <div className="arrowContainer">
-                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
                                 </div>
-                                </div>
-                                <div className={showLocation ? 'optionList showLocation' : 'optionList'}>
-                                    <div className={`optionValue ${location === "Bangalore" ? 'select__option' : ''}`} onClick={() => setOption('Bangalore')}>Bangalore</div>
-                                    <div className={`optionValue ${location === "Seattle" ? 'select__option' : ''}`} onClick={() => setOption('Seattle')}>Seattle</div>
-                                </div>
+                                {(arryList.length>0 && showLocation)?
+                                 <div className={`optionList ${showLocation?'showLocation':''}`}>
+                                    {arryList.map(item=>{
+                                        return <div className={`optionValue`} onClick={() => setOption(item)}>{item}</div>       
+                                    })}
+                                </div>:''}
                             </div>
                             <div className="input-field">
                                 <input className="input-default form__input" id="salary" value={salary} placeholder="salary" type="number" name="salary" step="0.01"
@@ -308,18 +346,17 @@ const AddHire = (props) => {
                                 </div>
                             </div>
                             <div className="input-field select-box">
-                                <div onClick={() => handleManager()}>
+                                <div>
                                 <input className="input-default form__input" id="manager" placeholder="Reporting Manager" type="text" name="manager" value={manager}
-                                    onChange={(e) => setManager(e.target.value)} autoComplete="off" readOnly/>
+                                    onChange={(e) => lookUp(e)} autoComplete="off"/>
                                 <label htmlFor="manager" className="form__label">Reporting Manager</label>
-                                <div className="arrowContainer">
-                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
                                 </div>
-                                </div>
-                                <div className={`optionList ${showManager ? 'showLocation' : ''}`}>
-                                    <div className={`optionValue ${manager === "Vidhi" ? 'select__option' : ''}`} onClick={() => setManagerOption('Vidhi')}>Vidhi</div>
-                                    <div className={`optionValue ${manager === "Ankit" ? 'select__option' : ''}`} onClick={() => setManagerOption('Ankit')}>Ankit</div>
-                                </div>
+                                {(arryList.length>0 && showManager)?
+                                 <div className={`optionList ${showManager?'showLocation':''}`}>
+                                    {arryList.map(item=>{
+                                        return <div className={`optionValue`} onClick={() => setManagerOption(item)}>{item}</div>       
+                                    })}
+                                </div>:''}
                             </div>
                             {
                                 props.editHire ? <div className="input-field">
