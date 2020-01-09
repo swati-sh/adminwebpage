@@ -20,6 +20,12 @@ const HireList = (props) => {
 
     useEffect(
         () => {
+            let token = localStorage.getItem('token');
+            if(token){
+                props.history.push('/hireList');
+            } else {
+                props.history.push('/');
+            }
            getAllJoinee()
         }, []
     )

@@ -10,6 +10,17 @@ const Login = (props) => {
 
     useEffect (
         () => {
+            let token = localStorage.getItem('token');
+            if(token){
+                props.history.push('/hireList');
+            } else {
+                props.history.push('/');
+            }
+        }, []
+    )
+
+    useEffect (
+        () => {
             if(userName === '' || password === '') {
                 setDisableSubmit(true);
             } else {
