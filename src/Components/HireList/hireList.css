@@ -95,6 +95,12 @@
     margin-bottom: 20px;
 }
 
+.logout {
+    position: absolute;
+    right: 2%;
+    top: 3%;
+}
+
 .success__container {
     height: 100%;
 }

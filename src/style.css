@@ -69,7 +69,7 @@ select {
     letter-spacing: 1px;
     text-transform: uppercase;
     width: 95px;
-    border-radius: 5px;
+    border-radius: 22.5px;
     cursor: pointer;
     box-shadow: 9px 11px 12px -3px rgba(0,0,0,.11);
 }

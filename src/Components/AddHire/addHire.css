@@ -151,6 +151,9 @@ input:-webkit-autofill:active  {
 .cancel-btn {
     opacity: 0.3;
 }
+.cancel-btn:hover {
+    text-decoration: underline;
+}
 .disableBtn {
     cursor: not-allowed;
 }
@@ -189,10 +192,16 @@ input:-webkit-autofill:active  {
     opacity: 0.3;
 }
 .form-container {
-    max-height: 563px;
+    max-height: 580px;
     overflow: auto;
     margin-top: 20px;
 }
+
+.form-error {
+    font-family: TBold;
+    color: red;
+}
+
 .all-inputField {
     display: flex;
     margin-top: 20px;

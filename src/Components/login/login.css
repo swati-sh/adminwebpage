@@ -19,6 +19,14 @@
     font-family: TLight;
     font-size: 14px;
     border-radius: 5em;
+}
+
+.btn-disable {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.btn-enable {
     background-color: #fff;
     cursor: pointer;
 }
@@ -30,6 +38,7 @@
 
 .loginParent .input-default{
     color: #fff;
+    text-transform: none;
     letter-spacing: 0.5px;
     width: 100%;
 }
@@ -72,4 +81,13 @@
 
 h2{
     padding-bottom: 2em;
+}
+
+.invalid-login {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    font-family: TLight;
+    font-size: 12px;
 }

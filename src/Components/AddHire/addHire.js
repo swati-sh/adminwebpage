@@ -8,7 +8,7 @@ import attach from '../../assets/noun_attached document_615523.svg';
 import dateIcon from '../../assets/noun_Calendar_821509.svg';
 import DatePicker from "react-datepicker";
 import loader from '../../assets/Spinner-1s-200px.gif';
-import "react-datepicker/dist/react-datepicker.css"
+import "react-datepicker/dist/react-datepicker.css";
 
 const monthCalender = {
     '01': 'January',
@@ -37,16 +37,15 @@ const AddHire = (props) => {
     const [disabledSubmit, setDisabledSubmit] = useState(true);
     const [location, setLocation] = useState('');
     const [manager, setManager] = useState('');
-    const [packages, setPackages] = useState('');
     const [fileName, setFileName] = useState('');
     const [base64, setBase64] = useState('');
     const [fileTypePdf, setFileTypePdf] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('')
     const [attachfileName, setattachfileName] = useState('');
     const [dateValue, setDate] = useState(new Date());
     const [showLocation, setShowLocation] = useState(false);
     const [loaderShow, setLoader] = useState(false);
     const [showManager, setShowManager] = useState(false);
-    const [showPackage, setShowPackage] = useState('');
     const [officialEmail, setOfficialEmail] = useState('');
     const [officialPassword, setOfficialPassword] = useState('');
     const [disabledVerify, setDisabledVerify] = useState(true);
@@ -62,13 +61,13 @@ const AddHire = (props) => {
         setEmail('');
         setManager('');
         setLocation('');
-        setPackages('');
         setFileName('');
         onChildClick(true); 
+        setErrorMessage('');
     }
 
     const removeAttachedFile = () => {
-        setFileName('')
+        setFileName('');
     }
 
     const handleChange = (date) => {
@@ -93,15 +92,6 @@ const AddHire = (props) => {
         setShowManager(!showManager)
     }
 
-    const handlePackages = () => {
-        setShowPackage(!showPackage)
-    }
-
-    const setPackageOption = (value) => {
-        setPackages(value)
-        setShowPackage(!showPackage)
-    }
-
 
     useEffect(
         () => {
@@ -114,12 +104,12 @@ const AddHire = (props) => {
             let valid = validateEmail(email)
             if (firstName === '' || lastName === '' || email === '' ||
                 salary === '' || role === '' || phNum === '' || location === '' ||
-                packages === '' || manager === '' || dateValue === '' || fileTypePdf === false || valid === false) {
+                manager === '' || dateValue === '' || fileTypePdf === false || valid === false) {
                 setDisabledSubmit(true);
             } else {
                 setDisabledSubmit(false);
             }
-        }, [firstName, lastName, role, email, phNum, location, manager, salary, packages, fileName, fileTypePdf]
+        }, [firstName, lastName, role, email, phNum, location, manager, salary, fileName, fileTypePdf]
     )
 
     useEffect(
@@ -140,9 +130,14 @@ const AddHire = (props) => {
                 let value = attachfileName.split(".");
                 if (value[value.length - 1] !== "pdf") {
                     setFileTypePdf(false);
+                    setErrorMessage("Only PDF file allowed!")
                 } else {
                     setFileTypePdf(true)
+                    setErrorMessage('');
                 }
+            } else {
+                setErrorMessage('');
+                setFileTypePdf(false);
             }
         }, [attachfileName]
     )
@@ -163,7 +158,6 @@ const AddHire = (props) => {
                 setEmail(editField.personalEmail)
                 setRole(editField.designation)
                 setManager(editField.reportingManager)
-                setPackages(editField.benefitPackage)
                 setLocation(editField.location)
                 setSalary(editField.annualSalary)
                 if (editField.passCode) {
@@ -202,7 +196,6 @@ const AddHire = (props) => {
             lastName: lastName,
             designation: role,
             phoneNumber: phNum,
-            benefitPackage: packages,
             location: location,
             joiningDate: dateData,
             reportingManager: manager,
@@ -240,10 +233,12 @@ const AddHire = (props) => {
     const formList = () => {
         return <div className="padding">
             <div className="onboard-btn">
-                <div className="onboard">ONBOARDING</div>
-                <div className="button-container" onClick={() => onCancelClick()}><button className="btn cancel-btn">Cancel</button><img className="cancel" alt="cancel" src={cancelIcon} /></div>
+                <div>
+                    <div className="onboard">ONBOARDING</div>
+                    <div className="create-text">CREATE OFFER PACKET</div>
+                </div>
+                <div className="button-container" onClick={() => onCancelClick()}><button className="btn cancel-btn">Cancel</button></div>
             </div>
-            <div className="create-text">CREATE OFFER PACKET</div>
             <div className="form-container">
                 <div>
                     <div className="all-inputField">
@@ -297,14 +292,15 @@ const AddHire = (props) => {
                                 <label htmlFor="lastName" className="form__label">Last Name</label>
                             </div>
                             <div className="input-field">
-                                <input className="input-default form__input num_class" id="phNum" placeholder="Contact Person" type="number" step="0.01" name="phNum" value={phNum}
+                                <input className="input-default form__input num_class" id="phNum" placeholder="Phone Number" type="number" step="0.01" name="phNum" value={phNum}
                                     onChange={(e) => setPhNum(e.target.value)} onKeyPress={(event) => validate(event)} autoComplete="off" />
-                                <label htmlFor="phNum" className="form__label">Contact Phone</label>
+                                <label htmlFor="phNum" className="form__label">Phone Number</label>
                             </div>
                             <div className="input-field">
                                 <DatePicker
                                     selected={dateValue}
                                     onChange={handleChange}
+                                    minDate={new Date()}
                                 />
                                 <label htmlFor="date" className="form__label">Date</label>
                                 <div className="dateImgContainer">
@@ -325,19 +321,6 @@ const AddHire = (props) => {
                                     <div className={`optionValue ${manager === "Ankit" ? 'select__option' : ''}`} onClick={() => setManagerOption('Ankit')}>Ankit</div>
                                 </div>
                             </div>
-                            <div className="input-field select-box">
-                                <div onClick={() => handlePackages()}>
-                                <input className="input-default form__input" id="package" placeholder="Benefit Package" type="text" name="package" value={packages}
-                                    onChange={(e) => setPackages(e.target.value)} autoComplete="off" readOnly/>
-                                <label htmlFor="package" className="form__label">Benefit Package</label>
-                                <div className="arrowContainer">
-                                    <img src={dropDownArrow} alt="arrowDrop" className="arrowDrop-img" />
-                                </div>
-                                </div>
-                                <div className={showPackage ? 'optionList showLocation' : 'optionList'}>
-                                    <div className={`optionValue ${packages === "Star-Sliver" ? 'select__option' : ''}`} onClick={() => setPackageOption('Star-Sliver')}>Star-Sliver</div>
-                                </div>
-                            </div>
                             {
                                 props.editHire ? <div className="input-field">
                                     <input className="input-default form__input" id="officialPassword" placeholder="Password" type="password" name="officialPassword" value={officialPassword}
@@ -347,12 +330,14 @@ const AddHire = (props) => {
                             }
                         </div>
                     </div>
+                    {!fileTypePdf?<div className="form-error">{errorMessage}</div>:''}
                     <div className="offer-submit">
                         {!props.editHire ? <div className={fileName !== '' ? "large-button attach blueBorder" : "large-button attach"}>
                             <input type="file" className="upload_btn" id="fileInput" onChange={(e) => handleFile(e)} value={fileName} />
                             <div className="overlay-layer">
                                 <img src={attach} alt="attach" className="attach-img" />
-                                <div className={fileName !== '' ? "attach-text fullWidth" : "attach-text"}>{fileName !== '' ? <div className="fileUpload"><div>{attachfileName}</div><div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div> : "Attach offer"}</div></div>
+                                <div className={fileName !== '' ? "attach-text fullWidth" : "attach-text"}>{fileName !== '' ? <div className="fileUpload"><div>{attachfileName}</div>
+                                <div><img src={cancelIcon} alt="" onClick={() => removeAttachedFile()} /></div></div> : "Attach offer (only pdf)"}</div></div>
                         </div> :''}
                         {loaderShow ?
                             <div className="loaderParent">

@@ -43,13 +43,6 @@ const HireList = (props) => {
         }
     }
 
-    const onDeleteJoinee = async(item) => {
-        setLoaderShow(true)
-        let res = await axios.delete('https://piktordigitalid.herokuapp.com/api/onboarding/deleteJoinee?email='+item.personalEmail)
-        if(res.status === 200){
-            getAllJoinee()
-        }
-    }
 
    
    const onFormEntryCancelClick = (val) => {
@@ -118,7 +111,6 @@ const HireList = (props) => {
                                     <div className="list__content--name">{item.firstName} {item.lastName}</div>
                                     <div className="list__content--btn">
                                         <button className="btn cancel-btn" onClick={() => onEditClick(item)}>Edit</button>
-                                        <button className="btn cancel-btn" onClick={() => onDeleteJoinee(item)}>Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -154,14 +146,14 @@ const HireList = (props) => {
                         <LeftDisplay />
                     </div>
                     <div className="content__right">
+                        <div className="logout">
+                            <button className="logout__btn" onClick={() => onOutClick()}>logOut</button>
+                        </div>
                    <div className="content__right--block">
                             <div className="addHire-logOut">
                                 <div> 
                                  {(noHireData === false && editHire === false && formToEnter === false && submitClicked === false && loaderShow === false) && <div className="noHire addHire-text"><div className="noHire--text">
                                     Add Hire</div><img className="imageWrapper" alt="imageWrapper" src={plusSvg} onClick={() => onAddHireClick()} /></div> }
-                                </div>
-                                <div>
-                                    <button className="logout__btn" onClick={() => onOutClick()}>logOut</button>
                                 </div>
                             </div>
                             { loaderShow ? 
