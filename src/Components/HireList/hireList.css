@@ -147,10 +147,13 @@
     opacity: 1;
     font-family: TBold;
     margin-bottom: 15px;
+    outline: none;
+    text-transform: uppercase;
 }
 
 .another-offer-btn {
     color: #0058fb;
+    background-color: transparent;
 }
 
 .done-btn {

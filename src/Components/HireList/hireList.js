@@ -139,8 +139,8 @@ const HireList = (props) => {
                     <div className="desc-second">THE OFFER LETTER HAS BEEN SENT SUCCESSFULLY</div>
                 </div>
                 <div className="success__content--btn">
-                    <button className="another-offer-btn btn success-btn" onClick={() => onAddAnotherClick()}>Send another offer </button>
-                    <button className="done-btn btn success-btn" onClick={()=>onDoneClick()}>Done</button>
+                    <button className="another-offer-btn  success-btn" onClick={() => onAddAnotherClick()}>Send another offer </button>
+                    <button className="done-btn success-btn" onClick={()=>onDoneClick()}>Done</button>
                 </div>
             </div>
         )
