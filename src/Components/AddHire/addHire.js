@@ -45,7 +45,6 @@ const AddHire = props => {
   const [showLocation, setShowLocation] = useState(false);
   const [loaderShow, setLoader] = useState(false);
   const [showManager, setShowManager] = useState(false);
-  const [disabledVerify, setDisabledVerify] = useState(true);
   const [arryList, setArrayList] = useState([]);
   const [invalidSalary, setInvalidSalary] = useState(false);
   const [invalidPhNum, setInvalidPhNum] = useState(false);
@@ -293,6 +292,14 @@ const AddHire = props => {
     }
   };
 
+  const onDateBlur = () =>{
+     if(dateValue === null){
+         setInvalidDate(true)
+     } else {
+        setInvalidDate(false)
+     }
+  }
+
   const validatePhoneNumber = () => {
     var pattern = /^[0-9]{10,12}$/;
     if (pattern.test(phNum)) {
@@ -334,6 +341,12 @@ const AddHire = props => {
       } else {
         setInvalidManager(false);
       }
+    } else if (name === "salary") {
+        if (salary === "") {
+            setInvalidSalary(true)
+        } else {
+            setInvalidSalary(false);
+        }
     }
   };
 
@@ -349,6 +362,7 @@ const AddHire = props => {
     } else if (name === "phNum") {
       setPhNum(value);
       setInvalidPhNum(false);
+      setWrongPhNum(false);
     } else if (name === "location") {
       setLocation(value);
       setInvalidLocation(false);
@@ -485,8 +499,8 @@ const AddHire = props => {
                   {arryList.length > 0 && showLocation ? (
                     <div
                       className={`optionList ${
-                        showLocation ? "showLocation" : ""
-                      }`}
+                        showLocation ? "showLocation style-1" : ""
+                      }`} style-1
                     >
                       {arryList.map(item => {
                         return (
@@ -576,7 +590,7 @@ const AddHire = props => {
                   </label>
                   {invalidPhNum || wrongPhNum ? (
                     <div className="invalid-msg">
-                      Phone Number should be 10-12 digits and only number !
+                      Phone Number should be 10-12 digits or field is required!
                     </div>
                   ) : (
                     ""
@@ -587,6 +601,7 @@ const AddHire = props => {
                     selected={dateValue}
                     onChange={handleChange}
                     minDate={new Date()}
+                    onBlur={onDateBlur}
                   />
                   <label htmlFor="date" className="form__label">
                     <div>
@@ -596,6 +611,11 @@ const AddHire = props => {
                   <div className="dateImgContainer">
                     <img src={dateIcon} alt="date" className="date-img" />
                   </div>
+                  {invalidDate ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div className="input-field select-box">
                   <div>
@@ -722,19 +742,8 @@ const AddHire = props => {
                       </div>
                     </div>
                   ) : (
-                    <div
-                      className={`large-button ${
-                        disabledVerify ? "disableOffer" : "enableOffer"
-                      }`}
-                    >
-                      <button
-                        className={`btn propBtn ${
-                          disabledVerify ? "disableBtn" : "enableBtn"
-                        }`}
-                        disabled={disabledVerify}
-                      >
-                        VERIFY
-                      </button>
+                    <div className="large-button enableOffer">
+                      <button className="btn propBtn enableBtn">VERIFY</button>
                       <div className="imgContainer">
                         <img src={arrow} alt="arrow" className="arrow-img" />
                       </div>
