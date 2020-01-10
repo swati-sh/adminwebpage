@@ -1,6 +1,16 @@
 .list {
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 5px #ddd;
+} 
+.list:active {
+    transform: translateY(0);
 }
 
 .list-heading {

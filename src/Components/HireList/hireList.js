@@ -1,196 +1,249 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './hireList.css';
-import LeftDisplay from '../LeftDisplay/leftDisplay';
-import plusSvg from '../../assets/plus.svg';
-import AddHire from '../AddHire/addHire';
-import success from '../../assets/noun_success_2019805.svg';
-import loader from '../../assets/Spinner-1s-200px.gif';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./hireList.css";
+import LeftDisplay from "../LeftDisplay/leftDisplay";
+import plusSvg from "../../assets/plus.svg";
+import AddHire from "../AddHire/addHire";
+import success from "../../assets/noun_success_2019805.svg";
+import loader from "../../assets/Spinner-1s-200px.gif";
 
-const HireList = (props) => {
+const HireList = props => {
+  const [noHireData, setNoHireData] = useState(false);
+  const [dataList, setDataList] = useState([]);
+  const [editHire, setEditHire] = useState(false);
+  const [editField, setEditField] = useState("");
+  const [formToEnter, setFormToEnter] = useState(false);
+  const [backToList, setBackToList] = useState(true);
+  const [submitClicked, setSubmitClicked] = useState(false);
+  const [loaderShow, setLoaderShow] = useState(false);
 
-    const [noHireData, setNoHireData] = useState(false);
-    const [dataList, setDataList] = useState([]);
-    const [editHire, setEditHire] = useState(false);
-    const [editField, setEditField] = useState('');
-    const [formToEnter, setFormToEnter] = useState(false);
-    const [backToList, setBackToList] = useState(true);
-    const [submitClicked,setSubmitClicked] = useState(false);
-    const [loaderShow, setLoaderShow] = useState(false);
-
-    useEffect(
-        () => {
-            let token = localStorage.getItem('token');
-            if(token){
-                props.history.push('/hireList');
-            } else {
-                props.history.push('/');
-            }
-           getAllJoinee()
-        }, []
-    )
-
-    const getAllJoinee = async() => {
-        setLoaderShow(true)
-        const newData = [];
-        let res = await axios.get("https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee")
-        if(res.status === 200){
-            let joinee = res.data.joinee
-            if (joinee) {
-                res.data.data.map((item) => {
-                    newData.push(item);
-                })
-                setDataList(newData)
-                setNoHireData(false)
-            } else {
-                setNoHireData(true)
-            }
-            setLoaderShow(false)
-        }
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token) {
+      props.history.push("/hireList");
+    } else {
+      props.history.push("/");
     }
+    getAllJoinee();
+  }, []);
 
-
-   
-   const onFormEntryCancelClick = (val) => {
-        getAllJoinee()
-        setFormToEnter(false)
-        if(dataList.length>0){
-            setNoHireData(false)
-        } else {
-            setNoHireData(true)
-        }
+  const getAllJoinee = async () => {
+    setLoaderShow(true);
+    const newData = [];
+    let res = await axios.get(
+      "https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee"
+    );
+    if (res.status === 200) {
+      let joinee = res.data.joinee;
+      if (joinee) {
+        res.data.data.map(item => {
+          newData.push(item);
+        });
+        setDataList(newData);
+        setNoHireData(false);
+      } else {
+        setNoHireData(true);
+      }
+      setLoaderShow(false);
     }
+  };
 
-    const onEditCancelClick = (val) => {
-        setEditHire(false)
-        getAllJoinee()
+  const onFormEntryCancelClick = val => {
+    getAllJoinee();
+    setFormToEnter(false);
+    if (dataList.length > 0) {
+      setNoHireData(false);
+    } else {
+      setNoHireData(true);
     }
+  };
 
-    const onSubmitClicked = (val) => {
-       setSubmitClicked(true);
-    }
+  const onEditCancelClick = val => {
+    setEditHire(false);
+    getAllJoinee();
+  };
 
-    const onOutClick = () => {
-        localStorage.clear();
-        props.history.push('/')
-    }
+  const onSubmitClicked = val => {
+    setSubmitClicked(true);
+  };
 
-    const onDoneClick = () => {
-        setNoHireData(false)
-        setDataList([])
-        setEditHire(false)
-        setEditField('')
-        setFormToEnter(false)
-        setBackToList(true)
-        setSubmitClicked(false)
-        getAllJoinee()
-    }
+  const onOutClick = () => {
+    localStorage.clear();
+    props.history.push("/");
+  };
 
-    const onAddAnotherClick = () => {
-        setFormToEnter(true);
-        setSubmitClicked(false)
-    }
+  const onDoneClick = () => {
+    setNoHireData(false);
+    setDataList([]);
+    setEditHire(false);
+    setEditField("");
+    setFormToEnter(false);
+    setBackToList(true);
+    setSubmitClicked(false);
+    getAllJoinee();
+  };
 
-    const onEmptyListAddClick = () => {
-        setNoHireData(false)
-        setFormToEnter(true)
-    }
+  const onAddAnotherClick = () => {
+    setFormToEnter(true);
+    setSubmitClicked(false);
+  };
 
-    const onAddHireClick = () =>{
-        setFormToEnter(true)
-    }
+  const onEmptyListAddClick = () => {
+    setNoHireData(false);
+    setFormToEnter(true);
+  };
 
-    const onEditClick = (item) => {
-        setEditHire(true);
-        setEditField(item);
-    }
+  const onAddHireClick = () => {
+    setFormToEnter(true);
+  };
 
-    const showHireList = () => {
-        return (
-            <div className="padding">
-                <div className="list-heading">List of new joinee</div>
-                {
-                    dataList.map((item, key) => {
-                        return (
-                            <div className="list" key={key}>
-                                <div className="list__content">
-                                    <div className="list__content--name">{item.firstName} {item.lastName}</div>
-                                    <div className="list__content--btn">
-                                        <button className="btn cancel-btn" onClick={() => onEditClick(item)}>Edit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })
-                }</div>
-        )
-    }
+  const onEditClick = item => {
+    setEditHire(true);
+    setEditField(item);
+  };
 
-    const successResponse = () => {
-        return (
-            <div className="success__content">
-                <div className="success__content--img">
-                    <img src={success} className="success-img" alt="success"/>
-                </div>
-                <div className="success__content--desc">
-                    <div className="desc-first">SENT SUCCESSFULLY!</div>
-                    <div className="desc-second">THE OFFER LETTER HAS BEEN SENT SUCCESSFULLY</div>
-                </div>
-                <div className="success__content--btn">
-                    <button className="another-offer-btn  success-btn" onClick={() => onAddAnotherClick()}>Send another offer </button>
-                    <button className="done-btn success-btn" onClick={()=>onDoneClick()}>Done</button>
-                </div>
-            </div>
-        )
-    }
-
+  const showHireList = () => {
     return (
-        <React.Fragment>
-            <div className="container">
-                <div className="content">
-                    <div className="content__left">
-                        <LeftDisplay />
-                    </div>
-                    <div className="content__right">
-                        <div className="logout">
-                            <button className="logout__btn" onClick={() => onOutClick()}>logOut</button>
-                        </div>
-                   <div className="content__right--block">
-                            <div className="addHire-logOut">
-                                <div> 
-                                 {(noHireData === false && editHire === false && formToEnter === false && submitClicked === false && loaderShow === false) && <div className="noHire addHire-text"><div className="noHire--text">
-                                    Add Hire</div><img className="imageWrapper" alt="imageWrapper" src={plusSvg} onClick={() => onAddHireClick()} /></div> }
-                                </div>
-                            </div>
-                            { loaderShow ? 
-                            <div className="loaderParent main-loader">
-                                <div className="loading-row">
-                                    <img src={loader} alt="loader" className="loader-img" />
-                                </div>
-                            </div> : 
-                            <div className="right-sec__container">
-                            {(noHireData && submitClicked === false) ?<div className="noHire empty-list"><div className="noHire--text">
-                                       No New Hires</div><img className="imageWrapper" alt="plusSvg" src={plusSvg} onClick={() => onEmptyListAddClick()} /></div>
-                                       :<div>{
-                                    (editHire === false && formToEnter === false && submitClicked === false)?showHireList():''}</div>
-                            }
-                            {
-                                (editHire && submitClicked === false) ? 
-                                <AddHire editField={editField} editHire={editHire} onChildClick={() => onEditCancelClick(backToList)} onSubmitForm={() => onSubmitClicked(submitClicked)} /> : ''
-                            }
-                            {
-                                (formToEnter && submitClicked === false)? <AddHire onChildClick={() => onFormEntryCancelClick(backToList) } onSubmitForm={() => onSubmitClicked(submitClicked)} /> : ''
-                            }
-                            {
-                                submitClicked?<div className="success__container">{successResponse()}</div>:''
-                            }
-                            </div>}
-                        </div>
-                    </div>
+      <div className="padding">
+        <div className="list-heading">List of new joinee</div>
+        {dataList.map((item, key) => {
+          return (
+            <div className="list" key={key}  onClick={() => onEditClick(item)}>
+              <div className="list__content">
+                <div className="list__content--name">
+                  {item.firstName} {item.lastName}
                 </div>
+              </div>
             </div>
-        </React.Fragment>
-    )
-}
+          );
+        })}
+      </div>
+    );
+  };
+
+  const successResponse = () => {
+    return (
+      <div className="success__content">
+        <div className="success__content--img">
+          <img src={success} className="success-img" alt="success" />
+        </div>
+        <div className="success__content--desc">
+          <div className="desc-first">SENT SUCCESSFULLY!</div>
+          <div className="desc-second">
+            THE OFFER LETTER HAS BEEN SENT SUCCESSFULLY
+          </div>
+        </div>
+        <div className="success__content--btn">
+          <button
+            className="another-offer-btn  success-btn"
+            onClick={() => onAddAnotherClick()}
+          >
+            Send another offer{" "}
+          </button>
+          <button
+            className="done-btn success-btn"
+            onClick={() => onDoneClick()}
+          >
+            Done
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <React.Fragment>
+      <div className="container">
+        <div className="content">
+          <div className="content__left">
+            <LeftDisplay />
+          </div>
+          <div className="content__right">
+            <div className="logout">
+              <button className="logout__btn" onClick={() => onOutClick()}>
+                logOut
+              </button>
+            </div>
+            <div className="content__right--block">
+              <div className="addHire-logOut">
+                <div>
+                  {noHireData === false &&
+                    editHire === false &&
+                    formToEnter === false &&
+                    submitClicked === false &&
+                    loaderShow === false && (
+                      <div className="noHire addHire-text">
+                        <div className="noHire--text">Add Hire</div>
+                        <img
+                          className="imageWrapper"
+                          alt="imageWrapper"
+                          src={plusSvg}
+                          onClick={() => onAddHireClick()}
+                        />
+                      </div>
+                    )}
+                </div>
+              </div>
+              {loaderShow ? (
+                <div className="loaderParent main-loader">
+                  <div className="loading-row">
+                    <img src={loader} alt="loader" className="loader-img" />
+                  </div>
+                </div>
+              ) : (
+                <div className="right-sec__container">
+                  {noHireData && submitClicked === false ? (
+                    <div className="noHire empty-list">
+                      <div className="noHire--text">No New Hires</div>
+                      <img
+                        className="imageWrapper"
+                        alt="plusSvg"
+                        src={plusSvg}
+                        onClick={() => onEmptyListAddClick()}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      {editHire === false &&
+                      formToEnter === false &&
+                      submitClicked === false
+                        ? showHireList()
+                        : ""}
+                    </div>
+                  )}
+                  {editHire && submitClicked === false ? (
+                    <AddHire
+                      editField={editField}
+                      editHire={editHire}
+                      onChildClick={() => onEditCancelClick(backToList)}
+                      onSubmitForm={() => onSubmitClicked(submitClicked)}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {formToEnter && submitClicked === false ? (
+                    <AddHire
+                      onChildClick={() => onFormEntryCancelClick(backToList)}
+                      onSubmitForm={() => onSubmitClicked(submitClicked)}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {submitClicked ? (
+                    <div className="success__container">
+                      {successResponse()}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default HireList;
