@@ -246,6 +246,7 @@ const AddHire = props => {
       phoneNumber: phNum,
       location: location,
       joiningDate: dateData,
+      dateOfBirth: '01-Jan-90',
       reportingManager: manager,
       annualSalary: salary,
       officialEmail: "",
