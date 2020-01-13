@@ -1,6 +1,5 @@
-export const employeeList  = {
-        manager: 
-        [
+export function employeeList (){
+            return[    
                 "Vidhi Maheshwari", 
                 "Ankit Shekhawat",
                 "Kumar Rishi Anand",
@@ -65,15 +64,19 @@ export const employeeList  = {
                 "Selva",
                 "Tejasvi H S",
                 "Bharath T S"
+];
+}
 
-
-        ],
-        location : [
+export function locationList() {
+        return [
                 "Bangalore",
                 "Seatle"
         ]
 }
-      
-      export default {
-        employeeList,
+
+export function matchStocks(manager, value) {
+        return (
+          manager.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+          manager.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        );
       }

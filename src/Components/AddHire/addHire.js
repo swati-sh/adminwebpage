@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Autocomplete from "react-autocomplete";
 import "./addHire.css";
 import cancelIcon from "../../assets/cancel.svg";
 import arrow from "../../assets/noun_Arrow_2094739.svg";
@@ -8,7 +9,7 @@ import dateIcon from "../../assets/noun_Calendar_821509.svg";
 import DatePicker from "react-datepicker";
 import loader from "../../assets/Spinner-1s-200px.gif";
 import "react-datepicker/dist/react-datepicker.css";
-import { employeeList } from "../../employeeList";
+import { employeeList, matchStocks, locationList } from "../../employeeList";
 
 const monthCalender = {
   "01": "January",
@@ -45,7 +46,6 @@ const AddHire = props => {
   const [showLocation, setShowLocation] = useState(false);
   const [loaderShow, setLoader] = useState(false);
   const [showManager, setShowManager] = useState(false);
-  const [arryList, setArrayList] = useState([]);
   const [invalidSalary, setInvalidSalary] = useState(false);
   const [invalidPhNum, setInvalidPhNum] = useState(false);
   const [wrongPhNum, setWrongPhNum] = useState(false);
@@ -79,18 +79,6 @@ const AddHire = props => {
 
   const handleChange = date => {
     setDate(date);
-  };
-
-  const setOption = value => {
-    setLocation(value);
-    setArrayList([]);
-    setShowLocation(false);
-  };
-
-  const setManagerOption = value => {
-    setManager(value);
-    setShowManager(false);
-    setArrayList([]);
   };
 
   useEffect(() => {
@@ -161,43 +149,6 @@ const AddHire = props => {
       setInvalidEmail(false);
     } else {
       setInvalidEmail(true);
-    }
-  };
-
-  const filterArray = (e, item) => {
-    let newData = [];
-    let value = e.toLowerCase();
-    employeeList[item].filter(item => {
-      if (item.toLowerCase().indexOf(value) > -1) {
-        newData.push(item);
-      }
-    });
-    setArrayList(newData);
-  };
-
-  
-
-  const setLookUp = e => {
-    let value = e.target.value;
-    let name = e.target.name;
-    if (name === "location") {
-      if (value !== "") {
-        filterArray(value, name);
-        setShowLocation(true);
-        setLocation(value);
-      } else {
-        setLocation("");
-        setShowLocation(false);
-      }
-    } else if (name === "manager") {
-      if (value !== "") {
-        filterArray(value, name);
-        setShowManager(true);
-        setManager(value);
-      } else {
-        setManager("");
-        setShowManager(false);
-      }
     }
   };
 
@@ -304,13 +255,35 @@ const AddHire = props => {
     }
   };
 
-  const onDateBlur = () =>{
-     if(dateValue === null){
-         setInvalidDate(true)
-     } else {
-        setInvalidDate(false)
-     }
-  }
+  const onLookupChange = e => {
+    let value = e.target.value;
+    let name = e.target.name;
+    if (name === "manager") {
+      if (value !== "") {
+        setShowManager(true);
+        setManager(value);
+      } else {
+        setManager("");
+        setShowManager(false);
+      }
+    }else if (name === "location") {
+      if (value !== "") {
+        setShowLocation(true);
+        setLocation(value);
+      } else {
+        setLocation("");
+        setShowLocation(false);
+      }
+    }
+  };
+
+  const onDateBlur = () => {
+    if (dateValue === null) {
+      setInvalidDate(true);
+    } else {
+      setInvalidDate(false);
+    }
+  };
 
   const validatePhoneNumber = () => {
     var pattern = /^[0-9]{10,12}$/;
@@ -341,26 +314,31 @@ const AddHire = props => {
       } else {
         setInvalidRole(false);
       }
-    } else if (name === "location") {
-      if (location === "") {
-        setInvalidLocation(true);
-      } else {
-        setInvalidLocation(false);
-      }
-    } else if (name === "manager") {
-      if (manager === "") {
-        setInvalidManager(true);
-      } else {
-        setInvalidManager(false);
-      }
     } else if (name === "salary") {
-        if (salary === "") {
-            setInvalidSalary(true)
-        } else {
-            setInvalidSalary(false);
-        }
+      if (salary === "") {
+        setInvalidSalary(true);
+      } else {
+        setInvalidSalary(false);
+      }
     }
   };
+
+  const onSelectLocation = (val) => {
+      if(val){
+        setLocation(val);
+        setShowLocation(true)
+      } else {
+        setLocation(val);
+        setShowLocation(false)
+      }
+  }
+
+  const onSelectManager = (val) => {
+      if(val) {
+        setShowManager(true);
+        setManager(val)
+      }
+  }
 
   const onChangeValue = e => {
     let name = e.target.name;
@@ -375,12 +353,6 @@ const AddHire = props => {
       setPhNum(value);
       setInvalidPhNum(false);
       setWrongPhNum(false);
-    } else if (name === "location") {
-      setLocation(value);
-      setInvalidLocation(false);
-    } else if (name === "manager") {
-      setManager(value);
-      setInvalidManager(false);
     } else if (name === "date") {
       setDate(value);
       setInvalidDate(false);
@@ -484,51 +456,42 @@ const AddHire = props => {
                     ""
                   )}
                 </div>
-                <div className="input-field">
-                  <div>
-                    <input
-                      className="input-default form__input"
-                      id="location"
-                      placeholder="Location"
-                      type="text"
-                      name="location"
-                      value={location}
-                      onChange={e => setLookUp(e)}
-                      autoComplete="off"
-                      onBlur={e => onBlurField(e)}
-                    />
-                    <label htmlFor="location" className="form__label">
-                      <div>
-                        Location<span className="required-dot"></span>
+                 <div className="autoComplete">
+                  <Autocomplete
+                    value={location}
+                    inputProps={{
+                      className: "states-autocomplete",
+                      placeholder: "Location",
+                      name: "location",
+                      id:"location"
+                    }}
+                    items={locationList()}
+                    getItemValue={item => item}
+                    shouldItemRender={matchStocks}
+                    onChange={onLookupChange}
+                    onSelect={onSelectLocation}
+                    renderMenu={children => (
+                      <div className="menu">
+                        {showLocation?<div className="children">{children}</div>:''}
                       </div>
-                    </label>
-                    {invalidLocation ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
-                    ) : (
-                      ""
                     )}
-                  </div>
-                  {arryList.length > 0 && showLocation ? (
-                    <div
-                      className={`optionList ${
-                        showLocation ? "showLocation style-1" : ""
-                      }`} style-1
-                    >
-                      {arryList.map(item => {
-                        return (
-                          <div
-                            className={`optionValue`}
-                            onClick={() => setOption(item)}
-                          >
-                            {item}
-                          </div>
-                        );
-                      })}
+                    renderItem={(item, isHighlighted) => (
+                      <div
+                        className={`item ${
+                          isHighlighted ? "item-highlighted" : ""
+                        }`}
+                        key={item}
+                      >
+                        {item}
+                      </div>
+                    )}
+                  />
+                  {showLocation? <label htmlFor="location" className="form__label lookup__label">
+                    <div>
+                      Location<span className="required-dot"></span>
                     </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                  </label>:''}
+                  </div>
                 <div className="input-field">
                   <input
                     className="input-default form__input"
@@ -629,47 +592,44 @@ const AddHire = props => {
                     ""
                   )}
                 </div>
-                <div className="input-field select-box">
-                  <div>
-                    <input
-                      className="input-default form__input"
-                      id="manager"
-                      placeholder="Reporting Manager"
-                      type="text"
-                      name="manager"
-                      value={manager}
-                      onChange={e => setLookUp(e)}
-                      onBlur={e => onBlurField(e)}
-                      autoComplete="off"
-                    />
-                    <label htmlFor="manager" className="form__label">
-                      <div>
-                        Reporting Manager<span className="required-dot"></span>
+                <div className="autoComplete">
+                  <Autocomplete
+                    value={manager}
+                    inputProps={{
+                      className: "states-autocomplete",
+                      placeholder: "Reporting Manager",
+                      name: "manager",
+                      id:"manager"
+                    }}
+                    wrapperStyle={{ position: 'relative', display: 'inline-block' }}
+                    items={employeeList()}
+                    getItemValue={item => item}
+                    shouldItemRender={matchStocks}
+                    onChange={onLookupChange}
+                    onSelect={onSelectManager}
+                    renderMenu={children => (
+                      <div className="menu">
+                        {showManager?<div className="children">{children}</div>:''}
                       </div>
-                    </label>
-                    {invalidManager ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
-                    ) : (
-                      ""
                     )}
-                  </div>
-                  {arryList.length > 0 && showManager ? (
-                    <div
-                      className={`optionList ${
-                        showManager ? "showLocation" : ""
-                      }`}
-                    >
-                      {arryList.map(item => {
-                        return (
-                          <div
-                            className={`optionValue`}
-                            onClick={() => setManagerOption(item)}
-                          >
-                            {item}
-                          </div>
-                        );
-                      })}
+                    renderItem={(item, isHighlighted,) => (
+                      <div
+                        className={`item ${
+                          isHighlighted ? "item-highlighted" : ""
+                        }`}
+                        key={item}
+                      >
+                        {item}
+                      </div>
+                    )}
+                  />
+                {showManager? <label htmlFor="manager" className="form__label lookup__label">
+                    <div>
+                      Reporting Manager<span className="required-dot"></span>
                     </div>
+                  </label>:''}
+                  {invalidManager ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
                   ) : (
                     ""
                   )}
