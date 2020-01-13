@@ -30,13 +30,17 @@ input:-webkit-autofill:active {
   margin: auto;
 }
 
-.asterik {
-  color: #ff0000;
-  font-size: 20px;
+.required-dot {
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  background-color: #ff0013;
+  margin-left: 4px;
+  border-radius: 50%;
 }
 
 .invalid-msg {
-  color: #ff0000;
+  color: #ff0013;
   font-size: 10px;
   position: absolute;
   bottom: 1em;
@@ -223,7 +227,7 @@ input:-webkit-autofill:active {
 
 .form-error {
   font-family: TBold;
-  color: red;
+  color: #ff0013;
 }
 
 .all-inputField {

@@ -231,6 +231,16 @@ const AddHire = props => {
       fileReader.readAsDataURL(fileToLoad);
     }
   };
+
+  const capitalizeFirstLettter = str => {
+    var splitStr = str.toLowerCase().split(" ");
+    for (var i = 0; i < splitStr.length; i++) {
+      splitStr[i] =
+        splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(" ");
+  };
+
   const onSubmitClick = () => {
     let dateData = dateValue.toISOString();
     dateData = dateData.split("T");
@@ -240,14 +250,14 @@ const AddHire = props => {
     let body = {
       documents: [],
       personalEmail: email.toLowerCase(),
-      firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
-      lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
-      designation: role.charAt(0).toUpperCase() + role.slice(1),
+      firstName: `${capitalizeFirstLettter(firstName)}`,
+      lastName: `${capitalizeFirstLettter(lastName)}`,
+      designation: `${capitalizeFirstLettter(role)}`,
       phoneNumber: phNum,
       location: location,
       joiningDate: dateData,
       dateOfBirth: '01-Jan-90',
-      reportingManager: manager.charAt(0).toUpperCase() + manager.slice(1),
+      reportingManager: `${capitalizeFirstLettter(manager)}`,
       annualSalary: salary,
       officialEmail: "",
       photo: "",
@@ -417,7 +427,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="firstName" className="form__label">
                     <div>
-                      First Name <span className="asterik">*</span>
+                      First Name <span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidFirstName ? (
@@ -440,7 +450,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="email" className="form__label">
                     <div>
-                      Personal Email <span className="asterik">*</span>
+                      Personal Email <span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidEmail ? (
@@ -465,7 +475,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="role" className="form__label">
                     <div>
-                      Role<span className="asterik">*</span>
+                      Role<span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidRole ? (
@@ -489,7 +499,7 @@ const AddHire = props => {
                     />
                     <label htmlFor="location" className="form__label">
                       <div>
-                        Location<span className="asterik">*</span>
+                        Location<span className="required-dot"></span>
                       </div>
                     </label>
                     {invalidLocation ? (
@@ -535,7 +545,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="Salary" className="form__label">
                     <div>
-                      Salary<span className="asterik">*</span>
+                      Salary<span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidSalary ? (
@@ -562,7 +572,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="lastName" className="form__label">
                     <div>
-                      Last Name<span className="asterik">*</span>
+                      Last Name<span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidLastName ? (
@@ -587,7 +597,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="phNum" className="form__label">
                     <div>
-                      Phone Number<span className="asterik">*</span>
+                      Phone Number<span className="required-dot"></span>
                     </div>
                   </label>
                   {invalidPhNum || wrongPhNum ? (
@@ -607,7 +617,7 @@ const AddHire = props => {
                   />
                   <label htmlFor="date" className="form__label">
                     <div>
-                      Date<span className="asterik">*</span>
+                      Date<span className="required-dot"></span>
                     </div>
                   </label>
                   <div className="dateImgContainer">
@@ -634,7 +644,7 @@ const AddHire = props => {
                     />
                     <label htmlFor="manager" className="form__label">
                       <div>
-                        Reporting Manager<span className="asterik">*</span>
+                        Reporting Manager<span className="required-dot"></span>
                       </div>
                     </label>
                     {invalidManager ? (
