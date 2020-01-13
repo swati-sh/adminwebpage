@@ -239,7 +239,7 @@ const AddHire = props => {
       dateData[2] + " " + monthCalender[dateData[1]] + " " + dateData[0];
     let body = {
       documents: [],
-      personalEmail: email,
+      personalEmail: email.toLowerCase(),
       firstName: firstName,
       lastName: lastName,
       designation: role,
