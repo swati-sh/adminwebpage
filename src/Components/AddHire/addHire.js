@@ -240,14 +240,14 @@ const AddHire = props => {
     let body = {
       documents: [],
       personalEmail: email.toLowerCase(),
-      firstName: firstName,
-      lastName: lastName,
-      designation: role,
+      firstName: firstName.charAt(0).toUpperCase() + firstName.slice(1),
+      lastName: lastName.charAt(0).toUpperCase() + lastName.slice(1),
+      designation: role.charAt(0).toUpperCase() + role.slice(1),
       phoneNumber: phNum,
       location: location,
       joiningDate: dateData,
       dateOfBirth: '01-Jan-90',
-      reportingManager: manager,
+      reportingManager: manager.charAt(0).toUpperCase() + manager.slice(1),
       annualSalary: salary,
       officialEmail: "",
       photo: "",
@@ -271,6 +271,7 @@ const AddHire = props => {
         .catch(err => {});
     }
   };
+  
   const validate = evt => {
     let theEvent = evt || window.evt;
     var key = theEvent.keyCode || theEvent.which;
