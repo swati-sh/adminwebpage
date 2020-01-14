@@ -106,17 +106,19 @@ const HireList = props => {
     return (
       <div className="padding">
         <div className="list-heading">List of new joinee</div>
-        {dataList.map((item, key) => {
-          return (
-            <div className="list" key={key}  onClick={() => onEditClick(item)}>
-              <div className="list__content">
-                <div className="list__content--name">
-                  {item.firstName} {item.lastName}
+        <article className="listContent">
+          {dataList.map((item, key) => {
+            return (
+              <div className="list" key={key}  onClick={() => onEditClick(item)}>
+                <div className="list__content">
+                  <div className="list__content--name">
+                    {item.firstName} {item.lastName}
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </article>
       </div>
     );
   };
@@ -165,25 +167,26 @@ const HireList = props => {
               </button>
             </div>
             <div className="content__right--block">
-              <div className="addHire-logOut">
-                <div>
+              
                   {noHireData === false &&
                     editHire === false &&
                     formToEnter === false &&
                     submitClicked === false &&
                     loaderShow === false && (
-                      <div className="noHire addHire-text">
-                        <div className="noHire--text">Add Hire</div>
-                        <img
-                          className="imageWrapper"
-                          alt="imageWrapper"
-                          src={plusSvg}
-                          onClick={() => onAddHireClick()}
-                        />
+                      <div className="addHire-logOut">
+                        <div>
+                          <div className="noHire addHire-text">
+                            <div className="noHire--text">Add Hire</div>
+                            <img
+                              className="imageWrapper"
+                              alt="imageWrapper"
+                              src={plusSvg}
+                              onClick={() => onAddHireClick()}
+                            />
+                          </div>
+                        </div>
                       </div>
                     )}
-                </div>
-              </div>
               {loaderShow ? (
                 <div className="loaderParent main-loader">
                   <div className="loading-row">

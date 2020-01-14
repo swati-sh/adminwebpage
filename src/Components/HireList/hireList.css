@@ -20,6 +20,15 @@
   color: #0058fb;
 }
 
+.listContent{
+  overflow: scroll;
+  height: 35em;
+}
+
+.list:last-child{
+  border-bottom: 0
+}
+
 .list__content {
   display: flex;
   justify-content: space-between;
