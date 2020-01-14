@@ -240,14 +240,14 @@ input:-webkit-autofill:active {
 
 .all-inputField {
   display: flex;
-  margin-top: 20px;
+  margin-top: 17px;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
 .input-field {
   position: relative;
-  margin: 5px 0;
+  margin-bottom: 5px;
 }
 .form__input:placeholder-shown + .form__label {
   opacity: 0;
