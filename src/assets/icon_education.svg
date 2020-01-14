@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none}.cls-1{clip-rule:evenodd}.cls-3{clip-path:url(#clip-path)}.cls-4{opacity:0}.cls-5{fill:url(#linear-gradient)}.cls-6{fill:#3eccac}.cls-7{clip-path:url(#clip-path-2)}.cls-8{fill:#fff}
+        </style>
+        <clipPath id="clip-path">
+            <path id="Path_43" d="M10-60h40a10 10 0 0 1 10 10v40A10 10 0 0 1 50 0H10A10 10 0 0 1 0-10v-40a10 10 0 0 1 10-10z" class="cls-1" data-name="Path 43"/>
+        </clipPath>
+        <linearGradient id="linear-gradient" x2="0" y2="17.067" gradientUnits="objectBoundingBox">
+            <stop offset="0"/>
+            <stop offset="0" stop-color="#ffb946"/>
+            <stop offset=".1" stop-color="#edbd52"/>
+            <stop offset=".2" stop-color="#dcc15f"/>
+            <stop offset=".3" stop-color="#cac56b"/>
+            <stop offset=".4" stop-color="#b9ca77"/>
+            <stop offset=".5" stop-color="#a8ce84"/>
+            <stop offset=".6" stop-color="#96d290"/>
+            <stop offset=".7" stop-color="#85d69d"/>
+            <stop offset=".8" stop-color="#73daa9"/>
+            <stop offset=".9" stop-color="#62deb5"/>
+            <stop offset="1" stop-color="#50e3c2"/>
+            <stop offset="1"/>
+        </linearGradient>
+        <clipPath id="clip-path-2">
+            <path id="Path_45" d="M42.151-22.621v-9.763h-.009L45-33.763 30-41l-15 7.237 6.126 2.956v5.231c0 2.524 3.9 4.5 8.874 4.5s8.874-1.977 8.874-4.5v-5.231l2.072-1v9.186a2.343 2.343 0 0 0-1.656 2.267A2.31 2.31 0 0 0 41.548-18a2.311 2.311 0 0 0 2.259-2.354 2.343 2.343 0 0 0-1.656-2.267zM30-39.615l12.13 5.853L30-27.91l-12.13-5.853zm7.668 14.04c0 1.534-3.149 3.244-7.668 3.244s-7.668-1.71-7.668-3.244v-4.65l7.668 3.7 7.668-3.7zm3.88 6.319a1.077 1.077 0 0 1-1.053-1.1 1.077 1.077 0 0 1 1.053-1.1 1.077 1.077 0 0 1 1.053 1.1 1.077 1.077 0 0 1-1.053 1.099z" class="cls-2" data-name="Path 45"/>
+        </clipPath>
+    </defs>
+    <g id="icon_education" transform="translate(0 60)">
+        <g id="Group_78" class="cls-3" data-name="Group 78">
+            <g id="Group_76" class="cls-4" data-name="Group 76">
+                <g id="Group_75" data-name="Group 75" transform="translate(0 -60)">
+                    <path id="Path_41" d="M0 0h60v60H0z" class="cls-5" data-name="Path 41"/>
+                </g>
+            </g>
+            <g id="Group_77" data-name="Group 77" transform="translate(0 -60)">
+                <path id="Path_42" d="M0 0h60v60H0z" class="cls-6" data-name="Path 42"/>
+            </g>
+        </g>
+        <g id="Group_79" class="cls-7" data-name="Group 79">
+            <path id="Path_44" d="M10-46h40v33H10z" class="cls-8" data-name="Path 44"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:none}.cls-1{clip-rule:evenodd}.cls-3{clip-path:url(#clip-path)}.cls-4{clip-path:url(#clip-path-2)}.cls-5{opacity:0}.cls-6{fill:url(#linear-gradient)}.cls-7{fill:#b560d0}.cls-8{clip-path:url(#clip-path-3)}.cls-9{fill:#fff}
+        </style>
+        <clipPath id="clip-path">
+            <path id="Path_62" d="M10-60h40a10 10 0 0 1 10 10v40A10 10 0 0 1 50 0H10A10 10 0 0 1 0-10v-40a10 10 0 0 1 10-10z" class="cls-1" data-name="Path 62"/>
+        </clipPath>
+        <clipPath id="clip-path-2">
+            <path id="Path_61" d="M0 0h60v-60H0z" class="cls-2" data-name="Path 61"/>
+        </clipPath>
+        <linearGradient id="linear-gradient" x2="0" y2="17.067" gradientUnits="objectBoundingBox">
+            <stop offset="0"/>
+            <stop offset="0" stop-color="#b560d0"/>
+            <stop offset=".1" stop-color="#ae64ce"/>
+            <stop offset=".2" stop-color="#a768cd"/>
+            <stop offset=".3" stop-color="#a06ccc"/>
+            <stop offset=".4" stop-color="#9970cb"/>
+            <stop offset=".5" stop-color="#9274c9"/>
+            <stop offset=".6" stop-color="#8a78c8"/>
+            <stop offset=".7" stop-color="#837cc7"/>
+            <stop offset=".8" stop-color="#7c80c6"/>
+            <stop offset=".9" stop-color="#7584c4"/>
+            <stop offset="1" stop-color="#6e88c3"/>
+            <stop offset="1"/>
+        </linearGradient>
+        <clipPath id="clip-path-3">
+            <path id="Path_65" d="M29.767-42.788a8.707 8.707 0 0 1 8.3 6.092 8.707 8.707 0 0 1-3.314 9.75v9.735L29.767-20.9l-4.988 3.688v-9.735a8.707 8.707 0 0 1-3.315-9.75 8.707 8.707 0 0 1 8.303-6.091zm3.174 16.809a8.646 8.646 0 0 1-6.349 0v5.17l3.174-2.358 3.174 2.358zm-3.174-15a6.893 6.893 0 0 0-6.893 6.893 6.893 6.893 0 0 0 6.893 6.893 6.893 6.893 0 0 0 4.874-2.019 6.893 6.893 0 0 0 2.019-4.874 6.893 6.893 0 0 0-6.893-6.888zm.03 2.328l1.391 2.872 3.144.484-2.3 2.207.514 3.144-2.812-1.481-2.808 1.455.544-3.144-2.27-2.237 3.174-.423zm-.03 4.112l-.212.423-.453.06.333.333-.091.453.423-.212.393.212-.06-.453.333-.333-.453-.06z" class="cls-2" data-name="Path 65"/>
+        </clipPath>
+    </defs>
+    <g id="icon_achivements" transform="translate(0 60)">
+        <g id="Group_128" class="cls-3" data-name="Group 128">
+            <g id="Group_127" class="cls-4" data-name="Group 127">
+                <g id="Group_125" class="cls-5" data-name="Group 125">
+                    <g id="Group_124" data-name="Group 124" transform="translate(0 -60)">
+                        <path id="Path_59" d="M0 0h60v60H0z" class="cls-6" data-name="Path 59"/>
+                    </g>
+                </g>
+                <g id="Group_126" data-name="Group 126" transform="translate(0 -60)">
+                    <path id="Path_60" d="M0 0h60v60H0z" class="cls-7" data-name="Path 60"/>
+                </g>
+            </g>
+        </g>
+        <g id="Group_130" class="cls-8" data-name="Group 130">
+            <g id="Group_129" class="cls-4" data-name="Group 129">
+                <path id="Path_63" d="M16.062-47.788h27.411v35.577H16.062z" class="cls-9" data-name="Path 63"/>
+            </g>
+        </g>
+    </g>
+</svg>

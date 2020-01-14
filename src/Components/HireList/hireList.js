@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {withRouter} from 'react-router'
 import axios from "axios";
 import "./hireList.css";
 import LeftDisplay from "../LeftDisplay/leftDisplay";
@@ -8,6 +9,7 @@ import success from "../../assets/noun_success_2019805.svg";
 import loader from "../../assets/Spinner-1s-200px.gif";
 
 const HireList = props => {
+  const {getHiresList,allHiresList} = props;
   const [noHireData, setNoHireData] = useState(false);
   const [dataList, setDataList] = useState([]);
   const [editHire, setEditHire] = useState(false);
@@ -24,19 +26,16 @@ const HireList = props => {
     } else {
       props.history.push("/");
     }
-    getAllJoinee();
+    setLoaderShow(true);
+    getHiresList();
   }, []);
 
-  const getAllJoinee = async () => {
-    setLoaderShow(true);
-    const newData = [];
-    let res = await axios.get(
-      "https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee"
-    );
-    if (res.status === 200) {
-      let joinee = res.data.joinee;
+  useEffect(() => {
+    if (allHiresList) {
+      const newData = [];
+      let joinee = allHiresList.joinee;
       if (joinee) {
-        res.data.data.map(item => {
+        allHiresList.data.map(item => {
           newData.push(item);
         });
         setDataList(newData.reverse());
@@ -46,10 +45,10 @@ const HireList = props => {
       }
       setLoaderShow(false);
     }
-  };
+  }, [allHiresList]);
 
   const onFormEntryCancelClick = val => {
-    getAllJoinee();
+    // getAllJoinee();
     setFormToEnter(false);
     if (dataList.length > 0) {
       setNoHireData(false);
@@ -60,7 +59,7 @@ const HireList = props => {
 
   const onEditCancelClick = val => {
     setEditHire(false);
-    getAllJoinee();
+   // getAllJoinee();
   };
 
   const onSubmitClicked = val => {
@@ -80,7 +79,7 @@ const HireList = props => {
     setFormToEnter(false);
     setBackToList(true);
     setSubmitClicked(false);
-    getAllJoinee();
+   // getAllJoinee();
   };
 
   const onAddAnotherClick = () => {
@@ -98,8 +97,14 @@ const HireList = props => {
   };
 
   const onEditClick = item => {
-    setEditHire(true);
-    setEditField(item);
+    if(item.tShirtSize){
+      props.history.push("/email",{
+        item:item
+      });
+    } else {
+      setEditHire(true);
+      setEditField(item);
+    }
   };
 
   const showHireList = () => {
@@ -249,4 +254,4 @@ const HireList = props => {
   );
 };
 
-export default HireList;
+export default withRouter(HireList);

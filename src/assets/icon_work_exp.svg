@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <style>
+            .cls-1,.cls-8{fill:#fff}.cls-1{clip-rule:evenodd}.cls-2{fill:none}.cls-3{clip-path:url(#clip-path)}.cls-4{opacity:0}.cls-5{fill:url(#linear-gradient)}.cls-6{fill:#6084fa}.cls-7{clip-path:url(#clip-path-2)}
+        </style>
+        <clipPath id="clip-path">
+            <path id="Path_49" d="M10-60h40a10 10 0 0 1 10 10v40A10 10 0 0 1 50 0H10A10 10 0 0 1 0-10v-40a10 10 0 0 1 10-10z" class="cls-1" data-name="Path 49"/>
+        </clipPath>
+        <linearGradient id="linear-gradient" x2="0" y2="17.067" gradientUnits="objectBoundingBox">
+            <stop offset="0"/>
+            <stop offset="0" stop-color="#26a4f0"/>
+            <stop offset=".1" stop-color="#2aaaec"/>
+            <stop offset=".2" stop-color="#2eb0e7"/>
+            <stop offset=".3" stop-color="#32b7e2"/>
+            <stop offset=".4" stop-color="#37bdde"/>
+            <stop offset=".5" stop-color="#3bc3d9"/>
+            <stop offset=".6" stop-color="#3fc9d4"/>
+            <stop offset=".7" stop-color="#43d0d0"/>
+            <stop offset=".8" stop-color="#48d6cb"/>
+            <stop offset=".9" stop-color="#4cdcc6"/>
+            <stop offset="1" stop-color="#50e3c2"/>
+            <stop offset="1"/>
+        </linearGradient>
+        <clipPath id="clip-path-2">
+            <path id="Path_51" d="M40.143-37.5h-1.929v-1a2.951 2.951 0 0 0-2.893-3h-9.642a2.951 2.951 0 0 0-2.893 3v1h-1.929a3.934 3.934 0 0 0-3.857 4v10a3.934 3.934 0 0 0 3.857 4h19.286a3.934 3.934 0 0 0 3.857-4v-10a3.934 3.934 0 0 0-3.857-4zm-15.429-1a.983.983 0 0 1 .964-1h9.643a.983.983 0 0 1 .964 1v1H24.714zm17.357 15a1.966 1.966 0 0 1-1.929 2H20.857a1.966 1.966 0 0 1-1.929-2v-10a1.966 1.966 0 0 1 1.929-2h1.929v3a.983.983 0 0 0 .964 1 .983.983 0 0 0 .964-1v-3h11.572v3a.983.983 0 0 0 .964 1 .983.983 0 0 0 .964-1v-3h1.929a1.966 1.966 0 0 1 1.929 2z" class="cls-2" data-name="Path 51"/>
+        </clipPath>
+    </defs>
+    <g id="icon_work_exp" transform="translate(0 60)">
+        <g id="Group_107" class="cls-3" data-name="Group 107">
+            <g id="Group_105" class="cls-4" data-name="Group 105">
+                <g id="Group_104" data-name="Group 104" transform="translate(0 -60)">
+                    <path id="Path_47" d="M0 0h60v60H0z" class="cls-5" data-name="Path 47"/>
+                </g>
+            </g>
+            <g id="Group_106" data-name="Group 106" transform="translate(0 -60)">
+                <path id="Path_48" d="M0 0h60v60H0z" class="cls-6" data-name="Path 48"/>
+            </g>
+        </g>
+        <g id="Group_108" class="cls-7" data-name="Group 108">
+            <path id="Path_50" d="M12-46.5h37v32H12z" class="cls-8" data-name="Path 50"/>
+        </g>
+    </g>
+</svg>

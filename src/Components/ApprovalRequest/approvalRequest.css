@@ -1,0 +1,152 @@
+.flex-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.heading__section {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 25px;
+}
+
+.heading__section--text {
+	color: #0100a6;
+	font-family: TBold;
+	font-size: 20px;
+}
+
+.details-section {
+	overflow: auto;
+}
+
+.first__row {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.first__row--name {
+	font-family: TBold;
+	text-transform: uppercase;
+}
+.margin {
+	margin: 5px 0;
+}
+.emailId {
+	color: #0463f7;
+	font-family: TLight;
+}
+.personal-details {
+	width: 80%;
+}
+.second__row {
+	
+}
+.second__row--content {
+	display: flex;
+	padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.second__row-label {
+	width: 30%;
+	color:#989898;
+	font-family: TLight;
+}
+
+.bold-name {
+	text-transform: uppercase;
+	font-family: TBold;
+}
+.details {
+	padding-bottom: 20px;
+}
+.light-name {
+	text-transform: uppercase;
+	font-family: TBold;
+	color: #989898;
+}
+
+.details-icon {
+	margin-right: 20px;
+}
+.list-container {
+	padding: 20px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.proff-name {
+	font-family: TBold;
+}
+
+.proff-desc {
+	color: #989898;
+	font-family: TLight;
+	font-size: 14px;
+}
+.approval-btn {
+	width: 50%;
+	padding: 20px;
+	text-transform: uppercase;
+	font-family: TBold;
+	text-align: center;
+	color: #fff;
+}
+
+.skills-container {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 20px 0;
+}
+
+.skills-content {
+	border-radius: 33.5px;
+    padding: 5px 12px;
+    border: 1.2px solid #0463f7;
+    color: #0463f7;
+    margin: 0 10px 10px 0;
+    font-family: TLight;
+    font-weight: 600;
+}
+.close-icon {
+	margin: 3px 0 0 20px;
+}
+.row {
+	margin: 20px 0;
+}
+
+.margin-med {
+	margin-right: 20px;
+}
+
+.last__row {
+	display: flex;
+}
+
+.last__row--rejectBtn {
+	background-color: #f04d4d;
+	margin-right: 20px;
+}
+
+.last__row--approveBtn {
+	background-color: #3eccac;
+
+}
+
+.details-section::-webkit-scrollbar-thumb {
+    background: #0463f7; 
+    border-radius: 5px;
+}
+.details-section::-webkit-scrollbar {
+  width: 10px;
+}
+.details-section::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}

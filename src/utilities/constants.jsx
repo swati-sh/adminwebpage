@@ -1,0 +1,1 @@
+export const GET_HIRE_LIST = "GET_HIRE_LIST";

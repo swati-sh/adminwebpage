@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+    <defs>
+        <style>
+            .cls-1{fill:#0463f7}.cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="icon_linkedin" transform="translate(-200.754 -285.523)">
+        <rect id="Rectangle_74" width="35" height="35" class="cls-1" data-name="Rectangle 74" rx="8.469" transform="translate(200.754 285.523)"/>
+        <g id="Group_151" data-name="Group 151" transform="translate(209.971 293.271)">
+            <g id="Group_150" data-name="Group 150">
+                <path id="Rectangle_75" d="M0 0h3.622v11.701H0z" class="cls-2" data-name="Rectangle 75" transform="translate(.348 5.851)"/>
+                <path id="Path_81" d="M215.385 300.341a2.159 2.159 0 1 0-2.142-2.159 2.151 2.151 0 0 0 2.142 2.159z" class="cls-2" data-name="Path 81" transform="translate(-213.243 -296.022)"/>
+            </g>
+            <path id="Path_82" d="M225.234 309.382c0-1.645.757-2.625 2.207-2.625 1.331 0 1.971.941 1.971 2.625v6.142h3.605v-7.409c0-3.134-1.776-4.649-4.257-4.649a4.079 4.079 0 0 0-3.526 1.933v-1.576h-3.474v11.7h3.474z" class="cls-2" data-name="Path 82" transform="translate(-215.475 -297.973)"/>
+        </g>
+    </g>
+</svg>
