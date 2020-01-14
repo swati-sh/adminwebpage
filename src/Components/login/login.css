@@ -41,6 +41,7 @@
     text-transform: none;
     letter-spacing: 0.5px;
     width: 100%;
+    font-size: 14px;
 }
 
 .loginParent ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

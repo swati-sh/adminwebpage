@@ -189,6 +189,7 @@ const AddHire = props => {
         setLocation("");
         setShowLocation(false);
       }
+      setShowManager(false)
     } else if (name === "manager") {
       if (value !== "") {
         filterArray(value, name);
@@ -198,6 +199,7 @@ const AddHire = props => {
         setManager("");
         setShowManager(false);
       }
+      setShowLocation(false)
     }
   };
 
@@ -405,12 +407,11 @@ const AddHire = props => {
             <div className="create-text">CREATE OFFER PACKET</div>
           </div>
           <div className="button-container" onClick={() => onCancelClick()}>
-            <button className="btn cancel-btn">Cancel</button>
+           <img src={cancelIcon} />
           </div>
         </div>
         <div className="form-container">
           <div>
-            <div className="direction">All fields are required!</div>
             <div className="all-inputField">
               <div className="col">
                 <div className="input-field">

@@ -39,7 +39,7 @@ const HireList = props => {
         res.data.data.map(item => {
           newData.push(item);
         });
-        setDataList(newData);
+        setDataList(newData.reverse());
         setNoHireData(false);
       } else {
         setNoHireData(true);
