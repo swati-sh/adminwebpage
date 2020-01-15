@@ -10,3 +10,13 @@ export function getHiresList() {
                 payload:request,
         };
 }
+
+export function getApprovalJoinee(params) {
+        let request = axios.request({
+                url: `https://piktordigitalid.herokuapp.com/api/login/loginByMail?email=${params}`,
+                method:"GET",
+        });return {
+                type: myConstants.GET_APPROVAL_JOINEE,
+                payload: request,
+        }
+}

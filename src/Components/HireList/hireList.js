@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {withRouter} from 'react-router'
-import axios from "axios";
+import {withRouter} from 'react-router';
 import "./hireList.css";
 import LeftDisplay from "../LeftDisplay/leftDisplay";
 import plusSvg from "../../assets/plus.svg";
@@ -99,7 +98,7 @@ const HireList = props => {
   const onEditClick = item => {
     if(item.tShirtSize){
       props.history.push("/email",{
-        item:item
+        item:item.personalEmail
       });
     } else {
       setEditHire(true);

@@ -23,7 +23,7 @@
 }
 
 .details-section {
-	overflow: auto;
+  	overflow: auto;
 }
 
 .first__row {
@@ -37,27 +37,26 @@
 	text-transform: uppercase;
 }
 .margin {
-	margin: 5px 0;
+  	margin: 5px 0;
 }
 .emailId {
 	color: #0463f7;
 	font-family: TLight;
 }
 .personal-details {
-	width: 80%;
+  	width: 80%;
 }
 .second__row {
-	
 }
 .second__row--content {
 	display: flex;
 	padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 }
 
 .second__row-label {
 	width: 30%;
-	color:#989898;
+	color: #989898;
 	font-family: TLight;
 }
 
@@ -66,7 +65,7 @@
 	font-family: TBold;
 }
 .details {
-	padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 .light-name {
 	text-transform: uppercase;
@@ -75,7 +74,7 @@
 }
 
 .details-icon {
-	margin-right: 20px;
+  	margin-right: 20px;
 }
 .list-container {
 	padding: 20px 0;
@@ -83,7 +82,14 @@
 }
 
 .proff-name {
-	font-family: TBold;
+  	font-family: TBold;
+}
+.rounded-icon {
+	display: block;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	object-fit: contain;
 }
 
 .proff-desc {
@@ -98,6 +104,7 @@
 	font-family: TBold;
 	text-align: center;
 	color: #fff;
+	cursor: pointer;
 }
 
 .skills-container {
@@ -108,45 +115,44 @@
 
 .skills-content {
 	border-radius: 33.5px;
-    padding: 5px 12px;
-    border: 1.2px solid #0463f7;
-    color: #0463f7;
-    margin: 0 10px 10px 0;
-    font-family: TLight;
-    font-weight: 600;
+	padding: 4px 12px 5px 12px;
+	border: 1.2px solid #0463f7;
+	color: #0463f7;
+	margin: 0 10px 10px 0;
+	font-family: TLight;
+	font-weight: 600;
 }
 .close-icon {
-	margin: 3px 0 0 20px;
+  	margin: 3px 0 0 20px;
 }
 .row {
-	margin: 20px 0;
+  	margin: 20px 0;
 }
 
 .margin-med {
-	margin-right: 20px;
+  	margin-right: 20px;
 }
 
 .last__row {
-	display: flex;
+  	display: flex;
 }
 
 .last__row--rejectBtn {
-	background-color: #f04d4d;
-	margin-right: 20px;
+  	background-color: #f04d4d;
+  	margin-right: 20px;
 }
 
 .last__row--approveBtn {
 	background-color: #3eccac;
-
 }
 
 .details-section::-webkit-scrollbar-thumb {
-    background: #0463f7; 
-    border-radius: 5px;
+	background: #0463f7;
+  	border-radius: 5px;
 }
 .details-section::-webkit-scrollbar {
-  width: 10px;
+  	width: 10px;
 }
 .details-section::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  	background: #f1f1f1;
 }
