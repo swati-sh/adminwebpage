@@ -26,7 +26,8 @@ const monthCalender = {
 };
 
 const AddHire = props => {
-  const { editField, onChildClick, onSubmitForm } = props;
+  const { editField, onChildClick, onSubmitForm,addNewHire,addHire } = props;
+  console.log(props)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -269,20 +270,20 @@ const AddHire = props => {
     };
     if (disabledSubmit !== true) {
       setLoader(true);
-      axios
-        .post(
-          "https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee",
-          body
-        )
-        .then(res => {
-          onSubmitForm(true);
+      addNewHire(body)
+    }
+  };
+
+  useEffect(
+    () => {
+      if(addHire && addHire.results.data.success === true) {
+        onSubmitForm(true);
           setLoader(false);
           setDisabledSubmit(true);
           onCancelClick();
-        })
-        .catch(err => {});
-    }
-  };
+      }
+    },[addHire]
+  )
   
   const validate = evt => {
     let theEvent = evt || window.evt;
@@ -752,14 +753,7 @@ const AddHire = props => {
                         <img src={arrow} alt="arrow" className="arrow-img" />
                       </div>
                     </div>
-                  ) : (
-                    <div className="large-button enableOffer">
-                      <button className="btn propBtn enableBtn">VERIFY</button>
-                      <div className="imgContainer">
-                        <img src={arrow} alt="arrow" className="arrow-img" />
-                      </div>
-                    </div>
-                  )}
+                  ) :''}
                 </div>
               )}
             </div>

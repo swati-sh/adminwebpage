@@ -98,7 +98,7 @@ const ApprovalRequest = props => {
           <div className="desc-first">Approved Successfully</div>
           <div className="desc-second">Request has been approved</div>
         </div>
-        <div className="success__content--btn" onClick={()=>onCancelClick()}>
+        <div className="success__content--btn" onClick={() => onCancelClick()}>
           <button className="done-btn success-btn">Done</button>
         </div>
       </div>
@@ -150,18 +150,16 @@ const ApprovalRequest = props => {
                           src={photo}
                         />
                       </div>
-                      <div className="first__row--name margin">
+                      <div className="fontFamily margin">
                         {capitalizeFirstLettter(firstName)}&nbsp;{lastName}
                       </div>
-                      <div className="first__row--role-location margin">
+                      <div className="fontFamily margin">
                         {capitalizeFirstLettter(role)} | {location}
                       </div>
-                      <div className="first__row--email margin">
+                      <div className="fontFamily margin">
                         Email:<span className="emailId"> {email}</span>
                       </div>
-                      <div className="first__row--phone margin">
-                        Phone: {phoneNum}
-                      </div>
+                      <div className="fontFamily margin">Phone: {phoneNum}</div>
                     </div>
                     <div className="personal-details">
                       <div className="row second__row">
@@ -255,7 +253,9 @@ const ApprovalRequest = props => {
                             })}
                           </div>
                         ) : (
-                          ""
+                          <div className="list-container flex-row">
+                            <div className="no-data">No details submitted</div>
+                          </div>
                         )}
                       </div>
                       <div className="row">
@@ -304,7 +304,9 @@ const ApprovalRequest = props => {
                             })}
                           </div>
                         ) : (
-                          ""
+                          <div className="list-container flex-row">
+                            <div className="no-data">No details submitted</div>
+                          </div>
                         )}
                       </div>
                       <div className="row">
@@ -329,7 +331,9 @@ const ApprovalRequest = props => {
                             })}
                           </div>
                         ) : (
-                          ""
+                          <div className="list-container flex-row">
+                            <div className="no-data">No details submitted</div>
+                          </div>
                         )}
                       </div>
                       <div className="row third__row">
@@ -381,7 +385,9 @@ const ApprovalRequest = props => {
                             })}
                           </div>
                         ) : (
-                          ""
+                          <div className="list-container flex-row">
+                            <div className="no-data">No details submitted</div>
+                          </div>
                         )}
                       </div>
                       <div className="row last__row">

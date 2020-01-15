@@ -20,3 +20,29 @@ export function getApprovalJoinee(params) {
                 payload: request,
         }
 }
+
+export function addNewHire(params) {
+        let request = axios.request({
+                url: "https://piktordigitalid.herokuapp.com/api/onboarding/addNewJoinee",
+                method: "POST",
+                data: params,
+        });
+        return {
+                type: myConstants.ADD_HIRE,
+                payload: request
+        }
+}
+
+export function clearApprovalJoinee() {
+        return {
+                type:myConstants.CLEAR_APPROVAL_JOINEE,
+                payload: null
+        }
+}
+
+export function clearAddHire() {
+        return {
+                type: myConstants.CLEAR_ADD_HIRE,
+                payload: null
+        }
+}

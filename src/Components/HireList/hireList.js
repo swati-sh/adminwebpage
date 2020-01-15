@@ -47,7 +47,7 @@ const HireList = props => {
   }, [allHiresList]);
 
   const onFormEntryCancelClick = val => {
-    // getAllJoinee();
+    getHiresList();
     setFormToEnter(false);
     if (dataList.length > 0) {
       setNoHireData(false);
@@ -58,7 +58,7 @@ const HireList = props => {
 
   const onEditCancelClick = val => {
     setEditHire(false);
-   // getAllJoinee();
+    getHiresList();
   };
 
   const onSubmitClicked = val => {
@@ -78,7 +78,7 @@ const HireList = props => {
     setFormToEnter(false);
     setBackToList(true);
     setSubmitClicked(false);
-   // getAllJoinee();
+    getHiresList();
   };
 
   const onAddAnotherClick = () => {
@@ -220,6 +220,7 @@ const HireList = props => {
                   )}
                   {editHire && submitClicked === false ? (
                     <AddHire
+                      {...props}
                       editField={editField}
                       editHire={editHire}
                       onChildClick={() => onEditCancelClick(backToList)}
@@ -230,6 +231,7 @@ const HireList = props => {
                   )}
                   {formToEnter && submitClicked === false ? (
                     <AddHire
+                      {...props}
                       onChildClick={() => onFormEntryCancelClick(backToList)}
                       onSubmitForm={() => onSubmitClicked(submitClicked)}
                     />

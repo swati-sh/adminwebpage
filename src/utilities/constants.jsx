@@ -1,2 +1,6 @@
 export const GET_HIRE_LIST = "GET_HIRE_LIST";
 export const GET_APPROVAL_JOINEE = "GET_APPROVAL_JOINEE";
+export const ADD_HIRE = "ADD_HIRE";
+
+export const CLEAR_APPROVAL_JOINEE = "CLEAR_APPROVAL_JOINEE";
+export const CLEAR_ADD_HIRE = "CLEAR_ADD_HIRE"
