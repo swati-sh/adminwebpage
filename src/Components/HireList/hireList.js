@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {withRouter} from 'react-router';
+import { withRouter } from "react-router";
 import "./hireList.css";
 import LeftDisplay from "../LeftDisplay/leftDisplay";
 import plusSvg from "../../assets/plus.svg";
 import AddHire from "../AddHire/addHire";
 import success from "../../assets/noun_success_2019805.svg";
 import loader from "../../assets/Spinner-1s-200px.gif";
+import infoIcon from "../../assets/info.svg";
 
 const HireList = props => {
-  const {getHiresList,allHiresList} = props;
+  const { getHiresList, allHiresList } = props;
   const [noHireData, setNoHireData] = useState(false);
   const [dataList, setDataList] = useState([]);
   const [editHire, setEditHire] = useState(false);
@@ -96,9 +97,9 @@ const HireList = props => {
   };
 
   const onEditClick = item => {
-    if(item.tShirtSize){
-      props.history.push("/email",{
-        item:item.personalEmail
+    if (item.tShirtSize) {
+      props.history.push("/email", {
+        item: item.personalEmail
       });
     } else {
       setEditHire(true);
@@ -113,11 +114,17 @@ const HireList = props => {
         <article className="listContent">
           {dataList.map((item, key) => {
             return (
-              <div className="list" key={key}  onClick={() => onEditClick(item)}>
+              <div className="list" key={key} onClick={() => onEditClick(item)}>
                 <div className="list__content">
                   <div className="list__content--name">
                     {item.firstName} {item.lastName}
                   </div>
+                  {item.tShirtSize && (
+                    <div className="tooltip-list">
+                      <img src={infoIcon} />
+                      <span class="tooltiptext-list">Pending for Approval</span>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -165,32 +172,41 @@ const HireList = props => {
             <LeftDisplay />
           </div>
           <div className="content__right">
-            <div className="logout">
-              <button className="logout__btn" onClick={() => onOutClick()}>
-                logOut
-              </button>
-            </div>
+            {(editHire || formToEnter) && (
+              <div className="logout">
+                <button className="logout__btn" onClick={() => onOutClick()}>
+                  logOut
+                </button>
+              </div>
+            )}
             <div className="content__right--block">
-              
-                  {noHireData === false &&
-                    editHire === false &&
-                    formToEnter === false &&
-                    submitClicked === false &&
-                    loaderShow === false && (
-                      <div className="addHire-logOut">
-                        <div>
-                          <div className="noHire addHire-text">
-                            <div className="noHire--text">Add Hire</div>
-                            <img
-                              className="imageWrapper"
-                              alt="imageWrapper"
-                              src={plusSvg}
-                              onClick={() => onAddHireClick()}
-                            />
-                          </div>
-                        </div>
+              {noHireData === false &&
+                editHire === false &&
+                formToEnter === false &&
+                submitClicked === false &&
+                loaderShow === false && (
+                  <div className="addHire-logOut">
+                    <div>
+                      <div className="noHire addHire-text">
+                        <div className="noHire--text">CREATE OFFER PACKET</div>
+                        <img
+                          className="imageWrapper"
+                          alt="imageWrapper"
+                          src={plusSvg}
+                          onClick={() => onAddHireClick()}
+                        />
                       </div>
-                    )}
+                    </div>
+                    <div>
+                      <button
+                        className="logout__btn"
+                        onClick={() => onOutClick()}
+                      >
+                        logOut
+                      </button>
+                    </div>
+                  </div>
+                )}
               {loaderShow ? (
                 <div className="loaderParent main-loader">
                   <div className="loading-row">

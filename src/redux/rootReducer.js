@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import hiresList from './hiresReducer'
+import { combineReducers } from "redux";
+import hiresList from "./hiresReducer";
 // Use ES6 object literal shorthand syntax to define the object shape
 const rootReducer = combineReducers({
- groups:hiresList
-})
+  groups: hiresList
+});
 
 export default rootReducer;

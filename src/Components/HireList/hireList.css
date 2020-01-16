@@ -1,32 +1,28 @@
 .list {
-  border-bottom: 1px solid #ddd;
+  border: 2px solid #0058fb;
   margin-bottom: 20px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .list:hover {
-  transform: translateY(-5px);
-  box-shadow: 0px 2px 5px #ddd;
+  background-color: #0058fb;
 }
-.list:active {
-  transform: translateY(0);
+
+.list:hover .list__content {
+  color: #fff;
 }
 
 .list-heading {
-  padding: 10px;
+  padding: 10px 0;
   text-transform: uppercase;
   font-family: TBold;
-  color: #0058fb;
+  opacity: 0.3;
 }
 
 .listContent{
   overflow: scroll;
   height: 35em;
-}
-
-.list:last-child{
-  border-bottom: 0
 }
 
 .list__content {
@@ -35,6 +31,7 @@
   align-items: center;
   padding: 10px 10px;
   font-family: TBold;
+  color: #0058fb;
 }
 
 .list__content--name {
@@ -71,7 +68,7 @@
 .content__right--block {
   display: flex;
   flex-direction: column;
-  padding: 5% 6%;
+  padding: 4% 6%;
   height: calc(100% - 4em);
 }
 
@@ -80,10 +77,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.addHire-text {
-  margin-left: 12px;
 }
 
 .main-loader {
@@ -97,6 +90,7 @@
 .noHire--text {
   font-family: urbane;
   font-size: 20px;
+  color: #0058fb;
 }
 
 .right-sec__container {
@@ -105,6 +99,40 @@
 
 .empty-list {
   height: 90%;
+}
+
+.tooltip-list {
+  position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.tooltip-list .tooltiptext-list {
+    visibility: hidden;
+    width: 160px;
+    background-color: #ef4848;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 2;
+    top: -5px;
+    right: 110%;
+}
+
+.tooltip-list .tooltiptext-list::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent #ef4848;
+}
+
+.tooltip-list:hover .tooltiptext-list {
+	visibility: visible;
 }
 
 .addHire-logOut {
@@ -133,7 +161,7 @@
 }
 
 .success__content--img {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .success-img {
@@ -147,7 +175,6 @@
 
 .desc-first {
   margin-bottom: 5px;
-  text-transform: uppercase;
   font-family: TBold;
   font-size: 20px;
   color: #0100a6;
@@ -185,4 +212,9 @@
 .done-btn {
   color: #fff;
   background-color: #0058fb;
+}
+@media only screen and (max-width: 600px) {
+  .content__left {
+      display: none;
+  }
 }

@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react";
+import Modal from "../Modal/modal";
 import { withRouter } from "react-router";
 import LeftDisplay from "../LeftDisplay/leftDisplay";
 import educationIcon from "../../assets/icon_education.svg";
 import attachIcon from "../../assets/attach.svg";
 import cancelIcon from "../../assets/cancel.svg";
 import workIcon from "../../assets/icon_work_exp.svg";
+import infoIcon from "../../assets/info.svg";
 import cancel from "../../assets/icon_close.svg";
 import loaderIcon from "../../assets/Spinner-1s-200px.gif";
 import success from "../../assets/noun_success_2019805.svg";
+import rejectIcon from "../../assets/rejectedIcon.svg";
 import achivementsIcon from "../../assets/achivements.svg";
 import "./approvalRequest.css";
 
 const ApprovalRequest = props => {
-  const { getApprovalJoinee, approvalJoinee } = props;
+  const {
+    getApprovalJoinee,
+    approvalJoinee,
+    approvedRequest,
+    approvedData,
+    rejectedRequest,
+    rejectedData,
+    clearRejectedData,
+    clearApprovedData
+  } = props;
 
   const [loader, setLoader] = useState(true);
   const [firstName, setFirstName] = useState("");
@@ -29,19 +41,48 @@ const ApprovalRequest = props => {
   const [skills, setSkills] = useState([]);
   const [acheivements, setAchivements] = useState([]);
   const [approvedClicked, setApprovedClick] = useState(false);
+  const [rejectClicked, setRejectClicked] = useState(false);
   const [photo, setPhoto] = useState("");
+  const [modal, setModal] = useState(false);
+  const [actionLoader, setActionLoader] = useState(false);
+
+  useEffect(() => {
+    clearRejectedData();
+    clearApprovedData();
+    // clear all data when component unmounts
+    return () => {
+      clearRejectedData();
+      clearApprovedData();
+    };
+  }, []);
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token === null) {
+      localStorage.setItem("key", props.location.search.split("="));
+      props.history.push("/");
+    }
+  }, []);
 
   useEffect(() => {
     setLoader(true);
+    let token = localStorage.getItem("key");
     if (props.location.state !== undefined) {
       getApprovalJoinee(props.location.state.item);
     } else {
       if (props.location.search) {
         let search = props.location.search.split("=");
         getApprovalJoinee(search[1]);
+      } else if (token) {
+        let search = token.split("=");
+        getApprovalJoinee(search[1]);
       }
     }
-    if (props.location.state === undefined && props.location.search === "") {
+    if (
+      props.location.state === undefined &&
+      props.location.search === "" &&
+      !token
+    ) {
       props.history.push("/hirelist");
     }
   }, []);
@@ -66,17 +107,61 @@ const ApprovalRequest = props => {
     }
   }, [approvalJoinee]);
 
+  useEffect(() => {
+    if (approvedData) {
+      if (approvedData.results.status === 200) {
+        setActionLoader(false);
+      }
+    }
+  }, [approvedData]);
+
   const onOutClick = () => {
     localStorage.clear();
     props.history.push("/");
   };
 
+  const onRejectClicked = value => {
+    if (value !== "") {
+      let body = {
+        firstName: firstName,
+        rejectReason: value,
+        personalEmail: email
+      };
+      rejectedRequest(body);
+      setActionLoader(true);
+      setModal(false);
+    }
+  };
+
+  useEffect(() => {
+    if (rejectedData && rejectedData.results.status === 200) {
+      setActionLoader(false);
+      setRejectClicked(true);
+    }
+  }, [rejectedData]);
+
   const onCancelClick = () => {
     props.history.push("/hirelist");
+    setApprovedClick(false);
+    setRejectClicked(false);
   };
 
   const onApproveBtnClicked = () => {
     setApprovedClick(true);
+    setActionLoader(true);
+    let body = {
+      firstName,
+      personalEmail: email
+    };
+    approvedRequest(body);
+  };
+
+  const openModalHandler = () => {
+    setModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setModal(false);
   };
 
   const capitalizeFirstLettter = str => {
@@ -88,7 +173,7 @@ const ApprovalRequest = props => {
     return splitStr.join(" ");
   };
 
-  const approvedRequest = () => {
+  const onApprovedRequest = () => {
     return (
       <div className="success__content">
         <div className="success__content--img">
@@ -105,8 +190,26 @@ const ApprovalRequest = props => {
     );
   };
 
+  const onRejectRequest = () => {
+    return (
+      <div className="success__content">
+        <div className="success__content--img">
+          <img src={rejectIcon} className="success-img" alt="success" />
+        </div>
+        <div className="success__content--desc">
+          <div className="desc-first rejected-text">Approval Rejected</div>
+          <div className="desc-second">Request has been rejected</div>
+        </div>
+        <div className="success__content--btn" onClick={() => onCancelClick()}>
+          <button className="done-btn success-btn">Done</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
+      {console.log("re", rejectClicked)}
       <div className="container">
         <div className="content">
           <div className="content__left">
@@ -140,7 +243,7 @@ const ApprovalRequest = props => {
                     <img alt="cancel" src={cancelIcon} />
                   </div>
                 </div>
-                {!approvedClicked && (
+                {!approvedClicked && !rejectClicked && (
                   <div className="details-section">
                     <div className="row first__row">
                       <div className="margin">
@@ -150,7 +253,7 @@ const ApprovalRequest = props => {
                           src={photo}
                         />
                       </div>
-                      <div className="fontFamily margin">
+                      <div className="margin bold__text">
                         {capitalizeFirstLettter(firstName)}&nbsp;{lastName}
                       </div>
                       <div className="fontFamily margin">
@@ -163,26 +266,42 @@ const ApprovalRequest = props => {
                     </div>
                     <div className="personal-details">
                       <div className="row second__row">
-                        <div className="bold-name details">
+                        <div className="bold__text details">
                           Personal Details
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">First Name</div>
-                          <div className="bold-name">{firstName}</div>
+                          <div className="bold__text">{firstName}</div>
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">Last Name</div>
-                          <div className="bold-name">{lastName}</div>
+                          <div className="desc-tooltip">
+                            <div className="bold__text">{lastName} </div>{" "}
+                            <div className="tooltip">
+                              <img src={infoIcon} />
+                              <span class="tooltiptext">
+                                Pending for Approval
+                              </span>
+                            </div>
+                          </div>
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">
                             Personal Email
                           </div>
-                          <div className="bold-name">{email}</div>
+                          <div className="desc-tooltip">
+                            <div className="bold__text">{email}</div>{" "}
+                            <div className="tooltip">
+                              <img src={infoIcon} />
+                              <span class="tooltiptext">
+                                Pending for Approval
+                              </span>
+                            </div>
+                          </div>
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">Phone</div>
-                          <div className="bold-name">{phoneNum}</div>
+                          <div className="bold__text">{phoneNum}</div>
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">Role</div>
@@ -204,11 +323,19 @@ const ApprovalRequest = props => {
                         </div>
                         <div className="second__row--content">
                           <div className="second__row-label">T-shirt Size</div>
-                          <div className="bold-name">{tshirtSize}</div>
+                          <div className="desc-tooltip">
+                            <div className="bold__text">{tshirtSize}</div>{" "}
+                            <div className="tooltip">
+                              <img src={infoIcon} />
+                              <span class="tooltiptext">
+                                Pending for Approval
+                              </span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div className="row third__row">
-                        <div className="bold-name">Education</div>
+                        <div className="bold__text">Education</div>
                         {educationList && educationList.length > 0 ? (
                           <div>
                             {educationList.map((item, index) => {
@@ -222,11 +349,11 @@ const ApprovalRequest = props => {
                                       <img alt="edu" src={educationIcon} />
                                     </div>
                                     <div>
-                                      <div className="proff-name">
-                                        {item.name}
+                                      <div className="bold__text-lowerCase">
+                                        {capitalizeFirstLettter(item.name)}
                                       </div>
                                       <div className="proff-desc">
-                                        {item.branch}
+                                        {capitalizeFirstLettter(item.branch)}
                                       </div>
                                       <div className="proff-desc">
                                         {item.startYear}-{item.endYear}
@@ -234,18 +361,25 @@ const ApprovalRequest = props => {
                                     </div>
                                   </div>
                                   <div className="flex-row">
-                                    <div className="margin-med">
-                                      {item.document ? (
+                                    {item.document ? (
+                                      <div className="flex-row">
                                         <a
                                           href={item.document}
                                           target="_blank"
                                           rel="noopener noreferrer"
+                                          className="margin-med"
                                         >
                                           <img alt="attach" src={attachIcon} />
                                         </a>
-                                      ) : (
-                                        ""
-                                      )}
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )}
+                                    <div className="tooltip">
+                                      <img src={infoIcon} />
+                                      <span class="tooltiptext">
+                                        Pending for Approval
+                                      </span>
                                     </div>
                                   </div>
                                 </div>
@@ -259,7 +393,7 @@ const ApprovalRequest = props => {
                         )}
                       </div>
                       <div className="row">
-                        <div className="bold-name">Work Experience</div>
+                        <div className="bold__text">Work Experience</div>
                         {workExperience && workExperience.length > 0 ? (
                           <div>
                             {workExperience.map((item, index) => {
@@ -273,11 +407,13 @@ const ApprovalRequest = props => {
                                       <img src={workIcon} />
                                     </div>
                                     <div>
-                                      <div className="proff-name">
-                                        {item.designation}
+                                      <div className="bold__text-lowerCase">
+                                        {capitalizeFirstLettter(
+                                          item.designation
+                                        )}
                                       </div>
                                       <div className="proff-desc">
-                                        {item.company}
+                                        {capitalizeFirstLettter(item.company)}
                                       </div>
                                       <div className="proff-desc">
                                         {item.startYear} - {item.endYear}
@@ -285,18 +421,25 @@ const ApprovalRequest = props => {
                                     </div>
                                   </div>
                                   <div className="flex-row">
-                                    <div className="margin-med">
-                                      {item.document ? (
+                                    {item.document ? (
+                                      <div className="flex-row">
                                         <a
                                           href={item.document}
                                           target="_blank"
                                           rel="noopener noreferrer"
+                                          className="margin-med"
                                         >
                                           <img alt="attach" src={attachIcon} />
                                         </a>
-                                      ) : (
-                                        ""
-                                      )}
+                                      </div>
+                                    ) : (
+                                      ""
+                                    )}
+                                    <div className="tooltip">
+                                      <img src={infoIcon} />
+                                      <span class="tooltiptext">
+                                        Pending for Approval
+                                      </span>
                                     </div>
                                   </div>
                                 </div>
@@ -310,7 +453,15 @@ const ApprovalRequest = props => {
                         )}
                       </div>
                       <div className="row">
-                        <div className="bold-name">Skills</div>
+                        <div className="flex-row">
+                          <div className="bold__text">Skills</div>
+                          <div className="tooltip">
+                            <img src={infoIcon} />
+                            <span class="tooltiptext">
+                              Pending for Approval
+                            </span>
+                          </div>
+                        </div>
                         {skills && skills.length > 0 ? (
                           <div className="skills-container">
                             {skills.map((item, index) => {
@@ -337,7 +488,7 @@ const ApprovalRequest = props => {
                         )}
                       </div>
                       <div className="row third__row">
-                        <div className="bold-name">Achievements</div>
+                        <div className="bold__text">Achievements</div>
                         {acheivements && acheivements.length > 0 ? (
                           <div>
                             {acheivements.map((item, index) => {
@@ -354,7 +505,7 @@ const ApprovalRequest = props => {
                                       />
                                     </div>
                                     <div>
-                                      <div className="proff-name">
+                                      <div className="bold__text-lowerCase">
                                         {item.title}
                                       </div>
                                       <div className="proff-desc">
@@ -366,18 +517,30 @@ const ApprovalRequest = props => {
                                     </div>
                                   </div>
                                   <div className="flex-row">
-                                    <div className="margin-med">
+                                    <div>
                                       {item.document ? (
-                                        <a
-                                          href={item.document}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                        >
-                                          <img alt="attach" src={attachIcon} />
-                                        </a>
+                                        <div className="flex-row">
+                                          <a
+                                            href={item.document}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="margin-med"
+                                          >
+                                            <img
+                                              alt="attach"
+                                              src={attachIcon}
+                                            />
+                                          </a>
+                                        </div>
                                       ) : (
                                         ""
                                       )}
+                                      <div className="tooltip">
+                                        <img src={infoIcon} />
+                                        <span class="tooltiptext">
+                                          Pending for Approval
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -390,21 +553,47 @@ const ApprovalRequest = props => {
                           </div>
                         )}
                       </div>
-                      <div className="row last__row">
-                        <div className="last__row--rejectBtn approval-btn">
-                          Reject
+                      {!actionLoader ? (
+                        <div className="row last__row">
+                          <div
+                            className="last__row--rejectBtn approval-btn"
+                            onClick={() => openModalHandler()}
+                          >
+                            Reject
+                          </div>
+                          <div
+                            className="last__row--approveBtn approval-btn"
+                            onClick={() => onApproveBtnClicked()}
+                          >
+                            Approve
+                          </div>
                         </div>
-                        <div
-                          className="last__row--approveBtn approval-btn"
-                          onClick={() => onApproveBtnClicked()}
-                        >
-                          Approve
+                      ) : (
+                        <div className="loaderParent">
+                          <div className="loaderContainer">
+                            <img
+                              src={loaderIcon}
+                              alt="loader"
+                              className="loader-img"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </div>
                 )}
-                {approvedClicked && approvedRequest()}
+                {approvedClicked && onApprovedRequest()}
+                {rejectClicked && onRejectRequest()}
+                {modal && (
+                  <div onClick={() => closeModalHandler()}>
+                    <Modal
+                      className="modal"
+                      show={modal}
+                      onHide={() => closeModalHandler()}
+                      onRejectClicked={val => onRejectClicked(val)}
+                    ></Modal>
+                  </div>
+                )}
               </div>
             )}
           </div>
