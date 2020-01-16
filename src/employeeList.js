@@ -70,7 +70,7 @@ export const employeeList  = {
         ],
         location : [
                 "Bangalore",
-                "Seatle"
+                "Seattle"
         ]
 }
       

@@ -223,10 +223,10 @@ const ApprovalRequest = props => {
                                     </div>
                                     <div>
                                       <div className="proff-name">
-                                        {item.institution}
+                                        {item.name}
                                       </div>
                                       <div className="proff-desc">
-                                        {item.degree}
+                                        {item.branch}
                                       </div>
                                       <div className="proff-desc">
                                         {item.startYear}-{item.endYear}
