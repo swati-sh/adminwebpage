@@ -49,8 +49,14 @@ const Login = (props) => {
             if(userName === 'admin' && password === 'admin') {
                 localStorage.setItem('token', userName+password);
                 setPassword("");
-                props.history.push('/hireList');
+                let token = localStorage.getItem("key")
+                if(token){
+                    props.history.push('/email');
+                } else {
+                   props.history.push('/hireList');
+                }
                 setDisableSubmit(false);
+
             } else {
                 setInvalidLoginId(true);
                 setDisableSubmit(true);

@@ -33,6 +33,30 @@ export function addNewHire(params) {
         }
 }
 
+export function approvedRequest(params){
+        let request = axios.request({
+                url:"https://piktordigitalid.herokuapp.com/api/onboarding/approveRequest",
+                method: "POST",
+                data: params,
+        })
+        return {
+                type: myConstants.APPROVED_REQUEST,
+                payload: request
+        }
+}
+
+export function rejectedRequest(params) {
+        let request = axios.request({
+               url:"https://piktordigitalid.herokuapp.com/api/onboarding/rejectRequest",
+               method: "POST",
+               data: params 
+        })
+        return {
+                type: myConstants.REJECTED_REQUEST,
+                payload: request
+        }
+}
+
 export function clearApprovalJoinee() {
         return {
                 type:myConstants.CLEAR_APPROVAL_JOINEE,
@@ -43,6 +67,20 @@ export function clearApprovalJoinee() {
 export function clearAddHire() {
         return {
                 type: myConstants.CLEAR_ADD_HIRE,
+                payload: null
+        }
+}
+
+export function clearRejectedData() {
+        return {
+                type: myConstants.CLEAR_REJECTED_DATA,
+                payload : null
+        }
+}
+
+export function clearApprovedData() {
+        return {
+                type: myConstants.CLEAR_APPROVED_DATA,
                 payload: null
         }
 }

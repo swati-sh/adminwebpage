@@ -133,7 +133,7 @@
 }
 
 .success__content--img {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .success-img {
@@ -147,7 +147,6 @@
 
 .desc-first {
   margin-bottom: 5px;
-  text-transform: uppercase;
   font-family: TBold;
   font-size: 20px;
   color: #0100a6;
