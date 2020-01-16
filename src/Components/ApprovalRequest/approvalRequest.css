@@ -37,6 +37,7 @@
 
 .details-section {
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .first__row {
