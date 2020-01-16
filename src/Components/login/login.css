@@ -1,94 +1,97 @@
-.loginParent{
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: center;
-    height: 100%;
+.loginParent {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  height: 100%;
 }
 
-.btnContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.loginButn{
-    width: 4em;
-    text-align: center;
-    padding: 0.5em 1em;
-    font-family: TLight;
-    font-size: 14px;
-    border-radius: 5em;
+.loginButn {
+  width: 4em;
+  text-align: center;
+  padding: 0.5em 1em;
+  font-family: TLight;
+  font-size: 14px;
+  border-radius: 5em;
 }
 
 .btn-disable {
-    background-color: #ddd;
-    cursor: not-allowed;
+  background-color: #ddd;
+  cursor: not-allowed;
 }
 
 .btn-enable {
-    background-color: #fff;
-    cursor: pointer;
+  background-color: #fff;
+  cursor: pointer;
 }
 
-.loginParent .form__label{
-    color: #fff;
-    letter-spacing: 0.5px;
+.loginParent .form__label {
+  color: #fff;
+  letter-spacing: 0.5px;
 }
 
-.loginParent .input-default{
-    color: #fff;
-    text-transform: none;
-    letter-spacing: 0.5px;
-    width: 100%;
-    font-size: 14px;
+.loginParent .input-default {
+  color: #fff;
+  text-transform: none;
+  letter-spacing: 0.5px;
+  width: 100%;
+  font-size: 14px;
 }
 
-.loginParent ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    font-family: TLight;
-    opacity: 1; /* Firefox */
-    text-transform: initial;
-    color: #fff;
+.loginParent ::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-family: TLight;
+  opacity: 1; /* Firefox */
+  text-transform: initial;
+  color: #fff;
 }
 
-.loginParent :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    font-family: TLight;
-    text-transform: initial;
-    color: #fff;
+.loginParent :-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  font-family: TLight;
+  text-transform: initial;
+  color: #fff;
 }
 
-.loginParent ::-ms-input-placeholder { /* Microsoft Edge */
-    font-family: TLight;
-    text-transform: initial;
-    color: #fff;
+.loginParent ::-ms-input-placeholder {
+  /* Microsoft Edge */
+  font-family: TLight;
+  text-transform: initial;
+  color: #fff;
 }
 
-.loginPage{
-    background: #0058fb;
+.loginPage {
+  background: #0058fb;
 }
 
-.loginWrapper{
-    background: #0058fb;
-    width: 20em;
-    border-radius: 0.3 em;
-    padding: 5em;
-    box-shadow: 3px 0px 26px #888888
+.loginWrapper {
+  background: #0058fb;
+  width: 20em;
+  border-radius: 0.3 em;
+  padding: 5em;
+  box-shadow: 3px 0px 26px #888888;
 }
 
-.emailWrapper{
-    padding-bottom: 1em;
-    padding-top: 1em;
+.emailWrapper {
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 
-h2{
-    padding-bottom: 2em;
+h2 {
+  padding-bottom: 2em;
 }
 
 .invalid-login {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #fff;
-    letter-spacing: 0.5px;
-    font-family: TLight;
-    font-size: 12px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  font-family: TLight;
+  font-size: 12px;
 }

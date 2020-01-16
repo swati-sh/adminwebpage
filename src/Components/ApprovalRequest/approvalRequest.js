@@ -15,7 +15,6 @@ import achivementsIcon from "../../assets/achivements.svg";
 import "./approvalRequest.css";
 
 const ApprovalRequest = props => {
- 
   const {
     getApprovalJoinee,
     approvalJoinee,
@@ -47,40 +46,43 @@ const ApprovalRequest = props => {
   const [modal, setModal] = useState(false);
   const [actionLoader, setActionLoader] = useState(false);
 
-useEffect (() => {
-  clearRejectedData ();
-  clearApprovedData ();
-  // clear all data when component unmounts
-  return () => {
-  clearRejectedData ();
-  clearApprovedData ();
-  };
+  useEffect(() => {
+    clearRejectedData();
+    clearApprovedData();
+    // clear all data when component unmounts
+    return () => {
+      clearRejectedData();
+      clearApprovedData();
+    };
   }, []);
 
-  useEffect (() => {
+  useEffect(() => {
     let token = localStorage.getItem("token");
-    if(token === null){
-      localStorage.setItem('key', props.location.search.split("="));
-      props.history.push('/');
+    if (token === null) {
+      localStorage.setItem("key", props.location.search.split("="));
+      props.history.push("/");
     }
-  },[]
-  )
- 
+  }, []);
+
   useEffect(() => {
     setLoader(true);
-    let token = localStorage.getItem("key")
+    let token = localStorage.getItem("key");
     if (props.location.state !== undefined) {
       getApprovalJoinee(props.location.state.item);
     } else {
       if (props.location.search) {
         let search = props.location.search.split("=");
         getApprovalJoinee(search[1]);
-      } else if(token) {
+      } else if (token) {
         let search = token.split("=");
         getApprovalJoinee(search[1]);
       }
     }
-    if (props.location.state === undefined && props.location.search === "" && !token) {
+    if (
+      props.location.state === undefined &&
+      props.location.search === "" &&
+      !token
+    ) {
       props.history.push("/hirelist");
     }
   }, []);
@@ -207,7 +209,7 @@ useEffect (() => {
 
   return (
     <React.Fragment>
-      {console.log("re",rejectClicked)}
+      {console.log("re", rejectClicked)}
       <div className="container">
         <div className="content">
           <div className="content__left">
@@ -373,12 +375,12 @@ useEffect (() => {
                                     ) : (
                                       ""
                                     )}
-                                     <div className="tooltip">
-                                          <img src={infoIcon} />
-                                          <span class="tooltiptext">
-                                            Pending for Approval
-                                          </span>
-                                        </div>
+                                    <div className="tooltip">
+                                      <img src={infoIcon} />
+                                      <span class="tooltiptext">
+                                        Pending for Approval
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
                               );
@@ -433,12 +435,12 @@ useEffect (() => {
                                     ) : (
                                       ""
                                     )}
-                                     <div className="tooltip">
-                                          <img src={infoIcon} />
-                                          <span class="tooltiptext">
-                                            Pending for Approval
-                                          </span>
-                                      </div>
+                                    <div className="tooltip">
+                                      <img src={infoIcon} />
+                                      <span class="tooltiptext">
+                                        Pending for Approval
+                                      </span>
+                                    </div>
                                   </div>
                                 </div>
                               );
@@ -533,12 +535,12 @@ useEffect (() => {
                                       ) : (
                                         ""
                                       )}
-                                       <div className="tooltip">
-                                            <img src={infoIcon} />
-                                            <span class="tooltiptext">
-                                              Pending for Approval
-                                            </span>
-                                          </div>
+                                      <div className="tooltip">
+                                        <img src={infoIcon} />
+                                        <span class="tooltiptext">
+                                          Pending for Approval
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>

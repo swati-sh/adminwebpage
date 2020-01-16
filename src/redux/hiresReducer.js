@@ -6,7 +6,6 @@ const initialState = {
   addHire: null,
   approvedData: null,
   rejectedDataL: null
-  
 };
 
 export default function(state = initialState, action) {
@@ -50,39 +49,40 @@ export default function(state = initialState, action) {
           error: error
         }
       });
-      case myConstants.APPROVED_REQUEST:
+    case myConstants.APPROVED_REQUEST:
       if (!action.payload) {
         return Object.assign({}, state, { data: null });
       }
-      let value = "", errorValue = "";
+      let value = "",
+        errorValue = "";
       if (action.payload.status === 200 || action.payload.status === 204) {
         value = action.payload;
       } else {
         errorValue = action.payload;
       }
       return Object.assign({}, state, {
-         approvedData:{
+        approvedData: {
           results: value,
           error: errorValue
         }
       });
-      case myConstants.REJECTED_REQUEST:
-        if (!action.payload) {
-          return Object.assign({}, state, { data: null });
+    case myConstants.REJECTED_REQUEST:
+      if (!action.payload) {
+        return Object.assign({}, state, { data: null });
+      }
+      let successVal = "",
+        errorVal = "";
+      if (action.payload.status === 200 || action.payload.status === 204) {
+        successVal = action.payload;
+      } else {
+        errorVal = action.payload;
+      }
+      return Object.assign({}, state, {
+        rejectedData: {
+          results: successVal,
+          error: errorVal
         }
-        let successVal = "",
-          errorVal = "";
-        if (action.payload.status === 200 || action.payload.status === 204) {
-          successVal = action.payload;
-        } else {
-          errorVal = action.payload;
-        }
-        return Object.assign({}, state, {
-           rejectedData:{
-            results: successVal,
-            error: errorVal
-          }
-        });
+      });
 
     case myConstants.CLEAR_ADD_HIRE: {
       return Object.assign({}, state, {

@@ -219,7 +219,7 @@ input:-webkit-autofill:active {
   /* margin-top: 20px; */
 }
 
-.inputContainer{
+.inputContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -367,12 +367,31 @@ select option[disabled]:first-child {
 }
 
 .optionList::-webkit-scrollbar-thumb {
-    background: #989898; 
-    border-radius: 5px;
+  background: #989898;
+  border-radius: 5px;
 }
 .optionList::-webkit-scrollbar {
   width: 10px;
 }
 .optionList::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
+}
+
+@media only screen and (max-width: 984px) {
+  .inputContainer {
+    display: unset;
+    width: unset;
+  }
+  .onboard-btn {
+    margin-top: 25px;
+  }
+}
+
+@media only screen and (max-width: 695px) {
+  .input-default {
+    width: 260px;
+  }
+  .react-datepicker__input-container input {
+    width: 260px;
+  }
 }

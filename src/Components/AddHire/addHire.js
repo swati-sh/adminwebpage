@@ -26,8 +26,8 @@ const monthCalender = {
 };
 
 const AddHire = props => {
-  const { editField, onChildClick, onSubmitForm,addNewHire,addHire } = props;
-  console.log(props)
+  const { editField, onChildClick, onSubmitForm, addNewHire, addHire } = props;
+  console.log(props);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -176,8 +176,6 @@ const AddHire = props => {
     setArrayList(newData);
   };
 
-  
-
   const setLookUp = e => {
     let value = e.target.value;
     let name = e.target.name;
@@ -190,7 +188,7 @@ const AddHire = props => {
         setLocation("");
         setShowLocation(false);
       }
-      setShowManager(false)
+      setShowManager(false);
     } else if (name === "manager") {
       if (value !== "") {
         filterArray(value, name);
@@ -200,7 +198,7 @@ const AddHire = props => {
         setManager("");
         setShowManager(false);
       }
-      setShowLocation(false)
+      setShowLocation(false);
     }
   };
 
@@ -259,7 +257,7 @@ const AddHire = props => {
       phoneNumber: phNum,
       location: location,
       joiningDate: dateData,
-      dateOfBirth: '01-Jan-90',
+      dateOfBirth: "01-Jan-90",
       reportingManager: `${capitalizeFirstLettter(manager)}`,
       annualSalary: salary,
       officialEmail: "",
@@ -270,21 +268,19 @@ const AddHire = props => {
     };
     if (disabledSubmit !== true) {
       setLoader(true);
-      addNewHire(body)
+      addNewHire(body);
     }
   };
 
-  useEffect(
-    () => {
-      if(addHire && addHire.results.data.success === true) {
-        onSubmitForm(true);
-          setLoader(false);
-          setDisabledSubmit(true);
-          onCancelClick();
-      }
-    },[addHire]
-  )
-  
+  useEffect(() => {
+    if (addHire && addHire.results.data.success === true) {
+      onSubmitForm(true);
+      setLoader(false);
+      setDisabledSubmit(true);
+      onCancelClick();
+    }
+  }, [addHire]);
+
   const validate = evt => {
     let theEvent = evt || window.evt;
     var key = theEvent.keyCode || theEvent.which;
@@ -307,13 +303,13 @@ const AddHire = props => {
     }
   };
 
-  const onDateBlur = () =>{
-     if(dateValue === null){
-         setInvalidDate(true)
-     } else {
-        setInvalidDate(false)
-     }
-  }
+  const onDateBlur = () => {
+    if (dateValue === null) {
+      setInvalidDate(true);
+    } else {
+      setInvalidDate(false);
+    }
+  };
 
   const validatePhoneNumber = () => {
     var pattern = /^[0-9]{10,12}$/;
@@ -357,11 +353,11 @@ const AddHire = props => {
         setInvalidManager(false);
       }
     } else if (name === "salary") {
-        if (salary === "") {
-            setInvalidSalary(true)
-        } else {
-            setInvalidSalary(false);
-        }
+      if (salary === "") {
+        setInvalidSalary(true);
+      } else {
+        setInvalidSalary(false);
+      }
     }
   };
 
@@ -408,273 +404,282 @@ const AddHire = props => {
             <div className="create-text">CREATE OFFER PACKET</div>
           </div>
           <div className="button-container" onClick={() => onCancelClick()}>
-           <img src={cancelIcon} />
+            <img src={cancelIcon} />
           </div>
         </div>
         <div className="form-container">
           <div>
             <div className="all-inputField">
-                <div className="inputContainer">
-                  <div className="input-field">
-                    <input
-                      className="input-default form__input"
-                      placeholder="First Name"
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      value={firstName}
-                      onChange={e => onChangeValue(e)}
-                      onBlur={e => onBlurField(e)}
-                      autoComplete="off"
-                    />
-                    <label htmlFor="firstName" className="form__label">
-                      <div>
-                        First Name <span className="required-dot"></span>
-                      </div>
-                    </label>
-                    {invalidFirstName ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                  <div className="input-field">
-                    <input
-                      className="input-default form__input"
-                      id="lastName"
-                      placeholder="Last Name"
-                      type="text"
-                      name="lastName"
-                      value={lastName}
-                      onChange={e => onChangeValue(e)}
-                      autoComplete="off"
-                      onBlur={e => onBlurField(e)}
-                    />
-                    <label htmlFor="lastName" className="form__label">
-                      <div>
-                        Last Name<span className="required-dot"></span>
-                      </div>
-                    </label>
-                    {invalidLastName ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className="inputContainer">
-                  <div className="input-field">
-                      <input
-                        className="input-default form__input"
-                        id="email"
-                        placeholder="Personal Email"
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={e => onChangeValue(e)}
-                        onBlur={() => onBlurEmail()}
-                        autoComplete="off"
-                      />
-                      <label htmlFor="email" className="form__label">
-                        <div>
-                          Personal Email <span className="required-dot"></span>
-                        </div>
-                      </label>
-                      {invalidEmail ? (
-                        <div className="invalid-msg">
-                          This field is required or enter valid email!
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                  </div>
-                  <div className="input-field">
-                    <input
-                      className="input-default form__input num_class"
-                      id="phNum"
-                      placeholder="Phone Number"
-                      type="number"
-                      step="0.01"
-                      name="phNum"
-                      value={phNum}
-                      onChange={e => onChangeValue(e)}
-                      onKeyPress={event => validate(event)}
-                      onBlur={() => validatePhoneNumber()}
-                      autoComplete="off"
-                    />
-                    <label htmlFor="phNum" className="form__label">
-                      <div>
-                        Phone Number<span className="required-dot"></span>
-                      </div>
-                    </label>
-                    {invalidPhNum || wrongPhNum ? (
-                      <div className="invalid-msg">
-                        Phone Number should be 10-12 digits or field is required!
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className="inputContainer">
-                  <div className="input-field">
-                      <input
-                        className="input-default form__input"
-                        id="role"
-                        placeholder="Role"
-                        type="text"
-                        name="role"
-                        value={role}
-                        onChange={e => onChangeValue(e)}
-                        onBlur={e => onBlurField(e)}
-                        autoComplete="off"
-                      />
-                      <label htmlFor="role" className="form__label">
-                        <div>
-                          Role<span className="required-dot"></span>
-                        </div>
-                      </label>
-                      {invalidRole ? (
-                        <div className="invalid-msg">{requiredMsg}</div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  <div className="input-field">
-                    <DatePicker
-                      selected={dateValue}
-                      onChange={handleChange}
-                      minDate={new Date()}
-                      onBlur={onDateBlur}
-                    />
-                    <label htmlFor="date" className="form__label">
-                      <div>
-                        Joining Date<span className="required-dot"></span>
-                      </div>
-                    </label>
-                    <div className="dateImgContainer">
-                      <img src={dateIcon} alt="date" className="date-img" />
-                    </div>
-                    {invalidDate ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-                <div className="inputContainer">
-                  <div className="input-field">
-                      <div>
-                        <input
-                          className="input-default form__input"
-                          id="location"
-                          placeholder="Location"
-                          type="text"
-                          name="location"
-                          value={location}
-                          onChange={e => setLookUp(e)}
-                          autoComplete="off"
-                          onBlur={e => onBlurField(e)}
-                        />
-                        <label htmlFor="location" className="form__label">
-                          <div>
-                            Location<span className="required-dot"></span>
-                          </div>
-                        </label>
-                        {invalidLocation ? (
-                          <div className="invalid-msg">{requiredMsg}</div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                      {arryList.length > 0 && showLocation ? (
-                        <div className={`optionList ${showLocation ? "showLocation style-1" : "" }`} style-1>
-                          {arryList.map(item => {
-                            return (
-                              <div
-                                className={`optionValue`}
-                                onClick={() => setOption(item)}
-                              >
-                                {item}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                  </div>
-                  <div className="input-field select-box">
+              <div className="inputContainer">
+                <div className="input-field">
+                  <input
+                    className="input-default form__input"
+                    placeholder="First Name"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value={firstName}
+                    onChange={e => onChangeValue(e)}
+                    onBlur={e => onBlurField(e)}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="firstName" className="form__label">
                     <div>
-                      <input
-                        className="input-default form__input"
-                        id="manager"
-                        placeholder="Reporting Manager"
-                        type="text"
-                        name="manager"
-                        value={manager}
-                        onChange={e => setLookUp(e)}
-                        onBlur={e => onBlurField(e)}
-                        autoComplete="off"
-                      />
-                      <label htmlFor="manager" className="form__label">
-                        <div>
-                          Reporting Manager<span className="required-dot"></span>
-                        </div>
-                      </label>
-                      {invalidManager ? (
-                        <div className="invalid-msg">{requiredMsg}</div>
-                      ) : (
-                        ""
-                      )}
+                      First Name <span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidFirstName ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="input-field">
+                  <input
+                    className="input-default form__input"
+                    id="lastName"
+                    placeholder="Last Name"
+                    type="text"
+                    name="lastName"
+                    value={lastName}
+                    onChange={e => onChangeValue(e)}
+                    autoComplete="off"
+                    onBlur={e => onBlurField(e)}
+                  />
+                  <label htmlFor="lastName" className="form__label">
+                    <div>
+                      Last Name<span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidLastName ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="input-field">
+                  <input
+                    className="input-default form__input"
+                    id="email"
+                    placeholder="Personal Email"
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={e => onChangeValue(e)}
+                    onBlur={() => onBlurEmail()}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="email" className="form__label">
+                    <div>
+                      Personal Email <span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidEmail ? (
+                    <div className="invalid-msg">
+                      This field is required or enter valid email!
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="input-field">
+                  <input
+                    className="input-default form__input num_class"
+                    id="phNum"
+                    placeholder="Phone Number"
+                    type="number"
+                    step="0.01"
+                    name="phNum"
+                    value={phNum}
+                    onChange={e => onChangeValue(e)}
+                    onKeyPress={event => validate(event)}
+                    onBlur={() => validatePhoneNumber()}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="phNum" className="form__label">
+                    <div>
+                      Phone Number<span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidPhNum || wrongPhNum ? (
+                    <div className="invalid-msg">
+                      Phone Number should be 10-12 digits or field is required!
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="input-field">
+                  <input
+                    className="input-default form__input"
+                    id="role"
+                    placeholder="Role"
+                    type="text"
+                    name="role"
+                    value={role}
+                    onChange={e => onChangeValue(e)}
+                    onBlur={e => onBlurField(e)}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="role" className="form__label">
+                    <div>
+                      Role<span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidRole ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="input-field">
+                  <DatePicker
+                    selected={dateValue}
+                    onChange={handleChange}
+                    minDate={new Date()}
+                    onBlur={onDateBlur}
+                  />
+                  <label htmlFor="date" className="form__label">
+                    <div>
+                      Joining Date<span className="required-dot"></span>
+                    </div>
+                  </label>
+                  <div className="dateImgContainer">
+                    <img src={dateIcon} alt="date" className="date-img" />
                   </div>
-                    {arryList.length > 0 && showManager ? (
-                      <div className={`optionList ${ showManager ? "showLocation" : "" }`}>
-                        {arryList.map(item => {
-                          return (
-                            <div
-                              className={`optionValue`}
-                              onClick={() => setManagerOption(item)}
-                            >
-                              {item}
-                            </div>
-                          );
-                        })}
+                  {invalidDate ? (
+                    <div className="invalid-msg">{requiredMsg}</div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="input-field">
+                  <div>
+                    <input
+                      className="input-default form__input"
+                      id="location"
+                      placeholder="Location"
+                      type="text"
+                      name="location"
+                      value={location}
+                      onChange={e => setLookUp(e)}
+                      autoComplete="off"
+                      onBlur={e => onBlurField(e)}
+                    />
+                    <label htmlFor="location" className="form__label">
+                      <div>
+                        Location<span className="required-dot"></span>
                       </div>
+                    </label>
+                    {invalidLocation ? (
+                      <div className="invalid-msg">{requiredMsg}</div>
                     ) : (
                       ""
                     )}
                   </div>
-                </div>
-                <div className="inputContainer">
-                  <div className="input-field">
-                      <input
-                        className="input-default form__input"
-                        id="salary"
-                        value={salary}
-                        placeholder="Annual Salary"
-                        type="number"
-                        name="salary"
-                        step="0.01"
-                        onChange={e => onChangeValue(e)}
-                        onBlur={e => onBlurField(e)}
-                        onKeyPress={event => validate(event)}
-                        autoComplete="off"
-                      />
-                      <label htmlFor="Salary" className="form__label">
-                        <div>
-                          Salary<span className="required-dot"></span>
-                        </div>
-                      </label>
-                      {invalidSalary ? (
-                        <div className="invalid-msg">
-                          This field is required or salary should be in number!
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                  {arryList.length > 0 && showLocation ? (
+                    <div
+                      className={`optionList ${
+                        showLocation ? "showLocation style-1" : ""
+                      }`}
+                      style-1
+                    >
+                      {arryList.map(item => {
+                        return (
+                          <div
+                            className={`optionValue`}
+                            onClick={() => setOption(item)}
+                          >
+                            {item}
+                          </div>
+                        );
+                      })}
                     </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
+                <div className="input-field select-box">
+                  <div>
+                    <input
+                      className="input-default form__input"
+                      id="manager"
+                      placeholder="Reporting Manager"
+                      type="text"
+                      name="manager"
+                      value={manager}
+                      onChange={e => setLookUp(e)}
+                      onBlur={e => onBlurField(e)}
+                      autoComplete="off"
+                    />
+                    <label htmlFor="manager" className="form__label">
+                      <div>
+                        Reporting Manager<span className="required-dot"></span>
+                      </div>
+                    </label>
+                    {invalidManager ? (
+                      <div className="invalid-msg">{requiredMsg}</div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  {arryList.length > 0 && showManager ? (
+                    <div
+                      className={`optionList ${
+                        showManager ? "showLocation" : ""
+                      }`}
+                    >
+                      {arryList.map(item => {
+                        return (
+                          <div
+                            className={`optionValue`}
+                            onClick={() => setManagerOption(item)}
+                          >
+                            {item}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div className="inputContainer">
+                <div className="input-field">
+                  <input
+                    className="input-default form__input"
+                    id="salary"
+                    value={salary}
+                    placeholder="Annual Salary"
+                    type="number"
+                    name="salary"
+                    step="0.01"
+                    onChange={e => onChangeValue(e)}
+                    onBlur={e => onBlurField(e)}
+                    onKeyPress={event => validate(event)}
+                    autoComplete="off"
+                  />
+                  <label htmlFor="Salary" className="form__label">
+                    <div>
+                      Salary<span className="required-dot"></span>
+                    </div>
+                  </label>
+                  {invalidSalary ? (
+                    <div className="invalid-msg">
+                      This field is required or salary should be in number!
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
             </div>
             {!fileTypePdf ? (
               <div className="form-error">{errorMessage}</div>
@@ -753,7 +758,9 @@ const AddHire = props => {
                         <img src={arrow} alt="arrow" className="arrow-img" />
                       </div>
                     </div>
-                  ) :''}
+                  ) : (
+                    ""
+                  )}
                 </div>
               )}
             </div>
