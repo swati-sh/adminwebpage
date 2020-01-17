@@ -284,7 +284,11 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{lastName} </div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} alt="information" />
+                              <img
+                                src={infoIcon}
+                                alt="information"
+                                className="info-icon"
+                              />
                               <span className="tooltiptext">
                                 Pending for Approval
                               </span>
@@ -298,7 +302,11 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{email}</div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} alt="information" />
+                              <img
+                                src={infoIcon}
+                                alt="information"
+                                className="info-icon"
+                              />
                               <span className="tooltiptext">
                                 Pending for Approval
                               </span>
@@ -332,7 +340,11 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{tshirtSize}</div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} alt="information" />
+                              <img
+                                src={infoIcon}
+                                alt="information"
+                                className="info-icon"
+                              />
                               <span className="tooltiptext">
                                 Pending for Approval
                               </span>
@@ -341,7 +353,19 @@ const ApprovalRequest = props => {
                         </div>
                       </div>
                       <div className="row">
-                        <div className="bold__text">Education</div>
+                        <div className="flex-row">
+                          <div className="bold__text">Education</div>
+                          <div className="tooltip">
+                            <img
+                              src={infoIcon}
+                              alt="information"
+                              className="info-icon"
+                            />
+                            <span className="tooltiptext">
+                              Pending for Approval
+                            </span>
+                          </div>
+                        </div>
                         {educationList && educationList.length > 0 ? (
                           <div>
                             {educationList.map((item, index) => {
@@ -368,25 +392,16 @@ const ApprovalRequest = props => {
                                   </div>
                                   <div className="flex-row">
                                     {item.document ? (
-                                      <div className="flex-row">
-                                        <a
-                                          href={item.document}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="margin-med"
-                                        >
-                                          <img alt="attach" src={attachIcon} />
-                                        </a>
-                                      </div>
+                                      <a
+                                        href={item.document}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        <img alt="attach" src={attachIcon} />
+                                      </a>
                                     ) : (
                                       ""
                                     )}
-                                    <div className="tooltip">
-                                      <img src={infoIcon} alt="information" />
-                                      <span className="tooltiptext">
-                                        Pending for Approval
-                                      </span>
-                                    </div>
                                   </div>
                                 </div>
                               );
@@ -399,7 +414,19 @@ const ApprovalRequest = props => {
                         )}
                       </div>
                       <div className="row">
-                        <div className="bold__text">Work Experience</div>
+                        <div className="flex-row">
+                          <div className="bold__text">Work Experience</div>
+                          <div className="tooltip">
+                            <img
+                              src={infoIcon}
+                              alt="information"
+                              className="info-icon"
+                            />
+                            <span className="tooltiptext">
+                              Pending for Approval
+                            </span>
+                          </div>
+                        </div>
                         {workExperience && workExperience.length > 0 ? (
                           <div>
                             {workExperience.map((item, index) => {
@@ -428,25 +455,16 @@ const ApprovalRequest = props => {
                                   </div>
                                   <div className="flex-row">
                                     {item.document ? (
-                                      <div className="flex-row">
-                                        <a
-                                          href={item.document}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="margin-med"
-                                        >
-                                          <img alt="attach" src={attachIcon} />
-                                        </a>
-                                      </div>
+                                      <a
+                                        href={item.document}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        <img alt="attach" src={attachIcon} />
+                                      </a>
                                     ) : (
                                       ""
                                     )}
-                                    <div className="tooltip">
-                                      <img src={infoIcon} alt="information" />
-                                      <span className="tooltiptext">
-                                        Pending for Approval
-                                      </span>
-                                    </div>
                                   </div>
                                 </div>
                               );
@@ -462,7 +480,11 @@ const ApprovalRequest = props => {
                         <div className="flex-row">
                           <div className="bold__text">Skills</div>
                           <div className="tooltip">
-                            <img src={infoIcon} alt="information" />
+                            <img
+                              src={infoIcon}
+                              alt="information"
+                              className="info-icon"
+                            />
                             <span className="tooltiptext">
                               Pending for Approval
                             </span>
@@ -493,7 +515,19 @@ const ApprovalRequest = props => {
                         )}
                       </div>
                       <div className="row third__row">
-                        <div className="bold__text">Achievements</div>
+                        <div className="flex-row">
+                          <div className="bold__text">Achievements</div>
+                          <div className="tooltip">
+                            <img
+                              src={infoIcon}
+                              alt="information"
+                              className="info-icon"
+                            />
+                            <span className="tooltiptext">
+                              Pending for Approval
+                            </span>
+                          </div>
+                        </div>
                         {acheivements && acheivements.length > 0 ? (
                           <div>
                             {acheivements.map((item, index) => {
@@ -521,32 +555,18 @@ const ApprovalRequest = props => {
                                       </div>
                                     </div>
                                   </div>
-                                  <div className="flex-row">
-                                    <div>
-                                      {item.document ? (
-                                        <div className="flex-row">
-                                          <a
-                                            href={item.document}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="margin-med"
-                                          >
-                                            <img
-                                              alt="attach"
-                                              src={attachIcon}
-                                            />
-                                          </a>
-                                        </div>
-                                      ) : (
-                                        ""
-                                      )}
-                                      <div className="tooltip">
-                                        <img src={infoIcon} alt="information" />
-                                        <span className="tooltiptext">
-                                          Pending for Approval
-                                        </span>
-                                      </div>
-                                    </div>
+                                  <div>
+                                    {item.document ? (
+                                      <a
+                                        href={item.document}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        <img alt="attach" src={attachIcon} />
+                                      </a>
+                                    ) : (
+                                      ""
+                                    )}
                                   </div>
                                 </div>
                               );

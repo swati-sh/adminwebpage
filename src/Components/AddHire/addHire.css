@@ -4,7 +4,7 @@
   font-family: TBold;
   width: 400px;
   border-bottom: 1px solid #ccc;
-  margin: 1em 0 2em 0;
+  margin: 1em 0 1.5em 0;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   position: relative;
@@ -54,10 +54,10 @@ input:-webkit-autofill:active {
   font-family: TBold;
   width: 400px;
   border-bottom: 1px solid #ccc;
-  margin: 1em 0 2em 0;
+  margin: 1em 0 1.5em 0;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.6em;
 }
 .optionList {
   position: absolute;

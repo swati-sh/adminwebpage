@@ -154,6 +154,10 @@
   font-size: 16px;
 }
 
+.info-icon {
+  width: 20px;
+}
+
 .last__row {
   display: flex;
 }
@@ -181,6 +185,7 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+  padding-top: 3px;
 }
 .tooltip .tooltiptext {
   visibility: hidden;
