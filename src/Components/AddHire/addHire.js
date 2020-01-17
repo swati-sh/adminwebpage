@@ -394,6 +394,12 @@ const AddHire = props => {
     }
   };
 
+  const maxLengthCheck = (object) => {
+    if (object.target.value.length > object.target.maxLength) {
+      object.target.value = object.target.value.slice(0, object.target.maxLength)
+    }
+  }
+
   const formList = () => {
     return (
       <div className="padding">
@@ -490,6 +496,8 @@ const AddHire = props => {
                     placeholder="Phone Number"
                     type="number"
                     step="0.01"
+                    maxLength = "12"
+                    onInput={maxLengthCheck}
                     name="phNum"
                     value={phNum}
                     onChange={e => onChangeValue(e)}

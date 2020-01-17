@@ -58,6 +58,7 @@ input:-webkit-autofill:active {
   letter-spacing: 0.4px;
   text-transform: uppercase;
   padding-bottom: 0.6em;
+  font-size: 14px;
 }
 .optionList {
   position: absolute;
