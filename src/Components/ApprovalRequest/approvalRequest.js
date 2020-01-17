@@ -12,6 +12,7 @@ import loaderIcon from "../../assets/Spinner-1s-200px.gif";
 import success from "../../assets/noun_success_2019805.svg";
 import rejectIcon from "../../assets/rejectedIcon.svg";
 import achivementsIcon from "../../assets/achivements.svg";
+import defaultIcon from "../../assets/defaultIcon.png";
 import "./approvalRequest.css";
 
 const ApprovalRequest = props => {
@@ -212,7 +213,6 @@ const ApprovalRequest = props => {
 
   return (
     <React.Fragment>
-      {console.log("re", rejectClicked)}
       <div className="container">
         <div className="content">
           <div className="content__left">
@@ -227,12 +227,7 @@ const ApprovalRequest = props => {
             {loader ? (
               <div className="loaderParent main-loader">
                 <div className="loading-row">
-                  <img
-                    alt="loader"
-                    src={loaderIcon}
-                    alt="loader"
-                    className="loader-img"
-                  />
+                  <img alt="loader" src={loaderIcon} className="loader-img" />
                 </div>
               </div>
             ) : (
@@ -250,11 +245,19 @@ const ApprovalRequest = props => {
                   <div className="details-section">
                     <div className="row first__row">
                       <div className="margin">
-                        <img
-                          alt="emp-pic"
-                          className="rounded-icon"
-                          src={photo}
-                        />
+                        {photo !== "" ? (
+                          <img
+                            alt="emp-pic"
+                            className="rounded-icon"
+                            src={photo}
+                          />
+                        ) : (
+                          <img
+                            alt="emp-pic"
+                            className="rounded-icon"
+                            src={defaultIcon}
+                          />
+                        )}
                       </div>
                       <div className="margin bold__text">
                         {capitalizeFirstLettter(firstName)}&nbsp;{lastName}
@@ -282,7 +285,7 @@ const ApprovalRequest = props => {
                             <div className="bold__text">{lastName} </div>{" "}
                             <div className="tooltip">
                               <img src={infoIcon} />
-                              <span class="tooltiptext">
+                              <span className="tooltiptext">
                                 Pending for Approval
                               </span>
                             </div>
@@ -295,8 +298,8 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{email}</div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} />
-                              <span class="tooltiptext">
+                              <img src={infoIcon} alt="information" />
+                              <span className="tooltiptext">
                                 Pending for Approval
                               </span>
                             </div>
@@ -329,15 +332,15 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{tshirtSize}</div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} />
-                              <span class="tooltiptext">
+                              <img src={infoIcon} alt="information" />
+                              <span className="tooltiptext">
                                 Pending for Approval
                               </span>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="row third__row">
+                      <div className="row">
                         <div className="bold__text">Education</div>
                         {educationList && educationList.length > 0 ? (
                           <div>
@@ -355,10 +358,10 @@ const ApprovalRequest = props => {
                                       <div className="bold__text-lowerCase">
                                         {capitalizeFirstLettter(item.name)}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {capitalizeFirstLettter(item.branch)}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {item.startYear}-{item.endYear}
                                       </div>
                                     </div>
@@ -379,8 +382,8 @@ const ApprovalRequest = props => {
                                       ""
                                     )}
                                     <div className="tooltip">
-                                      <img src={infoIcon} />
-                                      <span class="tooltiptext">
+                                      <img src={infoIcon} alt="information" />
+                                      <span className="tooltiptext">
                                         Pending for Approval
                                       </span>
                                     </div>
@@ -407,7 +410,7 @@ const ApprovalRequest = props => {
                                 >
                                   <div className="flex-row">
                                     <div className="details-icon">
-                                      <img src={workIcon} />
+                                      <img src={workIcon} alt="work" />
                                     </div>
                                     <div>
                                       <div className="bold__text-lowerCase">
@@ -415,10 +418,10 @@ const ApprovalRequest = props => {
                                           item.designation
                                         )}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {capitalizeFirstLettter(item.company)}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {item.startYear} - {item.endYear}
                                       </div>
                                     </div>
@@ -439,8 +442,8 @@ const ApprovalRequest = props => {
                                       ""
                                     )}
                                     <div className="tooltip">
-                                      <img src={infoIcon} />
-                                      <span class="tooltiptext">
+                                      <img src={infoIcon} alt="information" />
+                                      <span className="tooltiptext">
                                         Pending for Approval
                                       </span>
                                     </div>
@@ -459,8 +462,8 @@ const ApprovalRequest = props => {
                         <div className="flex-row">
                           <div className="bold__text">Skills</div>
                           <div className="tooltip">
-                            <img src={infoIcon} />
-                            <span class="tooltiptext">
+                            <img src={infoIcon} alt="information" />
+                            <span className="tooltiptext">
                               Pending for Approval
                             </span>
                           </div>
@@ -511,10 +514,10 @@ const ApprovalRequest = props => {
                                       <div className="bold__text-lowerCase">
                                         {item.title}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {item.issueData}|{item.issuer}
                                       </div>
-                                      <div className="proff-desc">
+                                      <div className="proffesion-desc">
                                         {item.desc}
                                       </div>
                                     </div>
@@ -539,8 +542,8 @@ const ApprovalRequest = props => {
                                         ""
                                       )}
                                       <div className="tooltip">
-                                        <img src={infoIcon} />
-                                        <span class="tooltiptext">
+                                        <img src={infoIcon} alt="information" />
+                                        <span className="tooltiptext">
                                           Pending for Approval
                                         </span>
                                       </div>

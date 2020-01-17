@@ -20,7 +20,7 @@
   opacity: 0.3;
 }
 
-.listContent{
+.listContent {
   overflow: scroll;
   height: 35em;
 }
@@ -103,21 +103,21 @@
 
 .tooltip-list {
   position: relative;
-	display: inline-block;
-	cursor: pointer;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .tooltip-list .tooltiptext-list {
-    visibility: hidden;
-    width: 160px;
-    background-color: #ef4848;
-    color: #fff;
-    text-align: center;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 2;
-    top: -5px;
-    right: 110%;
+  visibility: hidden;
+  width: 160px;
+  background-color: #ef4848;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  top: -5px;
+  right: 110%;
 }
 
 .tooltip-list .tooltiptext-list::after {
@@ -132,7 +132,7 @@
 }
 
 .tooltip-list:hover .tooltiptext-list {
-	visibility: visible;
+  visibility: visible;
 }
 
 .addHire-logOut {
@@ -213,8 +213,19 @@
   color: #fff;
   background-color: #0058fb;
 }
+@media only screen and (max-width: 984px) {
+  .content__left {
+    width: 40%;
+  }
+  .content__right {
+    width: 60%;
+  }
+}
 @media only screen and (max-width: 600px) {
   .content__left {
-      display: none;
+    display: none;
+  }
+  .content__right {
+    width: 100%;
   }
 }

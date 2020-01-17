@@ -46,10 +46,6 @@
   align-items: center;
 }
 
-.first__row--name {
-  font-family: TBold;
-  text-transform: uppercase;
-}
 .margin {
   margin: 5px 0;
 }
@@ -60,8 +56,7 @@
 .personal-details {
   width: 80%;
 }
-.second__row {
-}
+
 .second__row--content {
   display: flex;
   padding: 15px 0;
@@ -97,7 +92,7 @@
   border-bottom: 1px solid #ddd;
 }
 
-.proff-name {
+.proffesion-name {
   font-family: TBold;
 }
 .rounded-icon {
@@ -108,7 +103,7 @@
   object-fit: contain;
 }
 
-.proff-desc {
+.proffesion-desc {
   color: #989898;
   font-family: TLight;
   font-size: 14px;
@@ -189,15 +184,15 @@
 }
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 173px;
+  width: 159px;
   background-color: #ef4848;
   color: #fff;
   text-align: center;
-  font-family: TBold;
+  font-family: TLight;
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  top: -5px;
+  top: -4px;
   margin-left: 5px;
 }
 

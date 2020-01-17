@@ -130,7 +130,9 @@ const HireList = props => {
                   {item.tShirtSize && (
                     <div className="tooltip-list">
                       <img src={infoIcon} />
-                      <span class="tooltiptext-list">Pending for Approval</span>
+                      <span className="tooltiptext-list">
+                        Pending for Approval
+                      </span>
                     </div>
                   )}
                 </div>

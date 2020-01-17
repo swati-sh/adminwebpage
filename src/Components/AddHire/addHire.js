@@ -27,7 +27,7 @@ const monthCalender = {
 
 const AddHire = props => {
   const { editField, onChildClick, onSubmitForm, addNewHire, addHire } = props;
-  console.log(props);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

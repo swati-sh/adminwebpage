@@ -159,6 +159,7 @@ input:-webkit-autofill:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 20px;
 }
 .btn {
   background: none;
@@ -376,6 +377,14 @@ select option[disabled]:first-child {
 .optionList::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
+@media only screen and (max-width: 1024px) {
+  .input-default {
+    width: 260px;
+  }
+  .react-datepicker__input-container input {
+    width: 260px;
+  }
+}
 
 @media only screen and (max-width: 984px) {
   .inputContainer {
@@ -385,6 +394,12 @@ select option[disabled]:first-child {
   .onboard-btn {
     margin-top: 25px;
   }
+  .input-default {
+    width: 350px;
+  }
+  .react-datepicker__input-container input {
+    width: 350px;
+  }
 }
 
 @media only screen and (max-width: 695px) {
@@ -393,5 +408,14 @@ select option[disabled]:first-child {
   }
   .react-datepicker__input-container input {
     width: 260px;
+  }
+}
+
+@media only screen and (max-width: 592px) {
+  .input-default {
+    width: 350px;
+  }
+  .react-datepicker__input-container input {
+    width: 350px;
   }
 }
