@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./addHire.css";
 import cancelIcon from "../../assets/cancel.svg";
 import arrow from "../../assets/noun_Arrow_2094739.svg";
@@ -404,7 +403,7 @@ const AddHire = props => {
             <div className="create-text">CREATE OFFER PACKET</div>
           </div>
           <div className="button-container" onClick={() => onCancelClick()}>
-            <img src={cancelIcon} />
+            <img src={cancelIcon} alt="cancel" />
           </div>
         </div>
         <div className="form-container">

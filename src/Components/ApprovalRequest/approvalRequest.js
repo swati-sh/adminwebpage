@@ -284,7 +284,7 @@ const ApprovalRequest = props => {
                           <div className="desc-tooltip">
                             <div className="bold__text">{lastName} </div>{" "}
                             <div className="tooltip">
-                              <img src={infoIcon} />
+                              <img src={infoIcon} alt="information" />
                               <span className="tooltiptext">
                                 Pending for Approval
                               </span>
@@ -478,7 +478,6 @@ const ApprovalRequest = props => {
                                 >
                                   {item}
                                   <img
-                                    alt="cancel"
                                     className="close-icon"
                                     alt="cancel"
                                     src={cancel}

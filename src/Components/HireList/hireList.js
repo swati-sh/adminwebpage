@@ -44,7 +44,7 @@ const HireList = props => {
       let joinee = allHiresList.joinee;
       if (joinee) {
         allHiresList.data.map(item => {
-          newData.push(item);
+          return newData.push(item);
         });
         setDataList(newData.reverse());
         setNoHireData(false);
