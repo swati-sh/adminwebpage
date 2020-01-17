@@ -84,6 +84,13 @@ export default function(state = initialState, action) {
         }
       });
 
+    case myConstants.CLEAR_HIRES_LIST: {
+      return Object.assign({}, state, {
+        data: null,
+        allHiresList: null
+      });
+    }
+
     case myConstants.CLEAR_ADD_HIRE: {
       return Object.assign({}, state, {
         data: null,

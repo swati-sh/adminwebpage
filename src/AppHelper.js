@@ -2,6 +2,7 @@ import {
   getHiresList,
   getApprovalJoinee,
   addNewHire,
+  clearHiresList,
   clearAddHire,
   clearApprovalJoinee,
   approvedRequest,
@@ -27,5 +28,6 @@ export const appDispatch = dispatch => ({
   clearApprovalJoinee: () => dispatch(clearApprovalJoinee()),
   clearAddHire: () => dispatch(clearAddHire()),
   clearApprovedData: () => dispatch(clearApprovedData()),
-  clearRejectedData: () => dispatch(clearRejectedData())
+  clearRejectedData: () => dispatch(clearRejectedData()),
+  clearHiresList: () => dispatch(clearHiresList())
 });

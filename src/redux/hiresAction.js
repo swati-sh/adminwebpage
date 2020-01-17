@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as myConstants from "../utilities/constants";
+
 export function getHiresList() {
   let request = axios.request({
     url: "https://piktordigitalid.herokuapp.com/api/onboarding/getAllJoinee",
@@ -55,6 +56,13 @@ export function rejectedRequest(params) {
   return {
     type: myConstants.REJECTED_REQUEST,
     payload: request
+  };
+}
+
+export function clearHiresList() {
+  return {
+    type: myConstants.CLEAR_HIRES_LIST,
+    payload: null
   };
 }
 

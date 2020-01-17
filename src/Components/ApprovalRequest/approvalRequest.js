@@ -22,6 +22,7 @@ const ApprovalRequest = props => {
     approvedData,
     rejectedRequest,
     rejectedData,
+    clearApprovalJoinee,
     clearRejectedData,
     clearApprovedData
   } = props;
@@ -49,10 +50,12 @@ const ApprovalRequest = props => {
   useEffect(() => {
     clearRejectedData();
     clearApprovedData();
+    clearApprovalJoinee();
     // clear all data when component unmounts
     return () => {
       clearRejectedData();
       clearApprovedData();
+      clearApprovalJoinee();
     };
   }, []);
 

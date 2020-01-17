@@ -9,7 +9,8 @@ import loader from "../../assets/Spinner-1s-200px.gif";
 import infoIcon from "../../assets/info.svg";
 
 const HireList = props => {
-  const { getHiresList, allHiresList } = props;
+  const { getHiresList, allHiresList, clearHiresList } = props;
+
   const [noHireData, setNoHireData] = useState(false);
   const [dataList, setDataList] = useState([]);
   const [editHire, setEditHire] = useState(false);
@@ -18,6 +19,13 @@ const HireList = props => {
   const [backToList, setBackToList] = useState(true);
   const [submitClicked, setSubmitClicked] = useState(false);
   const [loaderShow, setLoaderShow] = useState(false);
+
+  useEffect(() => {
+    clearHiresList();
+    return () => {
+      clearHiresList();
+    };
+  }, []);
 
   useEffect(() => {
     let token = localStorage.getItem("token");
