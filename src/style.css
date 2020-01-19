@@ -70,7 +70,7 @@ select {
   width: 95px;
   border-radius: 22.5px;
   cursor: pointer;
-  box-shadow: 9px 11px 12px -3px rgba(0, 0, 0, 0.11);
+  box-shadow: 0px 5px 15px -11px rgba(0, 0, 0, 1);
 }
 
 /** Font Family

@@ -44,7 +44,7 @@ input:-webkit-autofill:active {
   color: #ff0013;
   font-size: 12px;
   position: absolute;
-  bottom: 0.6em;
+  bottom: 0em;
   font-family: TLight;
 }
 

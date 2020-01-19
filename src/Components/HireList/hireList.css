@@ -118,6 +118,7 @@
   z-index: 2;
   top: -5px;
   right: 110%;
+  font-size: 14px;
 }
 
 .tooltip-list .tooltiptext-list::after {

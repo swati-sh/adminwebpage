@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import "./hireList.css";
 import LeftDisplay from "../LeftDisplay/leftDisplay";
-import plusSvg from "../../assets/plus.svg";
+import plusSvg from "../../assets/plus1.svg";
 import AddHire from "../AddHire/addHire";
 import success from "../../assets/noun_success_2019805.svg";
 import loader from "../../assets/Spinner-1s-200px.gif";
@@ -182,7 +182,7 @@ const HireList = props => {
             <LeftDisplay />
           </div>
           <div className="content__right">
-            {(editHire || formToEnter) && (
+            {(formToEnter) && (
               <div className="logout">
                 <button className="logout__btn" onClick={() => onOutClick()}>
                   logOut

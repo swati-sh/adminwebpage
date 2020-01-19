@@ -88,6 +88,7 @@ const AddHire = props => {
   };
 
   const setManagerOption = value => {
+    setInvalidManager(false);
     setManager(value);
     setShowManager(false);
     setArrayList([]);
@@ -109,6 +110,7 @@ const AddHire = props => {
       role === "" ||
       phNum === "" ||
       location === "" ||
+      (employeeList.manager.indexOf(manager) < 0) ||
       manager === "" ||
       dateValue === "" ||
       fileTypePdf === false ||
@@ -349,7 +351,11 @@ const AddHire = props => {
       if (manager === "") {
         setInvalidManager(true);
       } else {
-        setInvalidManager(false);
+        if(employeeList.manager.indexOf(manager) > -1){
+          setInvalidManager(false);
+        } else {
+          setInvalidManager(true);
+        }
       }
     } else if (name === "salary") {
       if (salary === "") {
@@ -423,6 +429,8 @@ const AddHire = props => {
                     type="text"
                     name="firstName"
                     id="firstName"
+                    maxLength = "50"
+                    onInput={maxLengthCheck}
                     value={firstName}
                     onChange={e => onChangeValue(e)}
                     onBlur={e => onBlurField(e)}
@@ -446,6 +454,8 @@ const AddHire = props => {
                     placeholder="Last Name"
                     type="text"
                     name="lastName"
+                    maxLength = "50"
+                    onInput={maxLengthCheck}
                     value={lastName}
                     onChange={e => onChangeValue(e)}
                     autoComplete="off"
@@ -512,7 +522,7 @@ const AddHire = props => {
                   </label>
                   {invalidPhNum || wrongPhNum ? (
                     <div className="invalid-msg">
-                      Phone Number should be 10-12 digits or field is required!
+                      Phone Number field is required or should be 10-12 digits!
                     </div>
                   ) : (
                     ""
@@ -631,7 +641,7 @@ const AddHire = props => {
                       </div>
                     </label>
                     {invalidManager ? (
-                      <div className="invalid-msg">{requiredMsg}</div>
+                      <div className="invalid-msg">This field is required or this name is not a valid manager</div>
                     ) : (
                       ""
                     )}
@@ -749,7 +759,7 @@ const AddHire = props => {
                   {!props.editHire ? (
                     <div
                       className={`large-button ${
-                        disabledSubmit ? "disableOffer" : "enableOffer"
+                        disabledSubmit ? "disableOffer disableBtn" : "enableOffer"
                       }`}
                       onClick={() => onSubmitClick()}
                     >
