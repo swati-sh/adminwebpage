@@ -244,6 +244,10 @@ const AddHire = props => {
   };
 
   const onSubmitClick = () => {
+    let locationValue = location.toLowerCase();
+    if(locationValue == "bengaluru"){
+      locationValue = "BANGALORE"
+    }
     let dateData = dateValue.toISOString();
     dateData = dateData.split("T");
     dateData = dateData[0].split("-");
@@ -256,7 +260,7 @@ const AddHire = props => {
       lastName: `${capitalizeFirstLettter(lastName)}`,
       designation: `${capitalizeFirstLettter(role)}`,
       phoneNumber: phNum,
-      location: location,
+      location: `${capitalizeFirstLettter(locationValue)}`,
       joiningDate: dateData,
       dateOfBirth: "01-Jan-90",
       reportingManager: `${capitalizeFirstLettter(manager)}`,
