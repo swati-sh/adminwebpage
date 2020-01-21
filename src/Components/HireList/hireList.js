@@ -197,13 +197,12 @@ const HireList = props => {
                 loaderShow === false && (
                   <div className="addHire-logOut">
                     <div>
-                      <div className="noHire addHire-text">
+                      <div className="noHire addHire-text" onClick={() => onAddHireClick()}>
                         <div className="noHire--text">CREATE OFFER PACKET</div>
                         <img
                           className="imageWrapper"
                           alt="imageWrapper"
                           src={plusSvg}
-                          onClick={() => onAddHireClick()}
                         />
                       </div>
                     </div>

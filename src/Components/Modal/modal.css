@@ -68,7 +68,7 @@ body .modal-container {
   cursor: pointer;
 }
 .disableRej-btn {
-  color: #989898;
+  background-color: #989898;
   cursor: not-allowed;
 }
 
